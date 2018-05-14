@@ -11,8 +11,8 @@ namespace CodeGenerator.Generator
 	{
 		void WriteInclude( string fileName );
 		void WriteData( string name, string extends, List<Value> valueList );
-		void WritePacket( string name, string extends, int code, List<Value> valueList );
+		void WritePacket( string name, string extends, int index, List<Value> valueList );
 
-		void GenerateFile( string fullPath );
+		void GenerateFile( string path );
 	}
 }

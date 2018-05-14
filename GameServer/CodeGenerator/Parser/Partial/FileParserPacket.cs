@@ -11,7 +11,7 @@ namespace CodeGenerator.Parser
 	{
 		private void ParsePacket( XmlNode node )
 		{
-			if( ! usingPck )
+			if( ! m_usingPck )
 				throw new Exception.CanNotGenPck();
 
 			string name = null;
@@ -36,7 +36,7 @@ namespace CodeGenerator.Parser
 				valueList.Add( tempValue );
 			}
 
-			fileGenerator.WritePacket( name, extendsData, nowPckIndex++, valueList );
+			m_fileGenerator.WritePacket( name, extendsData, m_nowPckIndex++, valueList );
 		}
 	}
 }

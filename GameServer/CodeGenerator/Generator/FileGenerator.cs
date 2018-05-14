@@ -10,55 +10,50 @@ namespace CodeGenerator.Generator
 {
 	class FileGenerator : GeneratorInterface
 	{
-		public FileGenerator( string[] languages )
+		public FileGenerator( List< Program.GenTarget > targetCon )
 		{
-			generatorList = new Dictionary<string, GeneratorInterface>();
-
-			foreach( string language in languages )
+			foreach( var target in targetCon )
 			{
-				language.ToLower();
-				switch( language )
+				switch( target.m_language )
 				{
 					case "cpp":
 					case "c++":
-						if( ! generatorList.ContainsKey("cpp") )
-							generatorList.Add("cpp",new CppGenerator());
+						generatorCon.Add( new CppGenerator( target.m_dstPath ) );
 						break;
 					case "cs":
 					case "c#":
-						if( ! generatorList.ContainsKey( "cs" ) )
-							generatorList.Add( "cs", new CsGenerator() );
+						generatorCon.Add( new CsGenerator( target.m_dstPath ) );
 						break;
 					default:
 						break;
 				}
-			}
+			}			
 		}
 
 		public void WriteInclude(string fileName)
 		{
-			foreach( var generator in generatorList )
-				generator.Value.WriteInclude( fileName );
+			foreach( var generator in generatorCon )
+				generator.WriteInclude( fileName );
 		}
 
 		public void WriteData( string name, string extends, List<Value> valueList )
 		{
-			foreach( var generator in generatorList )
-				generator.Value.WriteData( name, extends, valueList );
+			foreach( var generator in generatorCon )
+				generator.WriteData( name, extends, valueList );
 		}
 
-		public void WritePacket( string name, string extends, int code, List<Value> valueList )
+		public void WritePacket( string name, string extends, int index, List<Value> valueList )
 		{
-			foreach( var generator in generatorList )
-				generator.Value.WritePacket( name, extends, code, valueList );
+			foreach( var generator in generatorCon )
+				generator.WritePacket( name, extends, index, valueList );
 		}
 
-		public void GenerateFile( string fullPath )
+		public void GenerateFile( string path )
 		{
-			foreach( var generator in generatorList )
-				generator.Value.GenerateFile( fullPath );
+			foreach( var generator in generatorCon )
+				generator.GenerateFile( path );
 		}
 
-		private Dictionary<string,GeneratorInterface> generatorList = null;
+		private List<GeneratorInterface> generatorCon = new List<GeneratorInterface>();
 	}
 }

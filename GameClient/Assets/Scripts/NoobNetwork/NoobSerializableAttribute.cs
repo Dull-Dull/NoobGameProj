@@ -25,7 +25,10 @@ namespace Noob
 				while( parentType != null )
 				{
 					if( parentType == typeof( Packet ) )
-						PacketFactory.RegisterPck( (uint) t.GetMethod( "GetIndex" ).Invoke(null,null), t );
+					{
+						PacketFactory.RegisterPck( (uint)t.GetMethod( "GetIndex" ).Invoke( null, null ), t );
+					}
+						
 				}
 			}
 		}

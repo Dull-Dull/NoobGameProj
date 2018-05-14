@@ -11,13 +11,13 @@ namespace CodeGenerator.Parser
 	{
 		private void ParseInclude( XmlNode node )
 		{
-			if( !includeAble )
+			if( !m_includeAble )
 				throw new Exception.CanNotIncludeException();
 
 			//if( node.HasChildNodes )
 			//	throw new Exception.UnKnownKeywordException( node.FirstChild.Name );
 
-			fileGenerator.WriteInclude( node.InnerText );
+			m_fileGenerator.WriteInclude( node.InnerText );
 		}
 	}
 }

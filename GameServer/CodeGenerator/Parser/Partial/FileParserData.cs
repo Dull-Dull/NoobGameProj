@@ -36,7 +36,7 @@ namespace CodeGenerator.Parser
 				valueList.Add( tempValue );
 			}
 
-			fileGenerator.WriteData( name, extendsData, valueList );
+			m_fileGenerator.WriteData( name, extendsData, valueList );
 						
 		}
 	}

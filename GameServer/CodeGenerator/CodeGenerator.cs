@@ -19,8 +19,9 @@ namespace CodeGenerator
 			if( ! ParseArgs( args ) )
 				return 0;
 
-			MetaFile metaFile = new MetaFile( dirPath );
-			FileInfoIterator fileIter = new FileInfoIterator( dirPath );
+			MetaFile metaFile = new MetaFile( srcPath );
+			FileInfoIterator fileIter = new FileInfoIterator( srcPath );
+			FileGenerator fileGenerator = new FileGenerator( targetCon );
 
 			Console.WriteLine( "========== Start CodeGenerate ==========" );
 
@@ -28,11 +29,9 @@ namespace CodeGenerator
 			{
 				if( metaFile.CheckUpdatedFile( item ) )
 				{
-					FileGenerator fileGenerator = new FileGenerator( languages );
-					FileParser fileParser = new FileParser( fileGenerator );
-
 					try
 					{
+						FileParser fileParser = new FileParser( srcPath, fileGenerator );
 						Console.WriteLine( "compile : {0}", item.Name );
 						fileParser.Parsing( item );
 					}
@@ -60,21 +59,28 @@ namespace CodeGenerator
 				PrintHelp();
 				return false;
 			}
-
-			dirPath = args[0];
+			
+			srcPath = Path.GetDirectoryName( args[0] + '\\' );
 
 			if( args.Length == 1 )
 			{
-				languages = new string[numOfLanguages];
-				languages[0] = "cpp";
+				GenTarget genTarget = new GenTarget();
+				genTarget.m_dstPath = srcPath;
+				genTarget.m_language = "cpp";
+				targetCon.Add( genTarget );
 
 				return true;
 			}
 
-			languages = new string[args.Length - 1];
 			for( int i = 1; i < args.Length; ++i )
 			{
-				languages[i - 1] = args[i];
+				string lowerArg = args[i].ToLower();
+				string[] splitedArg = lowerArg.Split( ',' );
+				
+				GenTarget genTarget = new GenTarget();
+				genTarget.m_language = splitedArg[0];
+				genTarget.m_dstPath = Path.GetDirectoryName( splitedArg[1] + '\\' );
+				targetCon.Add( genTarget );
 			}
 
 			return true;
@@ -83,13 +89,20 @@ namespace CodeGenerator
 		static void PrintHelp()
 		{
 			Console.WriteLine( "========== Noob CodeGenerator Help ==========" );
-			Console.WriteLine( "CodeGenerator [Working Dir Path] [GenerateLanguages(Select)]" );
+			Console.WriteLine( "CodeGenerator [Src Path] [language/Dst Path] ..." );
+			Console.WriteLine( "Language Type : cpp, cs" );
+
 		}
 
-		private static string dirPath = null;
-		private static string[] languages = null;
+		public class GenTarget
+		{
+			public string m_language;
+			public string m_dstPath;
+		}
 
-		private const int numOfLanguages = 1;
+		private static List<GenTarget> targetCon = new List<GenTarget>();
+
+		private static string srcPath = null;
     }
 
 }

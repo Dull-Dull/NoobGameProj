@@ -11,16 +11,16 @@ namespace CodeGenerator.Parser
 	{
 		private void ParsePckCodeRange( XmlNode node )
 		{
-			if( !includeAble )
+			if( !m_includeAble )
 				throw new Exception.CanNotPckCodeRangeException();
 
 			if( node.HasChildNodes )
 				throw new Exception.UnKnownKeywordException( node.FirstChild.Name );
 
-			usingPck = true;
-			minPckIndex = int.Parse( GetAttrValue( node, "min" ) );
-			maxPckIndex = int.Parse( GetAttrValue( node, "max" ) );
-			nowPckIndex = minPckIndex;
+			m_usingPck = true;
+			m_minPckIndex = int.Parse( GetAttrValue( node, "min" ) );
+			m_maxPckIndex = int.Parse( GetAttrValue( node, "max" ) );
+			m_nowPckIndex = m_minPckIndex;
 		}
 	}
 }

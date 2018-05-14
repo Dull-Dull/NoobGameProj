@@ -21,29 +21,27 @@ namespace CodeGenerator.Parser
 
 	partial class FileParser
 	{
-		public FileParser( Generator.FileGenerator fileGenerator )
+		public FileParser( string srcPath, Generator.FileGenerator fileGenerator )
 		{
-			doc = new XmlDocument();
-			this.fileGenerator = fileGenerator;
-			includeAble = true;
-
-			usingPck = false;
-			minPckIndex = 0;
-			maxPckIndex = 0;
-			nowPckIndex = 0;
+			m_srcPath = srcPath;
+			m_doc = new XmlDocument();
+			this.m_fileGenerator = fileGenerator;
+			m_includeAble = true;
+			m_usingPck = false;
+			m_minPckIndex = 0;
+			m_maxPckIndex = 0;
+			m_nowPckIndex = 0;
 		}
 
 		public void Parsing( System.IO.FileInfo xmlInfo )
 		{
-			doc.Load( xmlInfo.FullName );
-			
-			System.Console.WriteLine( doc.DocumentElement.Name );
+			m_doc.Load( xmlInfo.FullName );
 
-			foreach( XmlNode node in doc.DocumentElement.ChildNodes )
+			foreach( XmlNode node in m_doc.DocumentElement.ChildNodes )
 			{
 				if( node.Name != "Include" &&
 					node.Name != "PckCodeRange" )
-					includeAble = false;
+					m_includeAble = false;
 
 				switch( node.Name )
 				{
@@ -64,7 +62,9 @@ namespace CodeGenerator.Parser
 				}
 			}
 
-			fileGenerator.GenerateFile( xmlInfo.DirectoryName + "\\" + System.IO.Path.GetFileNameWithoutExtension( xmlInfo.FullName ) );
+			//int lastIndex = xmlInfo.DirectoryName.LastIndexOf( m_srcPath )	;
+			string path = xmlInfo.DirectoryName.Substring( m_srcPath.Length );
+			m_fileGenerator.GenerateFile( path + "\\" + System.IO.Path.GetFileNameWithoutExtension( xmlInfo.FullName ) );
 		}
 
 		private string GetAttrValue( XmlNode node, string attrName )
@@ -76,11 +76,11 @@ namespace CodeGenerator.Parser
 			return attr.Value;
 		}
 
-		private XmlDocument doc;
-		private Generator.FileGenerator fileGenerator;
-		private bool includeAble;
-
-		bool usingPck;
-		int minPckIndex, maxPckIndex, nowPckIndex;
+		private string m_srcPath = null;
+		private XmlDocument m_doc = null;
+		private Generator.FileGenerator m_fileGenerator = null;
+		private bool m_includeAble;
+		private bool m_usingPck;
+		private int m_minPckIndex, m_maxPckIndex, m_nowPckIndex;
 	}
 }

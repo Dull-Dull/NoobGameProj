@@ -9,44 +9,52 @@ namespace CodeGenerator.Generator.Language
 {
 	class CsGenerator : GeneratorInterface
 	{
+		public CsGenerator( string dstPath )
+		{
+			m_dstPath = dstPath;
+		}
+
 		public void WriteInclude( string fileName )
 		{
 		}
 
 		public void WriteData( string name, string extends, List<Value> valueList )
 		{
-			result += "\n";
-			result += "\t[NoobSerializAbleAttibute]\n";
-			result += "\tpublic class " + name + ( extends != null ? " : " + extends : "" ) + "\n\t{\n";
+			m_result += "\n";
+			m_result += "\t[NoobSerializAbleAttibute]\n";
+			m_result += "\tpublic class " + name + ( extends != null ? " : " + extends : "" ) + "\n\t{\n";
 			
 			foreach( var value in valueList )
 			{
-				result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + ";\n";
+				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + ";\n";
 			}
 
-			result += "\t}\n";
+			m_result += "\t}\n";
 		}
 
-		public void WritePacket( string name, string extends, int code, List<Value> valueList )
+		public void WritePacket( string name, string extends, int index, List<Value> valueList )
 		{
-			result += "\n";
-			result += "\t[NoobSerializAbleAttibute]\n";
-			result += "\tpublic class " + name + ( extends != null ? " : " + extends : " : " + "Packet" ) + "\n\t{\n";
+			m_result += "\n";
+			m_result += "\t[NoobSerializAbleAttibute]\n";
+			m_result += "\tpublic class " + name + ( extends != null ? " : " + extends : " : " + "Packet" ) + "\n\t{\n";
 
 			foreach( var value in valueList )
 			{
-				result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + ";\n";
+				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + ";\n";
 			}
 
-			result += "\n\t\tpublic uint GetIndex(){ return " + code + "; }\n";
+			m_result += "\n\t\tpublic uint GetIndex(){ return " + index + "; }\n";
 
-			result += "\t}\n";
+			m_result += "\t}\n";
 		}
 
-		public void GenerateFile( string fullPath )
+		public void GenerateFile( string path )
 		{
-			result += "\n}";
-			System.IO.File.WriteAllText( fullPath + ".cs", result );
+			m_result += "\n}";
+
+			System.IO.FileInfo file = new System.IO.FileInfo( m_dstPath + path + ".cs" );
+			file.Directory.Create(); 
+			System.IO.File.WriteAllText( file.FullName, m_result );
 		}
 
 		private string ChangeType( string type )
@@ -64,9 +72,11 @@ namespace CodeGenerator.Generator.Language
 			return ret;
 		}
 
-		private string result = "using System;\n" +
+		private string m_result = "using System;\n" +
 								"using System.Collections.Generic;\n\n" +
 								"namespace Noob\n" +
 								"{\n";
+
+		private string m_dstPath = null;
 	}
 }
