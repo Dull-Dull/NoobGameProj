@@ -10,7 +10,7 @@ namespace Noob
 		public int val1;
 		public int val2;
 		public int val3;
-		public List<int> list;
+		public List<int> list = new List<int>();
 
 		public uint GetIndex(){ return 1; }
 	}

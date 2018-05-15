@@ -9,28 +9,28 @@ namespace Noob
 	[AttributeUsage( AttributeTargets.Class )]
 	public class NoobSerializAbleAttibute : Attribute
 	{
-		static void Init()
+		public static void Init()
 		{
 			Assembly asm = typeof( NoobSerializAbleAttibute ).Assembly;
 
 			foreach( var t in asm.GetTypes() )
 			{
 				Object[] attrObj = t.GetCustomAttributes( typeof( NoobSerializAbleAttibute ), false );
-				if( attrObj == null )
+				if( attrObj.Length == 0 ||
+					attrObj == null )
 					continue;
 
 				NoobSerializeFormatter.RegisterData( t );
 
-				Type parentType = t.BaseType;
-				while( parentType != null )
+				Type interfaceType = t.GetInterface( "Packet" );
+				if( interfaceType != null )
 				{
-					if( parentType == typeof( Packet ) )
-					{
-						PacketFactory.RegisterPck( (uint)t.GetMethod( "GetIndex" ).Invoke( null, null ), t );
-					}
-						
+					Object pckGraph = Activator.CreateInstance( t );
+					PacketFactory.RegisterPck( (uint)t.GetMethod( "GetIndex" ).Invoke( pckGraph, null ), t );
 				}
 			}
+
+			NoobSerializeFormatter.Init();
 		}
 	}
 }

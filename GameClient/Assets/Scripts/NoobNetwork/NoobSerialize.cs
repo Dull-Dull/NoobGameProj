@@ -79,7 +79,7 @@ namespace Noob
 			writeFuncCon.Add( typeof( List<> ),
 				( BinaryWriter writer, Object graph ) =>
 				{
-					Type nodeType = graph.GetType().GetGenericParameterConstraints()[0];
+					Type nodeType = graph.GetType().GetGenericArguments()[0];
 
 					MethodInfo methodInfo = typeof( NoobSerializeFormatter ).GetMethod( "WriteList" );
 					var methodRef = methodInfo.MakeGenericMethod( nodeType );
@@ -89,7 +89,7 @@ namespace Noob
 			writeFuncCon.Add( typeof( Dictionary<,> ),
 				( BinaryWriter writer, Object graph ) =>
 				{
-					Type[] DicPairTypes = graph.GetType().GetGenericParameterConstraints();
+					Type[] DicPairTypes = graph.GetType().GetGenericArguments();
 
 					MethodInfo methodInfo = typeof( NoobSerializeFormatter ).GetMethod( "WriteDictionary" );
 					var methodRef = methodInfo.MakeGenericMethod( DicPairTypes[0], DicPairTypes[1] );
@@ -150,7 +150,7 @@ namespace Noob
 			readFuncCon.Add( typeof( List<> ),
 				( BinaryReader reader, ref Object graph ) =>
 				{
-					Type nodeType = graph.GetType().GetGenericParameterConstraints()[0];
+					Type nodeType = graph.GetType().GetGenericArguments()[0];
 
 					MethodInfo methodInfo = typeof( NoobSerializeFormatter ).GetMethod( "ReadList" );
 					var methodRef = methodInfo.MakeGenericMethod( nodeType );
@@ -159,7 +159,7 @@ namespace Noob
 			readFuncCon.Add( typeof( Dictionary<,> ),
 				( BinaryReader reader, ref Object graph ) =>
 				{
-					Type[] DicPairTypes = graph.GetType().GetGenericParameterConstraints();
+					Type[] DicPairTypes = graph.GetType().GetGenericArguments();
 
 					MethodInfo methodInfo = typeof( NoobSerializeFormatter ).GetMethod( "ReadDictionary" );
 					var methodRef = methodInfo.MakeGenericMethod( DicPairTypes[0], DicPairTypes[1] );

@@ -8,6 +8,8 @@ public class ServerSession : MonoBehaviour {
 
 	void Awake()
 	{
+		NoobSerializAbleAttibute.Init();
+
 		session.m_OnConnect += ( SocketError err ) =>
 		{
 			if( err == SocketError.Success )
