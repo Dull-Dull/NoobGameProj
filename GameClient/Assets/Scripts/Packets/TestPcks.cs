@@ -7,9 +7,9 @@ namespace Noob
 	[NoobSerializAbleAttibute]
 	public class TestPck1 : Packet
 	{
-		public int val1;
-		public int val2;
-		public int val3;
+		public int val1 = 0;
+		public int val2 = 0;
+		public int val3 = 0;
 		public List<int> list = new List<int>();
 
 		public uint GetIndex(){ return 1; }
@@ -18,7 +18,7 @@ namespace Noob
 	[NoobSerializAbleAttibute]
 	public class TestPck2 : Packet
 	{
-		public int val1;
+		public int val1 = 0;
 
 		public uint GetIndex(){ return 2; }
 	}
@@ -26,8 +26,8 @@ namespace Noob
 	[NoobSerializAbleAttibute]
 	public class TestData3
 	{
-		public int val1;
-		public string val2;
+		public int val1 = 0;
+		public string val2 = "";
 	}
 
 }

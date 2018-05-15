@@ -26,7 +26,7 @@ namespace CodeGenerator.Generator.Language
 			
 			foreach( var value in valueList )
 			{
-				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + ";\n";
+				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
 			m_result += "\t}\n";
@@ -40,7 +40,7 @@ namespace CodeGenerator.Generator.Language
 
 			foreach( var value in valueList )
 			{
-				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + ";\n";
+				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
 			m_result += "\n\t\tpublic uint GetIndex(){ return " + index + "; }\n";
@@ -68,6 +68,27 @@ namespace CodeGenerator.Generator.Language
 
 			ret = ret.Replace( "unsigned ", "u" );
 			ret = ret.Replace( "int64", "long" );
+
+			return ret;
+		}
+
+		private string GetDefaultVal( string type )
+		{
+			string ret = "";
+
+			if( type.IndexOf( "map" ) == 0 ||
+				type.IndexOf( "vector" ) == 0 )
+			{
+				ret = "new " + ChangeType( type ) + "()";
+			}				
+			else if( type.IndexOf( "string" ) == 0 )
+			{
+				ret = "\"\"";
+			}
+			else
+			{
+				ret = "0";
+			}
 
 			return ret;
 		}
