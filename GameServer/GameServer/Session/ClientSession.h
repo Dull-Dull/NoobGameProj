@@ -1,7 +1,8 @@
 #pragma once
 
+class Player;
 
-class ClientSession : public ::Noob::ITcpSession
+class ClientSession : public ::Noob::ITcpSession, ::Noob::RefCnt
 {
 public:
 	ClientSession();
@@ -11,5 +12,9 @@ public:
 	void OnRecv( ::Noob::PacketPtr pck ) override;
 	void OnClose();
 
+	void SetPlayer( Player* player ){ m_player = player; }
+	Player* GetPlayer(){ return m_player; }
+
 private:
+	Player* m_player;
 };

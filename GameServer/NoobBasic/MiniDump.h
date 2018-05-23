@@ -11,7 +11,7 @@ public:
 
 private:
 	struct imple;
-	std::unique_ptr<imple> pImple;
+	::std::unique_ptr<imple> pImple;
 };
 
 }

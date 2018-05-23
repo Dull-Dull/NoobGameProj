@@ -10,12 +10,12 @@ struct TestPck1 : public ::Noob::Packet
 
 	TestPck1()
 	{
-		index = 1;
+		index = 10000;
 	}
 
 	TestPck1( int _val1, int _val2, int _val3, ::std::vector<int> _list )
 	{
-		index = 1;
+		index = 10000;
 		val1 = _val1;
 		val2 = _val2;
 		val3 = _val3;
@@ -23,7 +23,7 @@ struct TestPck1 : public ::Noob::Packet
 	}
 
 	std::wstring GetName(){ return L"TestPck1"; }
-	static unsigned int GetIndex(){ return 1; }
+	static unsigned int GetIndex(){ return 10000; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, TestPck1& val )
@@ -42,17 +42,17 @@ struct TestPck2 : public ::Noob::Packet
 
 	TestPck2()
 	{
-		index = 2;
+		index = 10001;
 	}
 
 	TestPck2( int _val1 )
 	{
-		index = 2;
+		index = 10001;
 		val1 = _val1;
 	}
 
 	std::wstring GetName(){ return L"TestPck2"; }
-	static unsigned int GetIndex(){ return 2; }
+	static unsigned int GetIndex(){ return 10001; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, TestPck2& val )

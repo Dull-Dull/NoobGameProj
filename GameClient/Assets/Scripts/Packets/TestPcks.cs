@@ -12,7 +12,7 @@ namespace Noob
 		public int val3 = 0;
 		public List<int> list = new List<int>();
 
-		public uint GetIndex(){ return 1; }
+		public uint GetIndex(){ return 10000; }
 	}
 
 	[NoobSerializAbleAttibute]
@@ -20,7 +20,7 @@ namespace Noob
 	{
 		public int val1 = 0;
 
-		public uint GetIndex(){ return 2; }
+		public uint GetIndex(){ return 10001; }
 	}
 
 	[NoobSerializAbleAttibute]

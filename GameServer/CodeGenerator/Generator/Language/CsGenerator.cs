@@ -11,6 +11,10 @@ namespace CodeGenerator.Generator.Language
 	{
 		public CsGenerator( string dstPath )
 		{
+			m_result = "using System;\n" +
+						"using System.Collections.Generic;\n\n" +
+						"namespace Noob\n" +
+						"{\n";
 			m_dstPath = dstPath;
 		}
 
@@ -93,10 +97,7 @@ namespace CodeGenerator.Generator.Language
 			return ret;
 		}
 
-		private string m_result = "using System;\n" +
-								"using System.Collections.Generic;\n\n" +
-								"namespace Noob\n" +
-								"{\n";
+		private string m_result = "";
 
 		private string m_dstPath = null;
 	}

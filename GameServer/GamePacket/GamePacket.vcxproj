@@ -96,6 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Packets\Login.h" />
     <ClInclude Include="Packets\TestPcks.h" />
     <ClInclude Include="PcksRegistration.h" />
     <ClInclude Include="PreCompiled.h" />
@@ -107,6 +108,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="Packets\Login.xml" />
     <Xml Include="Packets\TestPcks.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

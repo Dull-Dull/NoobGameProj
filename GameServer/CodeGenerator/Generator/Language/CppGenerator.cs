@@ -13,6 +13,7 @@ namespace CodeGenerator.Generator.Language
 		public CppGenerator( string dstPath )
 		{
 			m_dstPath = dstPath;
+			m_result = "#pragma once\n\n";
 		}
 
 		public void WriteInclude(string fileName)
@@ -183,7 +184,7 @@ namespace CodeGenerator.Generator.Language
 			return ret;
 		}
 
-		private string m_result = "#pragma once\n\n";
+		private string m_result = "";
 		private string m_registeredPcks = "";
 		private string m_dstPath = null;
 	}

@@ -11,12 +11,18 @@
       <Filter>Packets</Filter>
     </ClInclude>
     <ClInclude Include="PcksRegistration.h" />
+    <ClInclude Include="Packets\Login.h">
+      <Filter>Packets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiled.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Packets\TestPcks.xml">
+      <Filter>Packets</Filter>
+    </Xml>
+    <Xml Include="Packets\Login.xml">
       <Filter>Packets</Filter>
     </Xml>
   </ItemGroup>

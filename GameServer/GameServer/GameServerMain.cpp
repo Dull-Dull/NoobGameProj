@@ -1,6 +1,6 @@
 #include "PreCompiled.h"
 
-#include "ClientSession.h"
+#include "Session/ClientSession.h"
 #include <GamePacket/PcksRegistration.h>
 
 int main()
@@ -13,11 +13,9 @@ int main()
 
 	Noob::Listener listener( &iocp, Noob::EndPoint( INADDR_ANY, 15000 ) );
 	Noob::Acceptor< ClientSession > acceptor( &iocp, &listener );
-
 	acceptor.Post();
 
 	iocp.Wait();
-
 	WSACleanup();
 	return 0;
 }
