@@ -37,6 +37,8 @@ namespace CodeGenerator.Parser
 		{
 			m_doc.Load( xmlInfo.FullName );
 
+			m_fileGenerator.WriteBegin();
+
 			foreach( XmlNode node in m_doc.DocumentElement.ChildNodes )
 			{
 				if( node.Name != "Include" &&
@@ -62,6 +64,7 @@ namespace CodeGenerator.Parser
 				}
 			}
 
+			m_fileGenerator.WriteEnd();
 			//int lastIndex = xmlInfo.DirectoryName.LastIndexOf( m_srcPath )	;
 			string path = xmlInfo.DirectoryName.Substring( m_srcPath.Length );
 			m_fileGenerator.GenerateFile( path + "\\" + System.IO.Path.GetFileNameWithoutExtension( xmlInfo.FullName ) );

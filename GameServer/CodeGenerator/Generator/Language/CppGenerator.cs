@@ -13,7 +13,12 @@ namespace CodeGenerator.Generator.Language
 		public CppGenerator( string dstPath )
 		{
 			m_dstPath = dstPath;
+		}
+
+		public void WriteBegin()
+		{
 			m_result = "#pragma once\n\n";
+			m_registeredPcks = "";
 		}
 
 		public void WriteInclude(string fileName)
@@ -156,6 +161,10 @@ namespace CodeGenerator.Generator.Language
 			m_registeredPcks += "REGIST_PACKET( " + name + " );\n";
 		}
 
+		public void WriteEnd()
+		{
+
+		}
 
 		public void GenerateFile( string path )
 		{			

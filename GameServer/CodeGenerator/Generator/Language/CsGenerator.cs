@@ -10,12 +10,16 @@ namespace CodeGenerator.Generator.Language
 	class CsGenerator : GeneratorInterface
 	{
 		public CsGenerator( string dstPath )
+		{			
+			m_dstPath = dstPath;
+		}
+
+		public void WriteBegin()
 		{
 			m_result = "using System;\n" +
 						"using System.Collections.Generic;\n\n" +
 						"namespace Noob\n" +
 						"{\n";
-			m_dstPath = dstPath;
 		}
 
 		public void WriteInclude( string fileName )
@@ -52,10 +56,13 @@ namespace CodeGenerator.Generator.Language
 			m_result += "\t}\n";
 		}
 
-		public void GenerateFile( string path )
+		public void WriteEnd()
 		{
 			m_result += "\n}";
+		}
 
+		public void GenerateFile( string path )
+		{
 			System.IO.FileInfo file = new System.IO.FileInfo( m_dstPath + path + ".cs" );
 			file.Directory.Create(); 
 			System.IO.File.WriteAllText( file.FullName, m_result );

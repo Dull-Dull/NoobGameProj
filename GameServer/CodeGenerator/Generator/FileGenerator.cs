@@ -30,6 +30,12 @@ namespace CodeGenerator.Generator
 			}			
 		}
 
+		public void WriteBegin()
+		{
+			foreach( var generator in generatorCon )
+				generator.WriteBegin();
+		}
+
 		public void WriteInclude(string fileName)
 		{
 			foreach( var generator in generatorCon )
@@ -46,6 +52,12 @@ namespace CodeGenerator.Generator
 		{
 			foreach( var generator in generatorCon )
 				generator.WritePacket( name, extends, index, valueList );
+		}
+
+		public void WriteEnd()
+		{
+			foreach( var generator in generatorCon )
+				generator.WriteEnd();
 		}
 
 		public void GenerateFile( string path )
