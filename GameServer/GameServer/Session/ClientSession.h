@@ -1,6 +1,17 @@
 #pragma once
 
 class Player;
+class ClientSession;
+class GameDispatcher;
+
+class ClientAcceptor : public ::Noob::Acceptor< ClientSession >
+{
+public:
+	ClientAcceptor( ::Noob::Iocp* iocp, ::Noob::Listener* listener, GameDispatcher* dispatcher );
+	GameDispatcher* GetDispatcher();
+private:
+	GameDispatcher* m_dispatcher;
+};
 
 class ClientSession : public ::Noob::ITcpSession, ::Noob::RefCnt
 {
@@ -12,9 +23,10 @@ public:
 	void OnRecv( ::Noob::PacketPtr pck ) override;
 	void OnClose();
 
-	void SetPlayer( Player* player ){ m_player = player; }
-	Player* GetPlayer(){ return m_player; }
+	void SetPlayer( Player* player );
+	Player* GetPlayer();
 
 private:
-	Player* m_player;
+	struct imple;
+	::std::unique_ptr<imple> pImple;
 };
