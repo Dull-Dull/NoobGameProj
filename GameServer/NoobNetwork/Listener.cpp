@@ -5,7 +5,7 @@
 namespace Noob
 {
 
-Listener::Listener( Iocp* iocp, const EndPoint& endPoint )
+Listener::Listener( Iocp* iocp, const EndPoint& endPoint ) : m_endPoint( endPoint )
 {
 	m_sock = WSASocket( AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0, WSA_FLAG_OVERLAPPED );
 	if( m_sock == INVALID_SOCKET )
@@ -18,8 +18,8 @@ Listener::Listener( Iocp* iocp, const EndPoint& endPoint )
 	ZeroMemory( &sockAddr, sizeof( sockAddr ) );
 
 	sockAddr.sin_family = PF_INET;
-	sockAddr.sin_addr.s_addr = htonl( endPoint.m_ip );
-	sockAddr.sin_port = htons( endPoint.m_port );
+	sockAddr.sin_addr.s_addr = htonl( m_endPoint.m_ip );
+	sockAddr.sin_port = htons( m_endPoint.m_port );
 
 	if( bind( m_sock, (SOCKADDR*)&sockAddr, sizeof( sockAddr ) ) == SOCKET_ERROR )
 	{

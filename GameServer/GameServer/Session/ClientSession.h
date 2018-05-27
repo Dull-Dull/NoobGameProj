@@ -1,19 +1,8 @@
 #pragma once
 
 class Player;
-class ClientSession;
-class GameDispatcher;
 
-class ClientAcceptor : public ::Noob::Acceptor< ClientSession >
-{
-public:
-	ClientAcceptor( ::Noob::Iocp* iocp, ::Noob::Listener* listener, GameDispatcher* dispatcher );
-	GameDispatcher* GetDispatcher();
-private:
-	GameDispatcher* m_dispatcher;
-};
-
-class ClientSession : public ::Noob::ITcpSession, ::Noob::RefCnt
+class ClientSession : public ::Noob::ITcpSession
 {
 public:
 	ClientSession();

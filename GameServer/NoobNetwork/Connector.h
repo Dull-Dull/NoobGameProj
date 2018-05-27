@@ -9,7 +9,7 @@ namespace Noob
 
 class ITcpSession;
 
-class IConnector
+class IConnector : public RefCnt
 {
 public:
 	IConnector()
@@ -21,14 +21,14 @@ public:
 	void AsyncConnect( Iocp* iocp, EndPoint endPoint );
 
 protected:
-	virtual void OnConnect() = 0;
+	virtual void OnConnect( bool success, unsigned int transferedLen ) = 0;
 	void onConnectSession( ITcpSession* session );
 
 	SOCKET m_sock;
 	Iocp* m_iocp;
+	Overlapped m_overlapped;
 private:
 	SOCKADDR_IN m_addr;
-	Overlapped m_overlapped;
 
 	friend Iocp;
 };
@@ -41,8 +41,15 @@ public:
 	~Connector(){}
 
 protected:
-	void OnConnect() override
+	void OnConnect( bool success, unsigned int transferedLen ) override
 	{
+		if( success == false )
+		{
+			Log( LOG_TYPE::ERROR, L"Async Connect Fail ", WSAGetLastError() );
+			m_overlapped.object = nullptr;
+			return;
+		}
+
 		SessionType* session = new SessionType();
 		session->Init( m_iocp, m_sock, EndPoint(), EndPoint() );
 		onConnectSession( session );

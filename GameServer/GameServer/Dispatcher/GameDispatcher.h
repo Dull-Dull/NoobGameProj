@@ -11,7 +11,7 @@ enum class E_GAME_TASK
 struct GameTask
 {
 	E_GAME_TASK m_eTask;
-	::Noob::RefCnt m_obj;
+	::Noob::RefCntPtr m_obj;
 };
 
 class GameDispatcher
@@ -20,7 +20,7 @@ public:
 	GameDispatcher();
 	~GameDispatcher();
 
-	void Push( E_GAME_TASK eTask, const ::Noob::RefCnt& obj );
+	void Push( E_GAME_TASK eTask, const ::Noob::RefCntPtr& obj );
 
 private:
 	struct imple;

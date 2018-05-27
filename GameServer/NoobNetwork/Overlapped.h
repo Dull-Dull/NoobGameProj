@@ -13,7 +13,8 @@ struct Overlapped : public WSAOVERLAPPED
 		CONNECT,
 	};
 
-	Overlapped( IO_TYPE _ioType, void* _object ) : ioType( _ioType ), object( _object )
+	Overlapped( IO_TYPE _ioType, const RefCntPtr& _object )
+		: ioType( _ioType ), object( _object )
 	{
 		Init();
 	}
@@ -23,8 +24,8 @@ struct Overlapped : public WSAOVERLAPPED
 		ZeroMemory( this, sizeof( WSAOVERLAPPED ) );
 	}
 
-	IO_TYPE ioType;
-	void* object;
+	IO_TYPE		ioType;
+	RefCntPtr	object;
 };
 
 }

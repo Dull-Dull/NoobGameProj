@@ -20,6 +20,14 @@ ITcpSession::ITcpSession() : m_recvOverlapped( Overlapped::IO_TYPE::RECV, this),
 
 ITcpSession::~ITcpSession()
 {
+	for( auto& buff : *m_consumeBuff )
+		delete[] buff.buf;
+
+	for( auto& buff : *m_sendingBuff )
+		delete[] buff.buf;
+
+	delete m_consumeBuff;
+	delete m_sendingBuff;
 	delete [] m_recvBuff.buf;
 }
 
@@ -34,6 +42,9 @@ void ITcpSession::Init( Iocp* iocp, SOCKET sock, const EndPoint& local, const En
 
 void ITcpSession::PostSend()
 {
+	for( auto& buff : *m_sendingBuff )
+		delete[] buff.buf;
+
 	WsaBuffContainer* temp = m_consumeBuff;
 	m_consumeBuff = m_sendingBuff;
 	m_sendingBuff = temp;
@@ -51,8 +62,14 @@ void ITcpSession::PostSend()
 	m_nowSending = true;
 }
 
-void ITcpSession::OnSendForIocp()
+void ITcpSession::OnSendForIocp( bool success, unsigned int transferedLen )
 {
+	if( success == false || transferedLen == 0 )
+	{
+		m_sendOverlapped.object = nullptr;
+		return;
+	}
+	else
 	{
 		LockGuard lockGuard( m_sendLock );
 		m_nowSending = false;
@@ -71,15 +88,23 @@ void ITcpSession::Close()
 	m_sock = NULL;
 }
 
-void ITcpSession::OnRecvForIocp( unsigned int recvLen )
+void ITcpSession::OnRecvForIocp( bool success, unsigned int transferedLen )
 {
-	if( recvLen == 0 )
+	if( success == false || transferedLen == 0 )
 	{
+		{
+			LockGuard lock( m_sendLock );
+			if( false == m_nowSending )
+				m_sendOverlapped.object = nullptr;
+		}
+
 		OnClose();
+		m_recvOverlapped.object = nullptr;
+
 		return;
 	}
 
-	m_recvBuffOffSet += recvLen;
+	m_recvBuffOffSet += transferedLen;
 
 	while( true )
 	{

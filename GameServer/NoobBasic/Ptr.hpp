@@ -84,4 +84,6 @@ private:
 	Type* obj;
 };
 
+using RefCntPtr = Ptr<RefCnt>;
+
 }

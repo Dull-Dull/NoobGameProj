@@ -8,21 +8,21 @@ namespace Noob
 
 class ITcpSession;
 
-class IAcceptor
+class IAcceptor : public RefCnt
 {
 public:
 	IAcceptor( Iocp* iocp, Listener* listener );
 	virtual ~IAcceptor();
 
 	void Post();
-	virtual void OnAccept() = 0;
+	virtual void OnAccept( bool success, unsigned int transferedLen ) = 0;
 
 protected:
 	Iocp* m_iocp;
 	SOCKET m_sock;
+	Overlapped m_overlapped;
 private:
 	Listener* m_listener;
-	Overlapped m_overlapped;
 	byte m_buff[1024];
 	DWORD m_recvLen;
 
@@ -45,8 +45,15 @@ public:
 
 	}
 
-	void OnAccept()
+	void OnAccept( bool success, unsigned int transferedLen )
 	{
+		if( success == false )
+		{
+			Log( LOG_TYPE::ERROR, L"Acceptor Closed ", WSAGetLastError() );
+			m_overlapped.object = nullptr;
+			return;
+		}
+
 		EndPoint local;
 		EndPoint remote;
 

@@ -3,7 +3,7 @@
 namespace Noob
 {
 
-class Iocp
+class Iocp : public RefCnt
 {
 public:
 				Iocp();
@@ -23,7 +23,7 @@ private:
 
 	std::vector<HANDLE> threadHandleContainer;
 	std::vector<DWORD>	threadIdContainer;
-	
 };
+using IocpPtr = Ptr<Iocp>;
 
 }

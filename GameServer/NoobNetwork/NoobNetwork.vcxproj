@@ -103,6 +103,7 @@
     <ClInclude Include="PacketRegister.h" />
     <ClInclude Include="PreCompiled.h" />
     <ClInclude Include="TcpSession.h" />
+    <ClInclude Include="WinSockInitor.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NoobBasic\NoobBasic.vcxproj">

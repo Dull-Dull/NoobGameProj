@@ -3,6 +3,7 @@
 #include <WinSock2.h>
 #include <MSWSock.h>
 
+#include "WinSockInitor.h"
 #include "Iocp.h"
 #include "Listener.h"
 #include "Acceptor.h"

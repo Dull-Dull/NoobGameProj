@@ -11,7 +11,7 @@ namespace Noob
 class IAcceptor;
 class IConnector;
 
-class ITcpSession
+class ITcpSession : public RefCnt
 {
 public:
 	ITcpSession();
@@ -86,8 +86,8 @@ protected:
 	virtual void OnSend(){}
 	virtual void OnClose() = 0;
 private:
-	void OnRecvForIocp( unsigned int recvLen );
-	void OnSendForIocp();
+	void OnRecvForIocp( bool success, unsigned int transferedLen );
+	void OnSendForIocp( bool success, unsigned int transferedLen );
 
 	void PostRecv();
 	void PostSend();

@@ -54,6 +54,7 @@
       <Filter>Connector</Filter>
     </ClInclude>
     <ClInclude Include="IncAll.h" />
+    <ClInclude Include="WinSockInitor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Packet">

@@ -16,10 +16,10 @@ struct GameDispatcher::imple
 	}
 
 	static DWORD WINAPI ThreadFunc( void* arg );
-	void AcceptProc( ::Noob::RefCnt& obj );
-	void ConnectProc( ::Noob::RefCnt& obj );
-	void RecvProc( ::Noob::RefCnt& obj );
-	void CloseProc( ::Noob::RefCnt& obj );
+	void AcceptProc( const ::Noob::RefCntPtr& obj );
+	void ConnectProc( const Noob::RefCntPtr& obj );
+	void RecvProc( const Noob::RefCntPtr& obj );
+	void CloseProc( const Noob::RefCntPtr& obj );
 };
 
 DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
@@ -50,27 +50,30 @@ DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
 			pImple->CloseProc( task->m_obj );
 			break;
 		}
+
+		delete task;
+		task = nullptr;
 	}
 
 	return 0;
 }
 
-void GameDispatcher::imple::AcceptProc( ::Noob::RefCnt& obj )
+void GameDispatcher::imple::AcceptProc( const Noob::RefCntPtr& obj )
+{
+	
+}
+
+void GameDispatcher::imple::ConnectProc( const Noob::RefCntPtr& obj )
 {
 
 }
 
-void GameDispatcher::imple::ConnectProc( ::Noob::RefCnt& obj )
+void GameDispatcher::imple::RecvProc( const Noob::RefCntPtr& obj )
 {
 
 }
 
-void GameDispatcher::imple::RecvProc( ::Noob::RefCnt& obj )
-{
-
-}
-
-void GameDispatcher::imple::CloseProc( ::Noob::RefCnt& obj )
+void GameDispatcher::imple::CloseProc( const Noob::RefCntPtr& obj )
 {
 
 }
@@ -86,7 +89,7 @@ GameDispatcher::~GameDispatcher()
 	WaitForSingleObject( pImple->m_threadHandle, 1000 );
 }
 
-void GameDispatcher::Push( E_GAME_TASK eTask, const ::Noob::RefCnt& obj )
+void GameDispatcher::Push( E_GAME_TASK eTask, const ::Noob::RefCntPtr& obj )
 {
 	GameTask* task = new GameTask;
 	task->m_eTask = eTask;

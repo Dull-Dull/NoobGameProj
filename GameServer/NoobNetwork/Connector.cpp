@@ -24,7 +24,7 @@ void IConnector::Connect( Iocp* iocp, EndPoint endPoint )
 		return;
 	}
 
-	OnConnect();
+	OnConnect( true, UINT_MAX );
 }
 
 void IConnector::AsyncConnect( Iocp* iocp, EndPoint endPoint )

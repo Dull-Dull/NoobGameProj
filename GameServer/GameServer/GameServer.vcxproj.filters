@@ -12,6 +12,9 @@
     <ClCompile Include="Dispatcher\GameDispatcher.cpp">
       <Filter>Dispatcher</Filter>
     </ClCompile>
+    <ClCompile Include="Session\ClientAcceptor.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="Dispatcher\GameDispatcher.h">
       <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="Session\ClientAcceptor.h">
+      <Filter>Session</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

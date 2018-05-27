@@ -6,6 +6,8 @@
 #include "Connector.h"
 #include "TcpSession.h"
 
+#pragma warning( disable : 4800 )
+
 namespace Noob
 {
 
@@ -98,36 +100,34 @@ DWORD WINAPI Iocp::ThreadFunc( void* arg )
 
 	while( true )
 	{
-		DWORD			recvLength		= 0;
+		DWORD			transferedLen	= 0;
 		ULONG_PTR		completionKey	= 0;
 		Overlapped*		overlapped		= nullptr;
 
-		if( GetQueuedCompletionStatus( This->iocpHandle, &recvLength, &completionKey,
-			reinterpret_cast<LPOVERLAPPED*>( &overlapped ), INFINITE ) )
-		{
-			if( overlapped == nullptr )
-				return 0;
+		bool success = GetQueuedCompletionStatus( This->iocpHandle, &transferedLen, &completionKey,
+			reinterpret_cast<LPOVERLAPPED*>( &overlapped ), INFINITE );
 
-			switch( overlapped->ioType )
-			{
-			case Overlapped::IO_TYPE::RECV :
-				reinterpret_cast<ITcpSession*>( overlapped->object )->
-					OnRecvForIocp( static_cast< unsigned int >( recvLength ) );
-				break;
-			case Overlapped::IO_TYPE::SEND :
-				reinterpret_cast<ITcpSession*>( overlapped->object )->OnSendForIocp();
-				break;
-			case Overlapped::IO_TYPE::ACCEPT :
-				reinterpret_cast<IAcceptor*>( overlapped->object )->OnAccept();
-				break;
-			case Overlapped::IO_TYPE::CONNECT :
-				reinterpret_cast<IConnector*>( overlapped->object )->OnConnect();
-				break;
-			}
-		}
-		else
+		if( overlapped == nullptr )
+			return 0;
+
+		switch( overlapped->ioType )
 		{
-			Log( LOG_TYPE::ERROR, L"GetQueueCS Error", GetLastError() );
+		case Overlapped::IO_TYPE::RECV :
+			reinterpret_cast<ITcpSession*>( overlapped->object.Get() )->
+				OnRecvForIocp( success, static_cast< unsigned int >( transferedLen ) );
+			break;
+		case Overlapped::IO_TYPE::SEND :
+			reinterpret_cast<ITcpSession*>( overlapped->object.Get() )->
+				OnSendForIocp( success, static_cast< unsigned int >( transferedLen ) );
+			break;
+		case Overlapped::IO_TYPE::ACCEPT :
+			reinterpret_cast<IAcceptor*>( overlapped->object.Get() )->
+				OnAccept( success, static_cast< unsigned int >( transferedLen ) );
+			break;
+		case Overlapped::IO_TYPE::CONNECT :
+			reinterpret_cast<IConnector*>( overlapped->object.Get() )->
+				OnConnect( success, static_cast< unsigned int >( transferedLen ) );
+			break;
 		}
 	}	
 }
