@@ -12,7 +12,8 @@ namespace Noob
 		public int val3 = 0;
 		public List<int> list = new List<int>();
 
-		public uint GetIndex(){ return 10000; }
+		public TestPck1(){ index = 10000; }
+		public static uint GetIndex(){ return 10000; }
 	}
 
 	[NoobSerializAbleAttibute]
@@ -20,7 +21,8 @@ namespace Noob
 	{
 		public int val1 = 0;
 
-		public uint GetIndex(){ return 10001; }
+		public TestPck2(){ index = 10001; }
+		public static uint GetIndex(){ return 10001; }
 	}
 
 	[NoobSerializAbleAttibute]

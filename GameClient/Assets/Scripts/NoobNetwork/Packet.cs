@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Noob
 {
-	public interface Packet
+	public class Packet
 	{
-		uint GetIndex();
+		public uint index;
 	}
 
 	public class PacketFactory

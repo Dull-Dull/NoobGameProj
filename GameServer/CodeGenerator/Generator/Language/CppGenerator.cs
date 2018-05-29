@@ -92,8 +92,11 @@ namespace CodeGenerator.Generator.Language
 				m_result += "\t" + ChangeType( value.type ) + " " + value.name + ";\n";
 			}
 
+			if( valueList.Count != 0 )
+				m_result += "\n";
+
 			//  생성자 생성
-			m_result += "\n\t" + name + "()\n";
+			m_result += "\t" + name + "()\n";
 			m_result += "\t{\n";
 			m_result += "\t\tindex = " + index + ";\n";
 			m_result += "\t}\n";

@@ -51,7 +51,11 @@ namespace CodeGenerator.Generator.Language
 				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
-			m_result += "\n\t\tpublic uint GetIndex(){ return " + index + "; }\n";
+			if( valueList.Count != 0 )
+				m_result += "\n";
+
+			m_result += "\t\tpublic " + name + "(){ index = " + index + "; }\n";
+			m_result += "\t\tpublic static uint GetIndex(){ return " + index + "; }\n";
 
 			m_result += "\t}\n";
 		}

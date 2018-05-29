@@ -3,7 +3,6 @@
 
 struct SC_Hello : public ::Noob::Packet
 {
-
 	SC_Hello()
 	{
 		index = 1;
@@ -25,7 +24,6 @@ inline StreamWriter& operator<<( StreamWriter& stream, SC_Hello& val )
 
 struct CS_Hello : public ::Noob::Packet
 {
-
 	CS_Hello()
 	{
 		index = 2;
