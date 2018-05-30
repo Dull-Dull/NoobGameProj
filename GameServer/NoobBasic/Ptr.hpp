@@ -9,6 +9,9 @@ template<typename Type>
 class Ptr
 {
 public:
+	using element_type = Type;
+
+public:
 	Ptr()
 	{
 		obj = nullptr;
@@ -18,7 +21,7 @@ public:
 	{
 		obj = ptr;
 
-		if( ptr!=nullptr )			
+		if( obj != nullptr )			
 			obj->IncCnt();
 	}
 
@@ -38,8 +41,8 @@ public:
 		decAndCheckObj();
 
 		obj = ptr.obj;
-
-		obj->IncCnt();
+		if( obj != nullptr )
+			obj->IncCnt();
 
 		return *this;
 	}
@@ -49,22 +52,28 @@ public:
 		decAndCheckObj();
 
 		obj = ptr;
-		obj->IncCnt();
+		if( obj != nullptr )
+			obj->IncCnt();
 
 		return *this;
 	}
 
-	Type& operator * ()
+	bool operator == ( const Ptr<Type>& rhs ) const
+	{
+		return obj == rhs.obj;
+	}
+
+	Type& operator * () const
 	{
 		return *obj;
 	}
 
-	Type* operator -> ()
+	Type* operator -> () const
 	{
 		return obj;
 	}
 
-	Type* Get()
+	Type* Get() const
 	{
 		return obj;
 	}
@@ -72,7 +81,7 @@ public:
 private:
 	void decAndCheckObj()
 	{
-		if( obj!=nullptr )
+		if( obj != nullptr )
 		{
 			obj->DecCnt();
 
@@ -85,5 +94,28 @@ private:
 };
 
 using RefCntPtr = Ptr<RefCnt>;
+
+template< class TargetType, class SrcType >
+Ptr<TargetType> PtrCast( const Ptr<SrcType>& src )
+{
+	TargetType* target = reinterpret_cast<TargetType*>( src.Get() );
+	return Ptr<TargetType>( target );
+}
+
+#define DECL( TYPE ) class TYPE;\
+using TYPE##Ptr = ::Noob::Ptr<TYPE>;
+
+}
+
+namespace std {
+
+template< class Type >
+struct hash< ::Noob::Ptr<Type> >
+{
+	size_t operator()( const ::Noob::Ptr<Type>& ptr ) const
+	{
+		return reinterpret_cast< size_t >( ptr.Get() );
+	}
+};
 
 }
