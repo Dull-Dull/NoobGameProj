@@ -11,7 +11,7 @@
 #include <memory>
 #include <cassert>
 #include <type_traits>
-
+#include <atomic>
 #include <thread>
 #include <functional>
 
