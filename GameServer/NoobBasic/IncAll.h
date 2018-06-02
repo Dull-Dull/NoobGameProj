@@ -11,3 +11,4 @@
 #include "TaskQueue.hpp"
 #include "Tick.h"
 #include "Lock.h"
+#include "Singletone.hpp"

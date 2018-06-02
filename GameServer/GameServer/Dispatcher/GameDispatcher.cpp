@@ -2,6 +2,8 @@
 #include "GameDispatcher.h"
 
 #include "../Player/Player.h"
+#include "../Player/PlayerContainer.h"
+#include "../Session/ClientSession.h"
 
 struct GameDispatcher::imple
 {
@@ -60,22 +62,35 @@ DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
 
 void GameDispatcher::imple::AcceptProc( const Noob::RefCntPtr& obj )
 {
+	auto session = ::Noob::PtrCast<ClientSession>( obj );
+	PlayerPtr player = new Player( session.Get() );
+	session->SetPlayer( player.Get() );
+
+	PlayerContainer::GetInstance()->Insert( player );
 	
+	player->OnAccept();
 }
 
 void GameDispatcher::imple::ConnectProc( const Noob::RefCntPtr& obj )
 {
-
+	
 }
 
 void GameDispatcher::imple::RecvProc( const Noob::RefCntPtr& obj )
 {
-
+	auto session = ::Noob::PtrCast<ClientSession>( obj );
+	auto pck = session->PopPck();
+	auto player = session->GetPlayer();
+	player->OnRecv( pck );
 }
 
 void GameDispatcher::imple::CloseProc( const Noob::RefCntPtr& obj )
 {
+	auto session = ::Noob::PtrCast<ClientSession>( obj );
+	auto player = session->GetPlayer();
+	player->OnClose();
 
+	PlayerContainer::GetInstance()->Delete( player );
 }
 
 GameDispatcher::GameDispatcher() : pImple( new imple )

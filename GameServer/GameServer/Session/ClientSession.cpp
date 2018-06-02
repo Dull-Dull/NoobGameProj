@@ -52,3 +52,10 @@ Player* ClientSession::GetPlayer()
 {
 	return pImple->m_player;
 }
+
+::Noob::PacketPtr ClientSession::PopPck()
+{
+	::Noob::PacketPtr pck = nullptr;
+	pImple->m_pckQueue.try_pop( pck );
+	return pck;
+}

@@ -15,7 +15,10 @@ public:
 	void SetPlayer( Player* player );
 	Player* GetPlayer();
 
+	::Noob::PacketPtr PopPck();
+
 private:
 	struct imple;
 	::std::unique_ptr<imple> pImple;
 };
+using ClientSessionPtr = ::Noob::Ptr<ClientSession>;

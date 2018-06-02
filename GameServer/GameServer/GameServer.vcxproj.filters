@@ -9,11 +9,17 @@
     <ClCompile Include="Session\ClientSession.cpp">
       <Filter>Session</Filter>
     </ClCompile>
+    <ClCompile Include="Session\ClientAcceptor.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
     <ClCompile Include="Dispatcher\GameDispatcher.cpp">
       <Filter>Dispatcher</Filter>
     </ClCompile>
-    <ClCompile Include="Session\ClientAcceptor.cpp">
-      <Filter>Session</Filter>
+    <ClCompile Include="PacketProc\PacketProc.cpp">
+      <Filter>PacketProc</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerContainer.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +32,9 @@
     <Filter Include="Dispatcher">
       <UniqueIdentifier>{cbe9b2f4-9e4a-4fce-9a1b-4eec9a92c9a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PacketProc">
+      <UniqueIdentifier>{fc6b0fd6-bd94-458d-8cd3-1224eb0b1d6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompiled.h" />
@@ -35,11 +44,17 @@
     <ClInclude Include="Session\ClientSession.h">
       <Filter>Session</Filter>
     </ClInclude>
+    <ClInclude Include="Session\ClientAcceptor.h">
+      <Filter>Session</Filter>
+    </ClInclude>
     <ClInclude Include="Dispatcher\GameDispatcher.h">
       <Filter>Dispatcher</Filter>
     </ClInclude>
-    <ClInclude Include="Session\ClientAcceptor.h">
-      <Filter>Session</Filter>
+    <ClInclude Include="PacketProc\PacketProc.h">
+      <Filter>PacketProc</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerContainer.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
