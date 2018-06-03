@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace CodeGenerator.Parser
+namespace CodeGenerator.FileParser
 {
 	partial class FileParser
 	{
-		private void ParsePacket( XmlNode node )
+		private void ParseData( XmlNode node )
 		{
-			if( ! m_usingPck )
-				throw new Exception.CanNotGenPck();
-
 			string name = null;
 			string extendsData = null;
 
 			name = GetAttrValue( node, "name" );
 			extendsData = GetAttrValue( node, "extends" );
+
+			if( name == null )
+				throw new Exception.AttributeNotFoundException( "Data/name" );
 
 			List<Value> valueList = new List<Value>();
 
@@ -36,7 +36,8 @@ namespace CodeGenerator.Parser
 				valueList.Add( tempValue );
 			}
 
-			m_fileGenerator.WritePacket( name, extendsData, m_nowPckIndex++, valueList );
+			m_fileGenerator.WriteData( name, extendsData, valueList );
+						
 		}
 	}
 }

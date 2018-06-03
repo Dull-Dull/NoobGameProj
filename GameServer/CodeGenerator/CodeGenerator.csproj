@@ -68,14 +68,17 @@
     <Compile Include="FileInfoIterator.cs" />
     <Compile Include="Generator\FileGenerator.cs" />
     <Compile Include="Generator\GeneratorInterface.cs" />
-    <Compile Include="Generator\Language\CppGenerator.cs" />
-    <Compile Include="Generator\Language\CsGenerator.cs" />
-    <Compile Include="Parser\FileParser.cs" />
+    <Compile Include="Generator\Language\cpp\CppGenerator.cs" />
+    <Compile Include="Generator\Language\cpp\CppTypes.cs" />
+    <Compile Include="Generator\Language\cs\CsGenerator.cs" />
+    <Compile Include="Generator\Language\cs\CsTypes.cs" />
+    <Compile Include="Generator\TypeParser.cs" />
+    <Compile Include="FileParser\FileParser.cs" />
     <Compile Include="MetaFile.cs" />
-    <Compile Include="Parser\Partial\FileParserData.cs" />
-    <Compile Include="Parser\Partial\FileParserInclude.cs" />
-    <Compile Include="Parser\Partial\FileParserPacket.cs" />
-    <Compile Include="Parser\Partial\FileParserPacketCodeRange.cs" />
+    <Compile Include="FileParser\Partial\FileParserData.cs" />
+    <Compile Include="FileParser\Partial\FileParserInclude.cs" />
+    <Compile Include="FileParser\Partial\FileParserPacket.cs" />
+    <Compile Include="FileParser\Partial\FileParserPacketCodeRange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeGenerator.Parser;
+using CodeGenerator.FileParser;
 
 namespace CodeGenerator.Generator.Language
 {
-	class CsGenerator : GeneratorInterface
+	partial class CsGenerator : GeneratorInterface, TypeInterface
 	{
 		public CsGenerator( string dstPath )
 		{			
 			m_dstPath = dstPath;
+			m_typeParser = new TypeParser( this );
 		}
 
 		public void WriteBegin()
@@ -34,7 +35,7 @@ namespace CodeGenerator.Generator.Language
 			
 			foreach( var value in valueList )
 			{
-				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
+				m_result += "\t\tpublic " + m_typeParser.ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
 			m_result += "\t}\n";
@@ -48,7 +49,7 @@ namespace CodeGenerator.Generator.Language
 
 			foreach( var value in valueList )
 			{
-				m_result += "\t\tpublic " + ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
+				m_result += "\t\tpublic " + m_typeParser.ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
 			if( valueList.Count != 0 )
@@ -72,44 +73,35 @@ namespace CodeGenerator.Generator.Language
 			System.IO.File.WriteAllText( file.FullName, m_result );
 		}
 
-		private string ChangeType( string type )
-		{
-			string ret = type.Trim();
-			ret = ret.Replace( '[', '<' );
-			ret = ret.Replace( ']', '>' );
-
-			ret = ret.Replace( "map", "Dictionary" );
-			ret = ret.Replace( "vector", "List" );
-
-			ret = ret.Replace( "unsigned ", "u" );
-			ret = ret.Replace( "int64", "long" );
-
-			return ret;
-		}
-
 		private string GetDefaultVal( string type )
 		{
-			string ret = "";
+			type = type.Trim();
 
-			if( type.IndexOf( "map" ) == 0 ||
-				type.IndexOf( "vector" ) == 0 )
+			if( type.IndexOf( "list" ) == 0 ||
+				type.IndexOf( "set" ) == 0 ||
+				type.IndexOf( "hash_set" ) == 0 ||
+				type.IndexOf( "tree" ) == 0 ||
+				type.IndexOf( "hash_tree" ) == 0 )
 			{
-				ret = "new " + ChangeType( type ) + "()";
-			}				
+				return "new " + m_typeParser.ChangeType( type ) + "()";
+			}			
 			else if( type.IndexOf( "string" ) == 0 )
 			{
-				ret = "\"\"";
+				return "\"\"";
+			}
+			else if( type.IndexOf( "bool" ) == 0 )
+			{
+				return "false";
 			}
 			else
 			{
-				ret = "0";
+				return "0";
 			}
-
-			return ret;
 		}
 
 		private string m_result = "";
-
 		private string m_dstPath = null;
+
+		private TypeParser m_typeParser = null;
 	}
 }

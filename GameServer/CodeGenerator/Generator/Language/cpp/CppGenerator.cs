@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeGenerator.Parser;
+using CodeGenerator.FileParser;
 
 
 namespace CodeGenerator.Generator.Language
 {
-    class CppGenerator : GeneratorInterface
+    partial class CppGenerator : GeneratorInterface, TypeInterface
     {
 		public CppGenerator( string dstPath )
 		{
 			m_dstPath = dstPath;
+			m_typeParser = new TypeParser( this );
 		}
 
 		public void WriteBegin()
@@ -36,7 +37,7 @@ namespace CodeGenerator.Generator.Language
 			//	values 생성
 			foreach( var value in valueList )
 			{
-				m_result += "\t" + ChangeType( value.type ) + " " + value.name + ";\n";
+				m_result += "\t" + m_typeParser.ChangeType( value.type ) + " " + value.name + ";\n";
 			}
 
 			//	GetName 생성
@@ -89,7 +90,7 @@ namespace CodeGenerator.Generator.Language
 			//	values 생성
 			foreach( var value in valueList )
 			{
-				m_result += "\t" + ChangeType( value.type ) + " " + value.name + ";\n";
+				m_result += "\t" + m_typeParser.ChangeType( value.type ) + " " + value.name + ";\n";
 			}
 
 			if( valueList.Count != 0 )
@@ -107,7 +108,7 @@ namespace CodeGenerator.Generator.Language
 
 				for( int i = 0; i < valueList.Count; ++i )
 				{
-					m_result += ChangeType( valueList[i].type ) + " _" + valueList[i].name;
+					m_result += m_typeParser.ChangeType( valueList[i].type ) + " _" + valueList[i].name;
 					if( i != valueList.Count - 1 )
 						m_result += ", ";
 				}
@@ -181,23 +182,10 @@ namespace CodeGenerator.Generator.Language
 				m_registeredPcks );
 		}
 
-		private string ChangeType( string type )
-		{
-			string ret = type.Trim();
-			ret = ret.Replace( '[', '<' );
-			ret = ret.Replace( ']', '>' );
-
-			ret = ret.Replace( "map", "::std::map" );
-			ret = ret.Replace( "vector", "::std::vector" );
-			ret = ret.Replace( "string", "::std::wstring" );
-
-			ret = ret.Replace( "int64", "int64_t" );
-
-			return ret;
-		}
-
 		private string m_result = "";
 		private string m_registeredPcks = "";
 		private string m_dstPath = null;
+
+		private TypeParser m_typeParser = null;
 	}
 }

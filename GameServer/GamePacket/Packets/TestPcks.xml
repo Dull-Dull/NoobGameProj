@@ -4,18 +4,18 @@
   <PckCodeRange min="10000" max="10200"/>
 	
 	<Packet name ="TestPck1" code ="1">
-		<Val type ="int" name ="val1"/>
-		<Val type ="int" name ="val2"/>
-		<Val type ="int" name ="val3"/>
-		<Val type ="vector[int]" name ="list"/>
+		<Val type ="int32" name ="val1"/>
+		<Val type ="int32" name ="val2"/>
+		<Val type ="int32" name ="val3"/>
+		<Val type ="list[int32]" name ="list"/>
 	</Packet>
 
 	<Packet name ="TestPck2">
-		<Val type ="int" name ="val1"/>
+		<Val type ="int32" name ="val1"/>
 	</Packet>
 
 	<Data name="TestData3">
-		<Val type ="int" name ="val1"/>
+		<Val type ="int32" name ="val1"/>
 		<Val type ="string" name ="val2"/>
 	</Data>
 	

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 
-using CodeGenerator.Parser;
+using CodeGenerator.FileParser;
 using CodeGenerator.Generator;
 
 namespace CodeGenerator
@@ -31,7 +31,7 @@ namespace CodeGenerator
 				{
 					try
 					{
-						FileParser fileParser = new FileParser( srcPath, fileGenerator );
+						FileParser.FileParser fileParser = new FileParser.FileParser( srcPath, fileGenerator );
 						Console.WriteLine( "compile : {0}", item.Name );
 						fileParser.Parsing( item );
 					}
