@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace Noob
 {
 
-	[NoobSerializAbleAttibute]
+	[NoobSerializAble]
 	public class SC_Hello : Packet
 	{
 		public SC_Hello(){ index = 1; }
 		public static uint GetIndex(){ return 1; }
 	}
 
-	[NoobSerializAbleAttibute]
+	[NoobSerializAble]
 	public class CS_Hello : Packet
 	{
 		public CS_Hello(){ index = 2; }

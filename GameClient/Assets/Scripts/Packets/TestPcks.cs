@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Noob
 {
 
-	[NoobSerializAbleAttibute]
+	[NoobSerializAble]
 	public class TestPck1 : Packet
 	{
 		public int val1 = 0;
@@ -16,7 +16,7 @@ namespace Noob
 		public static uint GetIndex(){ return 10000; }
 	}
 
-	[NoobSerializAbleAttibute]
+	[NoobSerializAble]
 	public class TestPck2 : Packet
 	{
 		public int val1 = 0;
@@ -25,7 +25,7 @@ namespace Noob
 		public static uint GetIndex(){ return 10001; }
 	}
 
-	[NoobSerializAbleAttibute]
+	[NoobSerializAble]
 	public class TestData3
 	{
 		public int val1 = 0;

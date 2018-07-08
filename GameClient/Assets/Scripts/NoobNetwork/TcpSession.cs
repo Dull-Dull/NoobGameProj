@@ -192,8 +192,8 @@ namespace Noob
 			m_OnDisConnect();
 		}
 
-		public ConnectFunc m_OnConnect = null;
-		public DisconnectFunc m_OnDisConnect = null;
+		public event ConnectFunc m_OnConnect = null;
+		public event DisconnectFunc m_OnDisConnect = null;
 
 
 		private SocketAsyncEventArgs m_recvArgs = null;

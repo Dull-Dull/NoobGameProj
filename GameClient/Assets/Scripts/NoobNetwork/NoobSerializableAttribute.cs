@@ -7,15 +7,15 @@ using System.Text;
 namespace Noob
 {
 	[AttributeUsage( AttributeTargets.Class )]
-	public class NoobSerializAbleAttibute : Attribute
+	public class NoobSerializAbleAttribute : Attribute
 	{
 		public static void Init()
 		{
-			Assembly asm = typeof( NoobSerializAbleAttibute ).Assembly;
+			Assembly asm = typeof( NoobSerializAbleAttribute ).Assembly;
 
 			foreach( var t in asm.GetTypes() )
 			{
-				Object[] attrObj = t.GetCustomAttributes( typeof( NoobSerializAbleAttibute ), false );
+				Object[] attrObj = t.GetCustomAttributes( typeof( NoobSerializAbleAttribute ), false );
 				if( attrObj.Length == 0 ||
 					attrObj == null )
 					continue;

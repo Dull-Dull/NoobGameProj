@@ -8,7 +8,7 @@ public class ServerSession : MonoBehaviour {
 
 	void Awake()
 	{
-		NoobSerializAbleAttibute.Init();
+		NoobSerializAbleAttribute.Init();
 
 		session.m_OnConnect += ( SocketError err ) =>
 		{
