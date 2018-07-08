@@ -96,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="Dispatcher\GameDispatcher.cpp" />
     <ClCompile Include="GameServerMain.cpp" />
+    <ClCompile Include="GameTick\GameTick.cpp" />
     <ClCompile Include="PacketProc\PacketProc.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerContainer.cpp" />
@@ -108,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dispatcher\GameDispatcher.h" />
+    <ClInclude Include="GameTick\GameTick.h" />
     <ClInclude Include="PacketProc\PacketProc.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerContainer.h" />

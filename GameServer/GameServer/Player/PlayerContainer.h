@@ -2,7 +2,7 @@
 
 //#include "Player.h"
 
-DECL( Player );
+DECL_CLASS( Player );
 
 class PlayerContainer : public ::Noob::Singletone<PlayerContainer>
 {

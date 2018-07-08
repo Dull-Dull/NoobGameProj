@@ -14,6 +14,7 @@
 #include <atomic>
 #include <thread>
 #include <functional>
+#include <cassert>
 
 using byte		= unsigned char;
 using wchar		= wchar_t;

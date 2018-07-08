@@ -21,6 +21,9 @@
     <ClCompile Include="Player\PlayerContainer.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="GameTick\GameTick.cpp">
+      <Filter>GameTick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">
@@ -34,6 +37,9 @@
     </Filter>
     <Filter Include="PacketProc">
       <UniqueIdentifier>{fc6b0fd6-bd94-458d-8cd3-1224eb0b1d6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameTick">
+      <UniqueIdentifier>{43f39399-be6e-4295-b5ab-188d6ef61ab3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerContainer.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTick\GameTick.h">
+      <Filter>GameTick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

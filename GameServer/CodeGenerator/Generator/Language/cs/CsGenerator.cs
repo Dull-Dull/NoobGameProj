@@ -30,7 +30,7 @@ namespace CodeGenerator.Generator.Language
 		public void WriteData( string name, string extends, List<Value> valueList )
 		{
 			m_result += "\n";
-			m_result += "\t[NoobSerializAbleAttibute]\n";
+			m_result += "\t[NoobSerializAble]\n";
 			m_result += "\tpublic class " + name + ( extends != null ? " : " + extends : "" ) + "\n\t{\n";
 			
 			foreach( var value in valueList )
@@ -44,7 +44,7 @@ namespace CodeGenerator.Generator.Language
 		public void WritePacket( string name, string extends, int index, List<Value> valueList )
 		{
 			m_result += "\n";
-			m_result += "\t[NoobSerializAbleAttibute]\n";
+			m_result += "\t[NoobSerializAble]\n";
 			m_result += "\tpublic class " + name + ( extends != null ? " : " + extends : " : " + "Packet" ) + "\n\t{\n";
 
 			foreach( var value in valueList )

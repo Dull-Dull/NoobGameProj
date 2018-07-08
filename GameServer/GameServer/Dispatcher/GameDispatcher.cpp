@@ -9,6 +9,7 @@ struct GameDispatcher::imple
 {
 	::Noob::TaskQueue<GameTask> m_taskQueue;
 	HANDLE m_threadHandle;
+	HANDLE m_tickGenThreadHandle;
 	DWORD m_threadId;
 
 	imple()
@@ -18,10 +19,11 @@ struct GameDispatcher::imple
 	}
 
 	static DWORD WINAPI ThreadFunc( void* arg );
-	void AcceptProc( const ::Noob::RefCntPtr& obj );
-	void ConnectProc( const Noob::RefCntPtr& obj );
-	void RecvProc( const Noob::RefCntPtr& obj );
-	void CloseProc( const Noob::RefCntPtr& obj );
+	void Accept( const ::Noob::RefCntPtr& obj );
+	void Connect( const Noob::RefCntPtr& obj );
+	void Recv( const Noob::RefCntPtr& obj );
+	void Close( const Noob::RefCntPtr& obj );
+	void Tick();
 };
 
 DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
@@ -40,16 +42,19 @@ DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
 		switch( task->m_eTask )
 		{
 		case E_GAME_TASK::ACCEPT:
-			pImple->AcceptProc( task->m_obj );
+			pImple->Accept( task->m_obj );
 			break;
 		case E_GAME_TASK::CONNECT:
-			pImple->ConnectProc( task->m_obj );
+			pImple->Connect( task->m_obj );
 			break;
 		case E_GAME_TASK::RECV:
-			pImple->RecvProc( task->m_obj );
+			pImple->Recv( task->m_obj );
 			break;
 		case E_GAME_TASK::CLOSE:
-			pImple->CloseProc( task->m_obj );
+			pImple->Close( task->m_obj );
+			break;
+		case E_GAME_TASK::TICK:
+			pImple->Tick();
 			break;
 		}
 
@@ -60,7 +65,7 @@ DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
 	return 0;
 }
 
-void GameDispatcher::imple::AcceptProc( const Noob::RefCntPtr& obj )
+void GameDispatcher::imple::Accept( const Noob::RefCntPtr& obj )
 {
 	auto session = ::Noob::PtrCast<ClientSession>( obj );
 	PlayerPtr player = new Player( session.Get() );
@@ -71,12 +76,12 @@ void GameDispatcher::imple::AcceptProc( const Noob::RefCntPtr& obj )
 	player->OnAccept();
 }
 
-void GameDispatcher::imple::ConnectProc( const Noob::RefCntPtr& obj )
+void GameDispatcher::imple::Connect( const Noob::RefCntPtr& obj )
 {
 	
 }
 
-void GameDispatcher::imple::RecvProc( const Noob::RefCntPtr& obj )
+void GameDispatcher::imple::Recv( const Noob::RefCntPtr& obj )
 {
 	auto session = ::Noob::PtrCast<ClientSession>( obj );
 	auto pck = session->PopPck();
@@ -84,7 +89,7 @@ void GameDispatcher::imple::RecvProc( const Noob::RefCntPtr& obj )
 	player->OnRecv( pck );
 }
 
-void GameDispatcher::imple::CloseProc( const Noob::RefCntPtr& obj )
+void GameDispatcher::imple::Close( const Noob::RefCntPtr& obj )
 {
 	auto session = ::Noob::PtrCast<ClientSession>( obj );
 	auto player = session->GetPlayer();

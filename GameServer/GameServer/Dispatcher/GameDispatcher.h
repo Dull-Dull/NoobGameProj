@@ -6,6 +6,7 @@ enum class E_GAME_TASK
 	CONNECT,
 	RECV,
 	CLOSE,
+	TICK,
 };
 
 struct GameTask

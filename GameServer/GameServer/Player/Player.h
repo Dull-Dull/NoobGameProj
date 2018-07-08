@@ -14,6 +14,9 @@ public:
 
 	void Send( const ::Noob::PacketPtr pck );
 
+	template< class PacketType >
+	void OnPacket( const ::Noob::Ptr<PacketType>& pck );
+
 private:
 	struct imple;
 	::std::unique_ptr<imple> pImple;

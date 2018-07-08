@@ -102,7 +102,10 @@ Ptr<TargetType> PtrCast( const Ptr<SrcType>& src )
 	return Ptr<TargetType>( target );
 }
 
-#define DECL( TYPE ) class TYPE;\
+#define DECL_CLASS( TYPE ) class TYPE;\
+using TYPE##Ptr = ::Noob::Ptr<TYPE>;
+
+#define DECL_STRUCT( TYPE ) struct TYPE;\
 using TYPE##Ptr = ::Noob::Ptr<TYPE>;
 
 }
