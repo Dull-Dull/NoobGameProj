@@ -4,11 +4,11 @@
 
 ::std::unordered_map< unsigned int, PacketProcManager::Func >* PacketProcManager::m_pckProcCon = nullptr;
 
-void PacketProcManager::Call( const PlayerPtr& player, const ::Noob::PacketPtr& pck )
+void PacketProcManager::Call( Player* player, const ::Noob::PacketPtr& pck )
 {
 	auto iter = m_pckProcCon->find( pck->index );
 	if( iter != m_pckProcCon->end() )
-		((player.Get())->*(iter->second))( pck );
+		(player->*(iter->second))( pck );
 }
 
 PacketProcRegisterer::PacketProcRegisterer( unsigned int pckIndex, PacketProcManager::Func callbackFunc )

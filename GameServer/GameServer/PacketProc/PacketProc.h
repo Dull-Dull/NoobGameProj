@@ -6,8 +6,8 @@ class PacketProcRegisterer;
 class PacketProcManager
 {
 public:
-	using Func = void (::Player::*)( const ::Noob::PacketPtr& );
-	static void Call( const PlayerPtr& player, const ::Noob::PacketPtr& pck );
+	using Func = void (Player::*)( const ::Noob::PacketPtr& );
+	static void Call( Player* player, const ::Noob::PacketPtr& pck );
 private:
 	static ::std::unordered_map< unsigned int, Func >* m_pckProcCon;
 	friend PacketProcRegisterer;

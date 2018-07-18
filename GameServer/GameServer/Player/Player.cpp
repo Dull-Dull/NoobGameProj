@@ -27,7 +27,7 @@ void Player::OnAccept()
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
 {
-	PacketProcManager::Call( pck );
+	PacketProcManager::Call( this, pck );
 }
 
 void Player::OnClose()
