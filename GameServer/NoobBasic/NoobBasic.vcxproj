@@ -89,7 +89,7 @@
     <ClInclude Include="Serialize.hpp" />
     <ClInclude Include="Singletone.hpp" />
     <ClInclude Include="TaskQueue.hpp" />
-    <ClInclude Include="Tick.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FastSmtp.cpp" />

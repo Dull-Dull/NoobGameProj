@@ -31,10 +31,10 @@
     <ClInclude Include="LogStream.h">
       <Filter>Log</Filter>
     </ClInclude>
-    <ClInclude Include="Tick.h" />
     <ClInclude Include="IncAll.h" />
     <ClInclude Include="Lock.h" />
     <ClInclude Include="Singletone.hpp" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiled.cpp" />
