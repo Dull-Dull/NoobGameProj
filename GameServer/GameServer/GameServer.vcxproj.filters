@@ -21,8 +21,11 @@
     <ClCompile Include="Player\PlayerContainer.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="GameTick\GameTick.cpp">
-      <Filter>GameTick</Filter>
+    <ClCompile Include="Alarm\AlarmManager.cpp">
+      <Filter>Alarm</Filter>
+    </ClCompile>
+    <ClCompile Include="Alarm\AlarmTask.cpp">
+      <Filter>Alarm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,7 +41,7 @@
     <Filter Include="PacketProc">
       <UniqueIdentifier>{fc6b0fd6-bd94-458d-8cd3-1224eb0b1d6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameTick">
+    <Filter Include="Alarm">
       <UniqueIdentifier>{43f39399-be6e-4295-b5ab-188d6ef61ab3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -62,8 +65,11 @@
     <ClInclude Include="Player\PlayerContainer.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="GameTick\GameTick.h">
-      <Filter>GameTick</Filter>
+    <ClInclude Include="Alarm\AlarmManager.h">
+      <Filter>Alarm</Filter>
+    </ClInclude>
+    <ClInclude Include="Alarm\AlarmTask.h">
+      <Filter>Alarm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

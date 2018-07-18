@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "../Player/PlayerContainer.h"
 #include "../Session/ClientSession.h"
+#include "../Alarm/AlarmTask.h"
 
 struct GameDispatcher::imple
 {
@@ -23,7 +24,7 @@ struct GameDispatcher::imple
 	void Connect( const Noob::RefCntPtr& obj );
 	void Recv( const Noob::RefCntPtr& obj );
 	void Close( const Noob::RefCntPtr& obj );
-	void Tick();
+	void Alarm( const Noob::RefCntPtr& obj );
 };
 
 DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
@@ -53,8 +54,8 @@ DWORD WINAPI GameDispatcher::imple::ThreadFunc( void* arg )
 		case E_GAME_TASK::CLOSE:
 			pImple->Close( task->m_obj );
 			break;
-		case E_GAME_TASK::TICK:
-			pImple->Tick();
+		case E_GAME_TASK::ALARM:
+			pImple->Alarm( task->m_obj );
 			break;
 		}
 
@@ -96,6 +97,12 @@ void GameDispatcher::imple::Close( const Noob::RefCntPtr& obj )
 	player->OnClose();
 
 	PlayerContainer::GetInstance()->Delete( player );
+}
+
+void GameDispatcher::imple::Alarm( const Noob::RefCntPtr& obj )
+{
+	auto alarmTask = ::Noob::PtrCast<AlarmTask>( obj );
+	alarmTask->OnAlarm();
 }
 
 GameDispatcher::GameDispatcher() : pImple( new imple )
