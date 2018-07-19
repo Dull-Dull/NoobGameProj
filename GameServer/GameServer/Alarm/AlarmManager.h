@@ -4,10 +4,10 @@
 
 class GameDispatcher;
 
-class AlarmManager
+class AlarmManager : public ::Noob::Singletone<AlarmManager>
 {
 public:
-	AlarmManager( GameDispatcher* dispatcher );
+	AlarmManager();
 	~AlarmManager();
 	
 	int64_t RegisterAlarm( const ::Noob::Duration& duration,  AlarmCallback callback );

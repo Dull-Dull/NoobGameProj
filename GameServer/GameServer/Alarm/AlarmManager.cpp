@@ -9,7 +9,6 @@ struct AlarmManager::imple
 {
 	using TickQueue = ::Noob::TaskQueue<int>;
 
-	GameDispatcher* m_dispatcher;
 	TickQueue m_tickQueue;
 
 	HANDLE m_genTickHandle;
@@ -55,7 +54,7 @@ DWORD WINAPI AlarmManager::imple::genAlarm( void* arg )
 			AlarmTaskPtr& alarmTask = *iter;
 			if( nowTime <= alarmTask->GetInvokeTime() )
 			{
-				pImple->m_dispatcher->Push( E_GAME_TASK::ALARM, alarmTask.Get() );
+				GameDispatcher::GetInstance()->Push( E_GAME_TASK::ALARM, alarmTask.Get() );
 				pImple->m_alarmMap.erase( alarmTask->GetIndex() );
 				iter = pImple->m_alarmList.erase( iter );
 				continue;
@@ -65,9 +64,8 @@ DWORD WINAPI AlarmManager::imple::genAlarm( void* arg )
 	}
 }
 
-AlarmManager::AlarmManager( GameDispatcher* dispatcher ) : pImple( new imple )
+AlarmManager::AlarmManager() : pImple( new imple )
 {
-	pImple->m_dispatcher = dispatcher;
 	pImple->m_indexCount = 0LL;
 
 	pImple->m_genTickHandle = CreateThread( NULL, 0, pImple->genTick, pImple.get(), 0, &(pImple->m_genTickId) );

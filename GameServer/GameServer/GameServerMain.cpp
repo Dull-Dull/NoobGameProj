@@ -12,8 +12,7 @@ int main()
 	
 	iocp->Start();
 
-	GameDispatcher dispatcher;
-	ClientAcceptorManager acceptorManager( iocp.Get(), 15000, &dispatcher );	
+	ClientAcceptorManager acceptorManager( iocp.Get(), 15000 );	
 	
 	iocp->Wait();
 

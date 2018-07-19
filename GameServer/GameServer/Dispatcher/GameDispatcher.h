@@ -15,7 +15,7 @@ struct GameTask
 	::Noob::RefCntPtr m_obj;
 };
 
-class GameDispatcher
+class GameDispatcher : public ::Noob::Singletone< GameDispatcher >
 {
 public:
 	GameDispatcher();
