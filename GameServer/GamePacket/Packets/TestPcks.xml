@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Pck>  
-  <PckCodeRange min="10000" max="10200"/>
-	
+<Pck>
+	<PckCodeRange min="10000" max="10200"/>
+
 	<Packet name ="TestPck1" code ="1">
 		<Val type ="int32" name ="val1"/>
 		<Val type ="int32" name ="val2"/>
@@ -18,5 +18,5 @@
 		<Val type ="int32" name ="val1"/>
 		<Val type ="string" name ="val2"/>
 	</Data>
-	
+
 </Pck>
