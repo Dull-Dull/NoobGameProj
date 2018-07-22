@@ -7,17 +7,9 @@ const static ::Noob::Tick g_tickUnit = ::Noob::Second / 2;
 
 struct AlarmManager::imple
 {
-	using TickQueue = ::Noob::TaskQueue<int>;
-
-	TickQueue m_tickQueue;
-
 	HANDLE m_genTickHandle;
 	DWORD m_genTickId;
-	static DWORD WINAPI genTick( void* );
-
-	HANDLE m_genAlarmHandle;
-	DWORD m_genAlarmId;
-	static DWORD WINAPI genAlarm( void* );
+	static DWORD WINAPI genTickThread( void* );
 
 	int64_t m_indexCount;
 
@@ -25,7 +17,7 @@ struct AlarmManager::imple
 	::std::unordered_map<int64_t, ::std::list<AlarmTaskPtr>::iterator> m_alarmMap;	
 };
 
-DWORD WINAPI AlarmManager::imple::genTick( void* arg )
+DWORD WINAPI AlarmManager::imple::genTickThread( void* arg )
 {
 	imple* pImple = static_cast<imple*>( arg );
 
@@ -34,33 +26,7 @@ DWORD WINAPI AlarmManager::imple::genTick( void* arg )
 	while( true )
 	{
 		Sleep( tickUnit );
-		pImple->m_tickQueue.Push( nullptr );
-	}
-}
-
-DWORD WINAPI AlarmManager::imple::genAlarm( void* arg )
-{
-	imple* pImple = static_cast<imple*>( arg );
-	int* tempTask = nullptr;
-
-	while( true )
-	{
-		pImple->m_tickQueue.Pop( tempTask, INFINITE );
-
-		::Noob::TimePoint nowTime = ::Noob::GetNow();
-
-		for( auto iter = pImple->m_alarmList.begin(); iter != pImple->m_alarmList.end();)
-		{
-			AlarmTaskPtr& alarmTask = *iter;
-			if( nowTime <= alarmTask->GetInvokeTime() )
-			{
-				GameDispatcher::GetInstance()->Push( E_GAME_TASK::ALARM, alarmTask.Get() );
-				pImple->m_alarmMap.erase( alarmTask->GetIndex() );
-				iter = pImple->m_alarmList.erase( iter );
-				continue;
-			}
-			++iter;
-		}
+		::GameDispatcher::GetInstance()->Push( E_GAME_TASK::TICK, nullptr );
 	}
 }
 
@@ -68,8 +34,7 @@ AlarmManager::AlarmManager() : pImple( new imple )
 {
 	pImple->m_indexCount = 0LL;
 
-	pImple->m_genTickHandle = CreateThread( NULL, 0, pImple->genTick, pImple.get(), 0, &(pImple->m_genTickId) );
-	pImple->m_genAlarmHandle = CreateThread( NULL, 0, pImple->genAlarm, pImple.get(), 0, &(pImple->m_genAlarmId) );
+	pImple->m_genTickHandle = CreateThread( NULL, 0, pImple->genTickThread, pImple.get(), 0, &(pImple->m_genTickId) );
 }
 
 AlarmManager::~AlarmManager()
@@ -100,5 +65,23 @@ void AlarmManager::UnRegisterAlarm( int64_t alarmIndex )
 	{
 		pImple->m_alarmList.erase( iter->second );
 		pImple->m_alarmMap.erase( iter );
+	}
+}
+
+void AlarmManager::onAlarm()
+{
+	::Noob::TimePoint nowTime = ::Noob::GetNow();
+
+	for( auto iter = pImple->m_alarmList.begin(); iter != pImple->m_alarmList.end();)
+	{
+		AlarmTaskPtr& alarmTask = *iter;
+		if( nowTime <= alarmTask->GetInvokeTime() )
+		{
+			alarmTask->OnAlarm();
+			pImple->m_alarmMap.erase( alarmTask->GetIndex() );
+			iter = pImple->m_alarmList.erase( iter );
+			continue;
+		}
+		++iter;
 	}
 }

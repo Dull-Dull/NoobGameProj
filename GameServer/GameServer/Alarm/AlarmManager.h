@@ -17,4 +17,7 @@ public:
 private:
 	struct imple;
 	::std::unique_ptr<imple> pImple;
+
+	void onAlarm();
+	friend GameDispatcher;
 };
