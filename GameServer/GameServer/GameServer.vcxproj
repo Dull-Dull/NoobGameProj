@@ -99,6 +99,7 @@
     <ClCompile Include="Dispatcher\GameDispatcher.cpp" />
     <ClCompile Include="GameServerMain.cpp" />
     <ClCompile Include="PacketProc\PacketProc.cpp" />
+    <ClCompile Include="Player\Ping\PingManager.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerContainer.cpp" />
     <ClCompile Include="PreCompiled.cpp">
@@ -113,6 +114,7 @@
     <ClInclude Include="Alarm\AlarmTask.h" />
     <ClInclude Include="Dispatcher\GameDispatcher.h" />
     <ClInclude Include="PacketProc\PacketProc.h" />
+    <ClInclude Include="Player\Ping\PingManager.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerContainer.h" />
     <ClInclude Include="PreCompiled.h" />

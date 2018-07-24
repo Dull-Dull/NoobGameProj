@@ -1,18 +1,17 @@
 #include "PreCompiled.h"
 #include "Player.h"
 
+#include "Ping/PingManager.h"
+#include "../Session/ClientSession.h"
 #include "../PacketProc/PacketProc.h"
+#include "../Alarm/AlarmManager.h"
 #include <GamePacket/Packets/Login.h>
-#include <GamePacket/Packets/TestPcks.h>
 
-struct Player::imple
+Player::Player( ClientSession* session )
 {
-	ClientSession* m_session;
-};
-
-Player::Player( ClientSession* session ) : pImple( new imple )
-{
-	pImple->m_session = session;
+	m_session = session;
+	m_ping = new PingManager( this );
+	m_bSaidHello = false;
 }
 
 Player::~Player()
@@ -22,21 +21,46 @@ Player::~Player()
 
 void Player::OnAccept()
 {
-
+	
 }
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
 {
+	if( m_bSaidHello )
+	{
+		if( pck->index != CS_Hello::GetIndex() )
+		{
+			m_session->Close();
+			return;
+		}
+	}
+
 	PacketProcManager::Call( this, pck );
 }
 
 void Player::OnClose()
 {
-	pImple->m_session = nullptr;
+	m_session = nullptr;
+	SAFE_DELETE( m_ping );
+}
+
+void Player::Close()
+{
+	m_session->Close();
 }
 
 REGIST_PCK_PROC(CS_Hello)
 void Player::OnPacket( const CS_HelloPtr& pck )
 {
+	SC_Hello hello;
+	Send( hello );
+	m_bSaidHello = true;
+	
+	m_ping->SendPing();
+}
 
+REGIST_PCK_PROC( CS_Ping )
+void Player::OnPacket( const CS_PingPtr& pck )
+{
+	m_ping->RecvPing( pck->tick );
 }

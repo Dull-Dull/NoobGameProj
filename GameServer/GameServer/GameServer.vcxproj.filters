@@ -27,6 +27,9 @@
     <ClCompile Include="Alarm\AlarmTask.cpp">
       <Filter>Alarm</Filter>
     </ClCompile>
+    <ClCompile Include="Player\Ping\PingManager.cpp">
+      <Filter>Player\PingManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">
@@ -43,6 +46,9 @@
     </Filter>
     <Filter Include="Alarm">
       <UniqueIdentifier>{43f39399-be6e-4295-b5ab-188d6ef61ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\PingManager">
+      <UniqueIdentifier>{6ffa8895-a41a-48a9-9c89-3986ce1d373a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="Alarm\AlarmTask.h">
       <Filter>Alarm</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Ping\PingManager.h">
+      <Filter>Player\PingManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

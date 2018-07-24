@@ -18,3 +18,7 @@
 
 using byte		= unsigned char;
 using wchar		= wchar_t;
+
+#define SAFE_DELETE( Val )\
+if( Val != nullptr )\
+{ delete Val; Val = nullptr; }
