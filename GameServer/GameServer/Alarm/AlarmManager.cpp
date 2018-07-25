@@ -75,7 +75,7 @@ void AlarmManager::onAlarm()
 	for( auto iter = pImple->m_alarmList.begin(); iter != pImple->m_alarmList.end();)
 	{
 		AlarmTaskPtr& alarmTask = *iter;
-		if( nowTime <= alarmTask->GetInvokeTime() )
+		if( nowTime >= alarmTask->GetInvokeTime() )
 		{
 			alarmTask->OnAlarm();
 			pImple->m_alarmMap.erase( alarmTask->GetIndex() );
