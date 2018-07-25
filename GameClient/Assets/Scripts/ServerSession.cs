@@ -24,14 +24,15 @@ public class ServerSession : MonoBehaviour {
 		};
 
 		session.AsyncConnect( "127.0.0.1", 15000 );
-		
+
+		pckProcMng = new PacketProcManager( this );
 	}
 
 	// Use this for initialization
 	void Start() {
 		Debug.Log( "Start()" );
 
-		StartCoroutine( CloseSession() );
+		//StartCoroutine( CloseSession() );
 	}
 
 	IEnumerator CloseSession()
@@ -44,15 +45,21 @@ public class ServerSession : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if( session.IsConnected )
+		{
+			for( Packet pck = session.TryPopPacket(); pck != null; pck = session.TryPopPacket() )
+			{
+				pckProcMng.runPckProc( pck );
+			}
+		}
 	}
 
 	private void OnDestroy()
 	{
-		session.Close();
+		if( session.IsConnected )
+			session.Close();
 	}
 
-
-
 	private TcpSession session = new TcpSession();
+	private PacketProcManager pckProcMng = null;
 }

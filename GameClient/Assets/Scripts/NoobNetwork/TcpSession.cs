@@ -64,9 +64,9 @@ namespace Noob
 				postRecv();
 		}
 
-		public bool IsConnected()
+		public bool IsConnected
 		{
-			return m_sock.Connected;
+			get{ return m_sock.Connected; }			
 		}
 
 		public void Close()
@@ -119,24 +119,32 @@ namespace Noob
 
 			lock( m_sendLock )
 			{
-				m_sendPckQueue.Dequeue();
-
-				if( m_sendPckQueue.Count != 0 )
+				try
 				{
-					postSend();
+					m_sendPckQueue.Dequeue();
+
+					if( m_sendPckQueue.Count != 0 )
+					{
+						postSend();
+					}
 				}
+				catch( InvalidOperationException ) { }
 			}
 		}
 
 		public Packet TryPopPacket()
 		{
-			Packet pck = null;
 			lock( m_recvPckQueue )
 			{
-				pck = m_recvPckQueue.Dequeue();
+				try
+				{
+					return m_recvPckQueue.Dequeue();
+				}
+				catch( InvalidOperationException )
+				{
+					return null;
+				}				
 			}
-			
-			return pck;
 		}		
 
 		private void postRecv()
