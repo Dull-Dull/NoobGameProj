@@ -280,7 +280,7 @@ namespace Noob
 						fieldType = fieldType.GetGenericTypeDefinition();
 
 					WriteFunc func = null;
-					if( writeFuncCon.TryGetValue( fieldType.GetGenericTypeDefinition(), out func ) )
+					if( NoobSerializeFormatter.writeFuncCon.TryGetValue( fieldType, out func ) )
 					{
 						func( writer, fieldGraph );
 					}
@@ -300,7 +300,7 @@ namespace Noob
 						fieldType = fieldType.GetGenericTypeDefinition();
 
 					ReadFunc func = null;
-					if( readFuncCon.TryGetValue( fieldType, out func ) )
+					if( NoobSerializeFormatter.readFuncCon.TryGetValue( fieldType, out func ) )
 					{
 						func( reader, ref fieldGraph );
 						field.SetValue( graph, fieldGraph );
