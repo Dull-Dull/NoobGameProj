@@ -49,31 +49,6 @@ public:
 		}
 	}
 
-	template< typename PacketType >
-	void Send( Ptr<PacketType>& pck )
-	{
-		static_assert( std::is_base_of<Packet,PacketType>::value, "Invalid Packet" );
-
-		StreamBuf streamBuf;
-		StreamWriter writer( streamBuf );
-
-		writer << *pck;
-
-		WSABUF buff;
-		buff.buf = reinterpret_cast<char*>( streamBuf.m_rowBuf );
-		buff.len = writer.m_offSet;
-
-		{
-			LockGuard lockGuard( m_sendLock );
-
-			m_consumeBuff->push_back( buff );
-			if( !m_nowSending )
-			{
-				PostSend();
-			}
-		}
-	}
-
 	void Close();
 
 	const EndPoint& GetLocal(){ return m_localEndPoint; }

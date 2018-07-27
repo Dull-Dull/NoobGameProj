@@ -42,9 +42,6 @@ void ITcpSession::Init( Iocp* iocp, SOCKET sock, const EndPoint& local, const En
 
 void ITcpSession::PostSend()
 {
-	for( auto& buff : *m_sendingBuff )
-		delete[] buff.buf;
-
 	WsaBuffContainer* temp = m_consumeBuff;
 	m_consumeBuff = m_sendingBuff;
 	m_sendingBuff = temp;
@@ -64,6 +61,10 @@ void ITcpSession::PostSend()
 
 void ITcpSession::OnSendForIocp( bool success, unsigned int transferedLen )
 {
+	for( const auto& wsaBuf : *m_sendingBuff )
+		delete[] wsaBuf.buf;
+	m_sendingBuff->clear();
+
 	if( success == false || transferedLen == 0 )
 	{
 		m_sendOverlapped.object = nullptr;

@@ -26,7 +26,7 @@ void Player::OnAccept()
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
 {
-	if( m_bSaidHello )
+	if( m_bSaidHello == false )
 	{
 		if( pck->index != CS_Hello::GetIndex() )
 		{

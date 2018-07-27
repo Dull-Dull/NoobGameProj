@@ -8,34 +8,29 @@ struct StreamBuf
 	{
 		m_rowBuf = new byte[bufSize];
 		m_bufSize = bufSize;
-		m_externBuf = false;
 	}
 
 	StreamBuf( byte* buf, size_t bufSize )
 	{
 		m_rowBuf = buf;
 		m_bufSize = bufSize;
-		m_externBuf = true;
 	}
 
 	~StreamBuf()
 	{
-		if( m_externBuf == false )
-			delete [] m_rowBuf;
 	}
 
 	void ReAlloc()
 	{
-		assert( m_externBuf == false );
-
 		byte* tempBuffer = m_rowBuf;
 		m_rowBuf = new byte[ m_bufSize * 2 ];
 		memcpy( m_rowBuf, tempBuffer, m_bufSize );
 		m_bufSize *= 2;
+
+		delete [] m_rowBuf;
 	}
 	byte*	m_rowBuf;
 	size_t	m_bufSize;
-	bool	m_externBuf;
 };
 
 struct StreamReader
