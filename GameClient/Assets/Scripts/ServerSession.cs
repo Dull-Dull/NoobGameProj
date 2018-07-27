@@ -13,7 +13,11 @@ public class ServerSession : MonoBehaviour {
 		session.m_OnConnect += ( SocketError err ) =>
 		{
 			if( err == SocketError.Success )
+			{
 				Debug.Log( "Connect Success!!!" );
+				CS_Hello hello = new CS_Hello();
+				session.Send( hello );
+			}
 			else
 				Debug.Log( "Connect Fail!!!" );
 		};

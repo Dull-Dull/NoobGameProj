@@ -293,6 +293,9 @@ namespace Noob
 
 				foreach( FieldInfo field in fields )
 				{
+					if( field.DeclaringType == typeof( Packet ) )
+						continue;
+
 					Object fieldGraph = field.GetValue( graph );
 					Type fieldType = fieldGraph.GetType();
 

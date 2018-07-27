@@ -21,12 +21,10 @@ namespace Noob
 					continue;
 
 				NoobSerializeFormatter.RegisterData( t );
-
-				Type interfaceType = t.GetInterface( "Packet" );
-				if( interfaceType != null )
+				
+				if( t.BaseType == typeof( Noob.Packet ) )
 				{
-					Object pckGraph = Activator.CreateInstance( t );
-					PacketFactory.RegisterPck( (uint)t.GetMethod( "GetIndex" ).Invoke( pckGraph, null ), t );
+					PacketFactory.RegisterPck( (uint)t.GetMethod( "GetIndex" ).Invoke( null, null ), t );
 				}
 			}
 
