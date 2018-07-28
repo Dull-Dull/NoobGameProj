@@ -66,4 +66,19 @@ public class ServerSession : MonoBehaviour {
 
 	private TcpSession session = new TcpSession();
 	private PacketProcManager pckProcMng = null;
+
+	[PacketProcRegistration( 1 )]
+	public void SC_HelloProc( Packet pck )
+	{
+		Debug.Log( "Call SC_Hello pck!!!" );
+	}
+
+	[PacketProcRegistration( 3 )]
+	public void SC_PingProc( Packet pck )
+	{
+		Debug.Log( "Recv SC_Ping pck!!!" );
+		CS_Ping ping = new CS_Ping();
+		ping.tick = ( pck as SC_Ping ).tick;
+		session.Send( ping );
+	}
 }

@@ -66,7 +66,12 @@ namespace Noob
 
 		public bool IsConnected
 		{
-			get{ return m_sock.Connected; }			
+			get{
+				if( m_sock == null )
+					return false;
+				else
+					return m_sock.Connected;
+			}			
 		}
 
 		public void Close()

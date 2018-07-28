@@ -69,7 +69,8 @@ namespace Noob
 
 				if( m_pckProcCon.ContainsKey( attr.PckIndex ) == false )
 				{
-					m_pckProcCon.Add( attr.PckIndex, (Action<Packet>)Delegate.CreateDelegate( consumerType, consumer, info ) );
+					var del = (Action<Packet>)Delegate.CreateDelegate( typeof( Action<Packet> ), consumer, info );
+					m_pckProcCon.Add( attr.PckIndex, del );
 				}
 			}
 		}
