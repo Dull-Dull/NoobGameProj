@@ -307,5 +307,6 @@ paket-files/
 *.exe
 *.out
 *.app
-/NoobUnitTest/Network/TestPck/PckRegister.h
-/NoobUnitTest/Network/TestPck/Pck.h
+
+# Dump files
+*.dmp
