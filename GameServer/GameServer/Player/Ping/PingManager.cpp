@@ -14,6 +14,7 @@ PingManager::PingManager( Player* player )
 	m_pingAlarmIndex = -1;
 	m_tryCnt = 0;
 	m_bRecvedPing = false;
+	m_ping = 0;
 }
 
 PingManager::~PingManager()
