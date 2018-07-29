@@ -10,7 +10,7 @@
 Player::Player( ClientSession* session )
 {
 	m_session = session;
-	m_ping = new PingManager( this );
+	m_ping = nullptr;
 	m_bSaidHello = false;
 }
 
@@ -21,7 +21,8 @@ Player::~Player()
 
 void Player::OnAccept()
 {
-	
+	if( m_ping == nullptr )
+		m_ping = new PingManager( this );
 }
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
