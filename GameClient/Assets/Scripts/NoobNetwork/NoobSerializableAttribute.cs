@@ -24,7 +24,8 @@ namespace Noob
 				
 				if( t.BaseType == typeof( Noob.Packet ) )
 				{
-					PacketFactory.RegisterPck( (uint)t.GetMethod( "GetIndex" ).Invoke( null, null ), t );
+					uint index = (uint)t.GetField( "index" ).GetRawConstantValue();
+					PacketFactory.RegisterPck( index, t );
 				}
 			}
 

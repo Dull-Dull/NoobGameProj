@@ -55,8 +55,8 @@ namespace CodeGenerator.Generator.Language
 			if( valueList.Count != 0 )
 				m_result += "\n";
 
-			m_result += "\t\tpublic " + name + "(){ index = " + index + "; }\n";
-			m_result += "\t\tpublic static uint GetIndex(){ return " + index + "; }\n";
+			m_result += "\t\tpublic override uint GetIndex(){ return index; }\n";
+			m_result += $"\t\tpublic const uint index = {index};\n";
 
 			m_result += "\t}\n";
 		}

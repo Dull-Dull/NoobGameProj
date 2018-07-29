@@ -67,13 +67,13 @@ public class ServerSession : MonoBehaviour {
 	private TcpSession session = new TcpSession();
 	private PacketProcManager pckProcMng = null;
 
-	[PacketProcRegistration( 1 )]
+	[PacketProcRegistration( SC_Hello.index )]
 	public void SC_HelloProc( Packet pck )
 	{
 		Debug.Log( "Call SC_Hello pck!!!" );
 	}
 
-	[PacketProcRegistration( 3 )]
+	[PacketProcRegistration( SC_Ping.index )]
 	public void SC_PingProc( Packet pck )
 	{
 		Debug.Log( "Recv SC_Ping pck!!!" );

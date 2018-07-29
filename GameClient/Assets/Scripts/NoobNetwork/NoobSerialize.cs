@@ -293,7 +293,7 @@ namespace Noob
 
 				foreach( FieldInfo field in fields )
 				{
-					if( field.DeclaringType == typeof( Packet ) )
+					if( field.IsLiteral && false == field.IsInitOnly )
 						continue;
 
 					Object fieldGraph = field.GetValue( graph );

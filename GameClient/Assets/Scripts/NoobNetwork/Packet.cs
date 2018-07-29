@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace Noob
 {
-	public class Packet
+	public abstract class Packet
 	{
-		public uint index;
+		public abstract uint GetIndex();
 	}
 
 	public class PacketFactory
@@ -78,7 +78,7 @@ namespace Noob
 		public void runPckProc( Packet pck )
 		{
 			Action<Packet> pckProc;
-			if( m_pckProcCon.TryGetValue( pck.index, out pckProc ) )
+			if( m_pckProcCon.TryGetValue( pck.GetIndex(), out pckProc ) )
 			{
 				pckProc( pck );
 			}

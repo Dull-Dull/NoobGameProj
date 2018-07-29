@@ -109,7 +109,7 @@ namespace Noob
 			NoobSerializeFormatter.Write( m_sendMem, pck );
 
 			Array.Copy( BitConverter.GetBytes( m_sendMem.Length ), 0, m_sendMem.GetBuffer(), 0, sizeof( uint ) );
-			Array.Copy( BitConverter.GetBytes( pck.index ), 0, m_sendMem.GetBuffer(), sizeof( uint ), sizeof( uint ) );
+			Array.Copy( BitConverter.GetBytes( pck.GetIndex() ), 0, m_sendMem.GetBuffer(), sizeof( uint ), sizeof( uint ) );
 
 			m_sendArgs.SetBuffer( m_sendArgs.Offset, (int)m_sendMem.Length );
 			Array.Copy( m_sendMem.GetBuffer(), 0, m_sendArgs.Buffer, m_sendArgs.Offset, m_sendMem.Length );
