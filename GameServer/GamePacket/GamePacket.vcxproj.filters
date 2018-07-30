@@ -17,6 +17,9 @@
     <ClInclude Include="Packets\Login.h">
       <Filter>Packets</Filter>
     </ClInclude>
+    <ClInclude Include="Datas\Math.h">
+      <Filter>Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiled.cpp" />

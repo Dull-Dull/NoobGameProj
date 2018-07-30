@@ -84,7 +84,7 @@ namespace CodeGenerator.Generator.Language
 			{
 				return "0";
 			}
-			if( type.IndexOf( "float32" ) == 0 ||
+			else if( type.IndexOf( "float32" ) == 0 ||
 				type.IndexOf( "float64" ) == 0 )
 			{
 				return "0.0f";

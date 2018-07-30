@@ -96,6 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Datas\Math.h" />
     <ClInclude Include="Packets\Login.h" />
     <ClInclude Include="Packets\TestPcks.h" />
     <ClInclude Include="PcksRegistration.h" />
