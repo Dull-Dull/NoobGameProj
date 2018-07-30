@@ -28,7 +28,7 @@ PingManager::~PingManager()
 void PingManager::SendPing()
 {	
 	SC_Ping ping;
-	ping.tick = ::Noob::GetTick();
+	ping.Tick = ::Noob::GetTick();
 	m_player->Send( ping );
 
 	m_pingAlarmIndex = AlarmManager::GetInstance()->RegisterAlarm( ::Noob::Duration(::Noob::Second * 7), [ this ](){

@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Pck>
+<login>
+	<Include>../Datas/Math</Include>
 	<PckCodeRange min="1" max="100"/>
 
 	<Packet name ="SC_Hello"/>
 	<Packet name ="CS_Hello"/>
 
+	<Packet name ="CS_Login">
+		<Val type ="string" name ="Nick"/>
+	</Packet>
+
+	<Packet name ="SC_Login">
+		<Val type ="uint32" name ="PlayerIndex"/>
+		<Val type ="Vector2D" name ="SpawnPosition"/>
+	</Packet>
+
 	<Packet name ="SC_Ping">
-		<Val type ="int64" name ="tick"/>
+		<Val type ="int64" name ="Tick"/>
 	</Packet>
 
 	<Packet name ="CS_Ping">
-		<Val type ="int64" name ="tick"/>
+		<Val type ="int64" name ="Tick"/>
 	</Packet>
 
-</Pck>
+</login>

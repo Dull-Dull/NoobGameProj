@@ -108,6 +108,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="Datas\Math.xml" />
     <Xml Include="Packets\Login.xml" />
     <Xml Include="Packets\TestPcks.xml" />
   </ItemGroup>

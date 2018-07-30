@@ -78,7 +78,7 @@ public class ServerSession : MonoBehaviour {
 	{
 		Debug.Log( "Recv SC_Ping pck!!!" );
 		CS_Ping ping = new CS_Ping();
-		ping.tick = ( pck as SC_Ping ).tick;
+		ping.Tick = ( pck as SC_Ping ).Tick;
 		session.Send( ping );
 	}
 }

@@ -63,5 +63,5 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 REGIST_PCK_PROC( CS_Ping )
 void Player::OnPacket( const CS_PingPtr& pck )
 {
-	m_ping->RecvPing( pck->tick );
+	m_ping->RecvPing( pck->Tick );
 }

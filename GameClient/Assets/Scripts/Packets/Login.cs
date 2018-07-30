@@ -19,21 +19,40 @@ namespace Noob
 	}
 
 	[NoobSerializAble]
-	public class SC_Ping : Packet
+	public class CS_Login : Packet
 	{
-		public long tick = 0;
+		public string Nick = "";
 
 		public override uint GetIndex(){ return index; }
 		public const uint index = 3;
 	}
 
 	[NoobSerializAble]
-	public class CS_Ping : Packet
+	public class SC_Login : Packet
 	{
-		public long tick = 0;
+		public uint PlayerIndex = 0;
+		public Vector2D SpawnPosition = new Vector2D();
 
 		public override uint GetIndex(){ return index; }
 		public const uint index = 4;
+	}
+
+	[NoobSerializAble]
+	public class SC_Ping : Packet
+	{
+		public long Tick = 0;
+
+		public override uint GetIndex(){ return index; }
+		public const uint index = 5;
+	}
+
+	[NoobSerializAble]
+	public class CS_Ping : Packet
+	{
+		public long Tick = 0;
+
+		public override uint GetIndex(){ return index; }
+		public const uint index = 6;
 	}
 
 }

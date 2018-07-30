@@ -4,6 +4,9 @@
     <Filter Include="Packets">
       <UniqueIdentifier>{8d17e18b-10c5-4616-b99e-a383b0886c74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{462b8a75-73b7-41d9-a5a6-32837b977471}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompiled.h" />
@@ -24,6 +27,9 @@
     </Xml>
     <Xml Include="Packets\Login.xml">
       <Filter>Packets</Filter>
+    </Xml>
+    <Xml Include="Datas\Math.xml">
+      <Filter>Data</Filter>
     </Xml>
   </ItemGroup>
 </Project>

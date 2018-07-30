@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<math>
+
+	<Data name ="Vector2D">
+		<Val type ="float" name ="X"/>
+		<Val type ="float" name ="Y"/>
+	</Data>
+	
+</math>
