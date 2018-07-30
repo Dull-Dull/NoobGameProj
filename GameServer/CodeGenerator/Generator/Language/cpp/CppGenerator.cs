@@ -176,10 +176,14 @@ namespace CodeGenerator.Generator.Language
 			file.Directory.Create();
 
 			System.IO.File.WriteAllText( m_dstPath + path + ".h", m_result );
-			System.IO.File.WriteAllText( m_dstPath + path + "Register.h",
+
+			if( m_registeredPcks.Length != 0 )
+			{
+				System.IO.File.WriteAllText( m_dstPath + path + "Register.h",
 				"#pragma once\n\n#include<NoobNetwork\\PacketRegister.h>\n" +
 				"#include\"" + System.IO.Path.GetFileName( m_dstPath + path + ".h" ) + "\"\n\n" +
 				m_registeredPcks );
+			}			
 		}
 
 		private string m_result = "";
