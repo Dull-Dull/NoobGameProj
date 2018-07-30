@@ -77,14 +77,18 @@ namespace CodeGenerator.Generator.Language
 		{
 			type = type.Trim();
 
-			if( type.IndexOf( "list" ) == 0 ||
-				type.IndexOf( "set" ) == 0 ||
-				type.IndexOf( "hash_set" ) == 0 ||
-				type.IndexOf( "tree" ) == 0 ||
-				type.IndexOf( "hash_tree" ) == 0 )
+			if( type.IndexOf( "int8" ) == 0 || type.IndexOf( "uint8" ) == 0 ||
+				type.IndexOf( "int16" ) == 0 || type.IndexOf( "uint16" ) == 0 ||
+				type.IndexOf( "int32" ) == 0 || type.IndexOf( "uint32" ) == 0 ||
+				type.IndexOf( "int64" ) == 0 || type.IndexOf( "uint64" ) == 0 )
 			{
-				return "new " + m_typeParser.ChangeType( type ) + "()";
-			}			
+				return "0";
+			}
+			if( type.IndexOf( "float32" ) == 0 ||
+				type.IndexOf( "float64" ) == 0 )
+			{
+				return "0.0f";
+			}
 			else if( type.IndexOf( "string" ) == 0 )
 			{
 				return "\"\"";
@@ -95,7 +99,7 @@ namespace CodeGenerator.Generator.Language
 			}
 			else
 			{
-				return "0";
+				return "new " + m_typeParser.ChangeType( type ) + "()";
 			}
 		}
 

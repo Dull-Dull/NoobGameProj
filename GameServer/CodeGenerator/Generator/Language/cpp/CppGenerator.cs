@@ -24,7 +24,7 @@ namespace CodeGenerator.Generator.Language
 
 		public void WriteInclude(string fileName)
         {
-			m_result += "#include \"" + fileName + "\"\n";
+			m_result += "#include \"" + fileName + ".h\"\n";
         }
 
 		public void WriteData( string name, string extends, List<Value> valueList )
