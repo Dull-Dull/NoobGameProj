@@ -27,7 +27,9 @@ public:
 private:
 	ClientSession* m_session;
 	PingManager* m_ping;
-	bool m_bSaidHello;
+	bool m_saidHello;
+
+	::std::wstring m_nick;
 };
 
 using PlayerPtr = ::Noob::Ptr<Player>;

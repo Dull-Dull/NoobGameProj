@@ -3,8 +3,8 @@
 <math>
 
 	<Data name ="Vector2D">
-		<Val type ="float32" name ="X"/>
-		<Val type ="float32" name ="Y"/>
+		<Val type ="float32" name ="x"/>
+		<Val type ="float32" name ="y"/>
 	</Data>
 	
 </math>

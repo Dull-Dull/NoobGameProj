@@ -8,20 +8,20 @@
 	<Packet name ="CS_Hello"/>
 
 	<Packet name ="CS_Login">
-		<Val type ="string" name ="Nick"/>
+		<Val type ="string" name ="nick"/>
 	</Packet>
 
 	<Packet name ="SC_Login">
-		<Val type ="uint32" name ="PlayerIndex"/>
-		<Val type ="Vector2D" name ="SpawnPosition"/>
+		<Val type ="uint32" name ="playerIndex"/>
+		<Val type ="Vector2D" name ="spawnPosition"/>
 	</Packet>
 
 	<Packet name ="SC_Ping">
-		<Val type ="int64" name ="Tick"/>
+		<Val type ="int64" name ="tick"/>
 	</Packet>
 
 	<Packet name ="CS_Ping">
-		<Val type ="int64" name ="Tick"/>
+		<Val type ="int64" name ="tick"/>
 	</Packet>
 
 </login>

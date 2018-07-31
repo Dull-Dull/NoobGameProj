@@ -46,17 +46,17 @@ inline StreamWriter& operator<<( StreamWriter& stream, CS_Hello& val )
 
 struct CS_Login : public ::Noob::Packet
 {
-	::std::wstring Nick;
+	::std::wstring nick;
 
 	CS_Login()
 	{
 		index = 3;
 	}
 
-	CS_Login( ::std::wstring _Nick )
+	CS_Login( ::std::wstring _nick )
 	{
 		index = 3;
-		Nick = _Nick;
+		nick = _nick;
 	}
 
 	std::wstring GetName(){ return L"CS_Login"; }
@@ -65,29 +65,29 @@ struct CS_Login : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, CS_Login& val )
 {
-	return stream>>val.Nick;
+	return stream>>val.nick;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, CS_Login& val )
 {
-	return stream<<val.Nick;
+	return stream<<val.nick;
 }
 
 struct SC_Login : public ::Noob::Packet
 {
-	unsigned int PlayerIndex;
-	Vector2D SpawnPosition;
+	unsigned int playerIndex;
+	Vector2D spawnPosition;
 
 	SC_Login()
 	{
 		index = 4;
 	}
 
-	SC_Login( unsigned int _PlayerIndex, Vector2D _SpawnPosition )
+	SC_Login( unsigned int _playerIndex, Vector2D _spawnPosition )
 	{
 		index = 4;
-		PlayerIndex = _PlayerIndex;
-		SpawnPosition = _SpawnPosition;
+		playerIndex = _playerIndex;
+		spawnPosition = _spawnPosition;
 	}
 
 	std::wstring GetName(){ return L"SC_Login"; }
@@ -96,27 +96,27 @@ struct SC_Login : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, SC_Login& val )
 {
-	return stream>>val.PlayerIndex>>val.SpawnPosition;
+	return stream>>val.playerIndex>>val.spawnPosition;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, SC_Login& val )
 {
-	return stream<<val.PlayerIndex<<val.SpawnPosition;
+	return stream<<val.playerIndex<<val.spawnPosition;
 }
 
 struct SC_Ping : public ::Noob::Packet
 {
-	int64_t Tick;
+	int64_t tick;
 
 	SC_Ping()
 	{
 		index = 5;
 	}
 
-	SC_Ping( int64_t _Tick )
+	SC_Ping( int64_t _tick )
 	{
 		index = 5;
-		Tick = _Tick;
+		tick = _tick;
 	}
 
 	std::wstring GetName(){ return L"SC_Ping"; }
@@ -125,27 +125,27 @@ struct SC_Ping : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, SC_Ping& val )
 {
-	return stream>>val.Tick;
+	return stream>>val.tick;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, SC_Ping& val )
 {
-	return stream<<val.Tick;
+	return stream<<val.tick;
 }
 
 struct CS_Ping : public ::Noob::Packet
 {
-	int64_t Tick;
+	int64_t tick;
 
 	CS_Ping()
 	{
 		index = 6;
 	}
 
-	CS_Ping( int64_t _Tick )
+	CS_Ping( int64_t _tick )
 	{
 		index = 6;
-		Tick = _Tick;
+		tick = _tick;
 	}
 
 	std::wstring GetName(){ return L"CS_Ping"; }
@@ -154,10 +154,10 @@ struct CS_Ping : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, CS_Ping& val )
 {
-	return stream>>val.Tick;
+	return stream>>val.tick;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, CS_Ping& val )
 {
-	return stream<<val.Tick;
+	return stream<<val.tick;
 }

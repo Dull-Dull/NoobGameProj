@@ -11,7 +11,7 @@ Player::Player( ClientSession* session )
 {
 	m_session = session;
 	m_ping = nullptr;
-	m_bSaidHello = false;
+	m_saidHello = false;
 }
 
 Player::~Player()
@@ -27,7 +27,7 @@ void Player::OnAccept()
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
 {
-	if( m_bSaidHello == false )
+	if( m_saidHello == false )
 	{
 		if( pck->index != CS_Hello::GetIndex() )
 		{
@@ -55,13 +55,26 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 {
 	SC_Hello hello;
 	Send( hello );
-	m_bSaidHello = true;
+	m_saidHello = true;
 	
 	m_ping->SendPing();
+}
+
+REGIST_PCK_PROC( CS_Login )
+void Player::OnPacket( const CS_LoginPtr& loginReq )
+{
+	m_nick = loginReq->nick;
+
+	SC_Login loginAck;
+	loginAck.playerIndex = 0;
+	loginAck.spawnPosition.x = 0.0f;
+	loginAck.spawnPosition.y = 0.0f;
+
+	Send( loginAck );
 }
 
 REGIST_PCK_PROC( CS_Ping )
 void Player::OnPacket( const CS_PingPtr& pck )
 {
-	m_ping->RecvPing( pck->Tick );
+	m_ping->RecvPing( pck->tick );
 }

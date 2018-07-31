@@ -71,6 +71,16 @@ public class ServerSession : MonoBehaviour {
 	public void SC_HelloProc( Packet pck )
 	{
 		Debug.Log( "Call SC_Hello pck!!!" );
+		CS_Login login = new CS_Login();
+		login.nick = "Unknown";
+
+		session.Send( login );
+	}
+
+	[PacketProcRegistration( SC_Login.index )]
+	public void SC_LoginProc( Packet pck )
+	{
+		Debug.Log( "Call SC_Login pck!!!" );
 	}
 
 	[PacketProcRegistration( SC_Ping.index )]
@@ -78,7 +88,7 @@ public class ServerSession : MonoBehaviour {
 	{
 		Debug.Log( "Recv SC_Ping pck!!!" );
 		CS_Ping ping = new CS_Ping();
-		ping.Tick = ( pck as SC_Ping ).Tick;
+		ping.tick = ( pck as SC_Ping ).tick;
 		session.Send( ping );
 	}
 }
