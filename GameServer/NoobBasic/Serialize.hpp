@@ -33,6 +33,16 @@ struct StreamBuf
 	size_t	m_bufSize;
 };
 
+class StreamException
+{
+public:
+	StreamException( const ::std::wstring& msg ) : m_msg( msg ){}
+
+	const::std::wstring& what(){ return m_msg; }
+private:
+	const ::std::wstring m_msg;
+};
+
 struct StreamReader
 {
 	StreamReader( StreamBuf& buffer ) : m_buffer( buffer ), m_offSet( 0 ){}
@@ -45,6 +55,13 @@ struct StreamReader
 	StreamReader& operator>>( BasicType& val )
 	{
 		static_assert( std::is_arithmetic<BasicType>::value, "Invalid Type" );
+
+		if( m_offSet + sizeof( BasicType ) > m_buffer.m_bufSize )
+			throw StreamException( ::std::wstring(L"operator>> BasicType") +
+				::std::wstring(L"\toffset = ") + ::std::to_wstring( m_offSet ) +
+				::std::wstring(L"\tdata size = ") + ::std::to_wstring( sizeof( BasicType ) ) +
+				::std::wstring(L"\tbuf size = ") + ::std::to_wstring( m_buffer.m_bufSize ) );
+
 		memcpy( &val, GetNowBuffer(), sizeof( BasicType ) );
 		m_offSet += sizeof( BasicType );
 
@@ -55,6 +72,13 @@ struct StreamReader
 	StreamReader& operator>>( const BasicType& val )
 	{
 		static_assert( std::is_arithmetic<BasicType>::value, "Invalid Type" );
+
+		if( m_offSet + sizeof( BasicType ) > m_buffer.m_bufSize )
+			throw StreamException( ::std::wstring(L"operator>> BasicType") +
+				::std::wstring(L"\toffset = ") + ::std::to_wstring( m_offSet ) +
+				::std::wstring(L"\tdata size = ") + ::std::to_wstring( sizeof( BasicType ) ) +
+				::std::wstring(L"\tbuf size = ") + ::std::to_wstring( m_buffer.m_bufSize ) );
+
 		BasicType& nonConstVal = const_cast<BasicType&>(val);
 
 		memcpy( &nonConstVal, GetNowBuffer(), sizeof( BasicType ) );
@@ -130,6 +154,12 @@ struct StreamReader
 	{
 		unsigned int strSize = 0;
 		*this >> strSize;
+
+		if( m_offSet + ( strSize + 1 ) * sizeof( wchar ) > m_buffer.m_bufSize )
+			throw StreamException( ::std::wstring(L"operator>> wstring") +
+				::std::wstring(L"\toffset = ") + ::std::to_wstring( m_offSet ) +
+				::std::wstring(L"\tdata size = ") + ::std::to_wstring( ( strSize + 1 ) * sizeof( wchar ) ) +
+				::std::wstring(L"\tbuf size = ") + ::std::to_wstring( m_buffer.m_bufSize ) );
 
 		wchar* str = reinterpret_cast<wchar*>( GetNowBuffer() );
 		*( str + strSize ) = L'\0';

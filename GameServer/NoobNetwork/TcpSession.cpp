@@ -137,8 +137,23 @@ void ITcpSession::OnRecvForIocp( bool success, unsigned int transferedLen )
 			return;
 		}
 
-		Packet* pck = PacketFactory::CreatePacket( header, m_recvBuff.buf + sizeof( PacketHeader ) );
-		OnRecv( pck );
+		try{
+			Packet* pck = PacketFactory::CreatePacket( header, m_recvBuff.buf + sizeof( PacketHeader ) );
+			OnRecv( pck );
+		}
+		catch( StreamException& exception )
+		{
+			Close();
+			m_recvOverlapped.object = nullptr;
+			{
+				LockGuard lock( m_sendLock );
+				if( false == m_nowSending )
+					m_sendOverlapped.object = nullptr;
+			}
+			OnClose();
+			return;
+		}
+		
 		
 		m_recvBuffOffSet -= totalPckLen;
 		memmove( m_recvBuff.buf, m_recvBuff.buf + totalPckLen, m_recvBuffOffSet );

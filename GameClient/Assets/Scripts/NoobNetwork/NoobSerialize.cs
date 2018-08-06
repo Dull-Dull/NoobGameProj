@@ -74,7 +74,7 @@ namespace Noob
 				{
 					string val = graph as string;
 					writer.Write( val.Length );
-					writer.Write( val.ToCharArray() );
+					writer.Write( Encoding.Unicode.GetBytes( val + "\0" ) );
 				} );
 			writeFuncCon.Add( typeof( List<> ),
 				( BinaryWriter writer, Object graph ) =>
@@ -145,7 +145,8 @@ namespace Noob
 				( BinaryReader reader, ref Object graph ) =>
 				{
 					int count = reader.ReadInt32();
-					graph = new string( reader.ReadChars( count ) );	
+					byte[] bytes = reader.ReadBytes( ( count + 1 ) * sizeof( char ) );
+					graph = Encoding.Unicode.GetString( bytes );
 				} );
 			readFuncCon.Add( typeof( List<> ),
 				( BinaryReader reader, ref Object graph ) =>
@@ -273,6 +274,9 @@ namespace Noob
 
 				foreach( FieldInfo field in fields )
 				{
+					if( field.IsLiteral && false == field.IsInitOnly )
+						continue;
+
 					Object fieldGraph = field.GetValue( graph );
 					Type fieldType = fieldGraph.GetType();
 					

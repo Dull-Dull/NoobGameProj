@@ -104,8 +104,9 @@ namespace Noob
 		private bool postSend()
 		{
 			Packet pck = m_sendPckQueue.Peek();
-
+			
 			m_sendMem.SetLength( HEADER_SIZE );
+			m_sendMem.Seek( HEADER_SIZE, SeekOrigin.Begin );
 			NoobSerializeFormatter.Write( m_sendMem, pck );
 
 			Array.Copy( BitConverter.GetBytes( m_sendMem.Length ), 0, m_sendMem.GetBuffer(), 0, sizeof( uint ) );
