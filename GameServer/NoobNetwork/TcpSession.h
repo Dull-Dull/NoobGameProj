@@ -24,6 +24,9 @@ public:
 	{
 		static_assert( std::is_base_of<Packet,PacketType>::value, "Invalid Packet" );
 
+		if( m_sendOverlapped.object.Get() != nullptr )
+			return;
+
 		StreamBuf streamBuf;
 		StreamWriter writer( streamBuf );
 		writer.m_offSet = sizeof( PacketHeader );
@@ -42,7 +45,7 @@ public:
 			LockGuard lockGuard( m_sendLock );
 
 			m_consumeBuff->push_back( buff );
-			if( !m_nowSending )
+			if( !m_nowSending && m_sendOverlapped.object.Get() != nullptr )
 			{
 				PostSend();
 			}
