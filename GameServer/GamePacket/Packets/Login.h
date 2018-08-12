@@ -76,14 +76,14 @@ inline StreamWriter& operator<<( StreamWriter& stream, CS_Login& val )
 struct SC_Login : public ::Noob::Packet
 {
 	unsigned int playerIndex;
-	Vector2D spawnPosition;
+	int spawnPosition;
 
 	SC_Login()
 	{
 		index = 4;
 	}
 
-	SC_Login( unsigned int _playerIndex, Vector2D _spawnPosition )
+	SC_Login( unsigned int _playerIndex, int _spawnPosition )
 	{
 		index = 4;
 		playerIndex = _playerIndex;

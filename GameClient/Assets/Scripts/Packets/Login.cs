@@ -31,7 +31,7 @@ namespace Noob
 	public class SC_Login : Packet
 	{
 		public uint playerIndex = 0;
-		public Vector2D spawnPosition = new Vector2D();
+		public int spawnPosition = 0;
 
 		public override uint GetIndex(){ return index; }
 		public const uint index = 4;
