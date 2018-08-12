@@ -143,7 +143,7 @@ void ITcpSession::OnRecvForIocp( bool success, unsigned int transferedLen )
 		}
 		catch( StreamException& exception )
 		{
-			Log( LOG_TYPE::ERROR, "StreamReadFail", exception.what() );
+			Log( LOG_TYPE::ERROR, L"StreamReadFail", exception.what() );
 
 			Close();
 			m_recvOverlapped.object = nullptr;

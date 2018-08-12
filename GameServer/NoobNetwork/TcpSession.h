@@ -24,7 +24,7 @@ public:
 	{
 		static_assert( std::is_base_of<Packet,PacketType>::value, "Invalid Packet" );
 
-		if( m_sendOverlapped.object.Get() != nullptr )
+		if( m_sendOverlapped.object.Get() == nullptr )
 			return;
 
 		StreamBuf streamBuf;
