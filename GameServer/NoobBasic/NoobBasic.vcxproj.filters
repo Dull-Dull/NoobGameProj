@@ -35,6 +35,9 @@
     <ClInclude Include="Lock.h" />
     <ClInclude Include="Singletone.hpp" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Random.h">
+      <Filter>Random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiled.cpp" />
@@ -56,6 +59,9 @@
     <ClCompile Include="LogStream.cpp">
       <Filter>Log</Filter>
     </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Random</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FastSmtp">
@@ -69,6 +75,9 @@
     </Filter>
     <Filter Include="Log\MIniDump">
       <UniqueIdentifier>{93e7c301-3f3d-4251-8c72-6df47edce361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Random">
+      <UniqueIdentifier>{9e6b7cf8-8022-4a6b-ac3e-090c81b4ab08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

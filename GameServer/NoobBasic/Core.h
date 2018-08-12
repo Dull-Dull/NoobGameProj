@@ -15,6 +15,7 @@
 #include <thread>
 #include <functional>
 #include <cassert>
+#include <random>
 
 using byte		= unsigned char;
 using wchar		= wchar_t;
