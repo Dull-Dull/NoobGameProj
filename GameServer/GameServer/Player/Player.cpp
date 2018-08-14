@@ -7,6 +7,8 @@
 #include "../Alarm/AlarmManager.h"
 #include <GamePacket/Packets/Login.h>
 
+unsigned int g_playerIndexCnt = 0;
+
 Player::Player( ClientSession* session )
 {
 	m_session = session;
@@ -66,9 +68,8 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	m_nick = loginReq->nick;
 
 	SC_Login loginAck;
-	loginAck.playerIndex = 0;
-	loginAck.spawnPosition.x = 0.0f;
-	loginAck.spawnPosition.y = 0.0f;
+	loginAck.playerIndex = g_playerIndexCnt++;
+	loginAck.spawnPosition = ::Noob::Random::GetInteger(0, 8);
 
 	Send( loginAck );
 }
