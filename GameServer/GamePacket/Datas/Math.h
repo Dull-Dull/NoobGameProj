@@ -6,7 +6,7 @@ struct Vector2D
 	float x;
 	float y;
 
-	static std::wstring GetName(){ return L"Vector2D"; }
+	static ::std::wstring GetName(){ return L"Vector2D"; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, Vector2D& val )

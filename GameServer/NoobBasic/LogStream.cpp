@@ -25,55 +25,55 @@ LogStream & LogStream::operator<<( const ::Noob::LogAble & val )
 
 LogStream & LogStream::operator<<( const int & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const unsigned int & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const __int64 & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const unsigned __int64 & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const long& val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const unsigned long& val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const short & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const unsigned short & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const byte & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
@@ -85,17 +85,17 @@ LogStream & LogStream::operator<<( const bool & val )
 
 LogStream & LogStream::operator<<( const float & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
 LogStream & LogStream::operator<<( const double & val )
 {
-	buf += std::to_wstring( val );
+	buf += ::std::to_wstring( val );
 	return *this;
 }
 
-LogStream & LogStream::operator<<( const std::wstring & val )
+LogStream & LogStream::operator<<( const ::std::wstring & val )
 {
 	buf += val;
 	return *this;

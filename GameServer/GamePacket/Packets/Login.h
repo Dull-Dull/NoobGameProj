@@ -9,7 +9,7 @@ struct SC_Hello : public ::Noob::Packet
 		index = 1;
 	}
 
-	std::wstring GetName(){ return L"SC_Hello"; }
+	::std::wstring GetName(){ return L"SC_Hello"; }
 	static unsigned int GetIndex(){ return 1; }
 };
 
@@ -30,7 +30,7 @@ struct CS_Hello : public ::Noob::Packet
 		index = 2;
 	}
 
-	std::wstring GetName(){ return L"CS_Hello"; }
+	::std::wstring GetName(){ return L"CS_Hello"; }
 	static unsigned int GetIndex(){ return 2; }
 };
 
@@ -59,7 +59,7 @@ struct CS_Login : public ::Noob::Packet
 		nick = _nick;
 	}
 
-	std::wstring GetName(){ return L"CS_Login"; }
+	::std::wstring GetName(){ return L"CS_Login"; }
 	static unsigned int GetIndex(){ return 3; }
 };
 
@@ -90,7 +90,7 @@ struct SC_Login : public ::Noob::Packet
 		spawnPosition = _spawnPosition;
 	}
 
-	std::wstring GetName(){ return L"SC_Login"; }
+	::std::wstring GetName(){ return L"SC_Login"; }
 	static unsigned int GetIndex(){ return 4; }
 };
 
@@ -119,7 +119,7 @@ struct SC_Ping : public ::Noob::Packet
 		tick = _tick;
 	}
 
-	std::wstring GetName(){ return L"SC_Ping"; }
+	::std::wstring GetName(){ return L"SC_Ping"; }
 	static unsigned int GetIndex(){ return 5; }
 };
 
@@ -148,7 +148,7 @@ struct CS_Ping : public ::Noob::Packet
 		tick = _tick;
 	}
 
-	std::wstring GetName(){ return L"CS_Ping"; }
+	::std::wstring GetName(){ return L"CS_Ping"; }
 	static unsigned int GetIndex(){ return 6; }
 };
 

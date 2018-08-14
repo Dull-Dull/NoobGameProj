@@ -17,7 +17,7 @@ public:
 			if( instance == nullptr )
 			{
 				instance = new Type;
-				m_instance.store( instance, std::memory_order_release );
+				m_instance.store( instance, ::std::memory_order_release );
 			}
 		}
 

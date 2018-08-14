@@ -54,7 +54,7 @@ struct StreamReader
 	template< typename BasicType >
 	StreamReader& operator>>( BasicType& val )
 	{
-		static_assert( std::is_arithmetic<BasicType>::value, "Invalid Type" );
+		static_assert( ::std::is_arithmetic<BasicType>::value, "Invalid Type" );
 
 		if( m_offSet + sizeof( BasicType ) > m_buffer.m_bufSize )
 			throw StreamException( ::std::wstring(L"operator>> BasicType") +
@@ -71,7 +71,7 @@ struct StreamReader
 	template< typename BasicType >
 	StreamReader& operator>>( const BasicType& val )
 	{
-		static_assert( std::is_arithmetic<BasicType>::value, "Invalid Type" );
+		static_assert( ::std::is_arithmetic<BasicType>::value, "Invalid Type" );
 
 		if( m_offSet + sizeof( BasicType ) > m_buffer.m_bufSize )
 			throw StreamException( ::std::wstring(L"operator>> BasicType") +
@@ -88,9 +88,9 @@ struct StreamReader
 	}
 
 	template< typename DataType >
-	StreamReader& operator>>( std::vector< DataType >& val )
+	StreamReader& operator>>( ::std::vector< DataType >& val )
 	{
-		static_assert( !std::is_same<bool, DataType>::value, "Can't Serializing std::vector<bool>" );
+		static_assert( !::std::is_same<bool, DataType>::value, "Can't Serializing ::std::vector<bool>" );
 		val.clear();
 
 		unsigned int vecSize = 0;
@@ -107,7 +107,7 @@ struct StreamReader
 	}
 
 	template< typename DataType >
-	StreamReader& operator>>( std::set< DataType >& val )
+	StreamReader& operator>>( ::std::set< DataType >& val )
 	{
 		val.clear();
 
@@ -125,14 +125,14 @@ struct StreamReader
 	}
 
 	template< typename Key, typename Value >
-	StreamReader& operator>>( std::pair< Key, Value >& val )
+	StreamReader& operator>>( ::std::pair< Key, Value >& val )
 	{
 		*this >> val.first >> val.second;
 		return *this;
 	}
 
 	template< typename Key, typename Value >
-	StreamReader& operator>>( std::map< Key, Value >& val )
+	StreamReader& operator>>( ::std::map< Key, Value >& val )
 	{
 		val.clear();
 
@@ -141,7 +141,7 @@ struct StreamReader
 
 		for( unsigned int i = 0; i < mapSize; ++i )
 		{
-			std::map< Key, Value >::value_type tempData;
+			::std::map< Key, Value >::value_type tempData;
 			*this >> tempData;
 			val.insert( tempData );
 		}			
@@ -150,7 +150,7 @@ struct StreamReader
 	}
 
 	template<>
-	StreamReader& operator>>( std::wstring& val )
+	StreamReader& operator>>( ::std::wstring& val )
 	{
 		unsigned int strSize = 0;
 		*this >> strSize;
@@ -171,7 +171,7 @@ struct StreamReader
 	}
 
 	template<>
-	StreamReader& operator>>( std::string& val )
+	StreamReader& operator>>( ::std::string& val )
 	{
 		unsigned int strSize = 0;
 		*this >> strSize;
@@ -197,7 +197,7 @@ struct StreamWriter
 	template< typename BasicType >
 	StreamWriter& operator<<( const BasicType& val )
 	{
-		static_assert( std::is_arithmetic<BasicType>::value, "Invalid Type" );
+		static_assert( ::std::is_arithmetic<BasicType>::value, "Invalid Type" );
 
 		if( m_buffer.m_bufSize < m_offSet + sizeof( BasicType ) )
 			m_buffer.ReAlloc();
@@ -209,7 +209,7 @@ struct StreamWriter
 	}
 
 	template< typename DataType >
-	StreamWriter& operator<<( const std::vector< DataType >& val )
+	StreamWriter& operator<<( const ::std::vector< DataType >& val )
 	{
 		unsigned int vecSize = static_cast<unsigned int>( val.size() );
 		*this << vecSize;
@@ -221,25 +221,25 @@ struct StreamWriter
 	}
 
 	template< typename DataType >
-	StreamWriter& operator<<( const std::set< DataType >& val )
+	StreamWriter& operator<<( const ::std::set< DataType >& val )
 	{
 		unsigned int setSize = static_cast<unsigned int>( val.size() );
 		*this << setSize;
 
-		for( std::set< DataType >::iterator i = val.begin() ; i != val.end() ; ++i )
+		for( ::std::set< DataType >::iterator i = val.begin() ; i != val.end() ; ++i )
 			*this << *i;
 
 		return *this;
 	}
 
 	template< typename Key, typename Value >
-	StreamWriter& operator<<( const std::pair< Key, Value >& val )
+	StreamWriter& operator<<( const ::std::pair< Key, Value >& val )
 	{
 		return *this << val.first << val.second;
 	}
 
 	template< typename Key, typename Value >
-	StreamWriter& operator<<( const std::map< Key, Value >& val )
+	StreamWriter& operator<<( const ::std::map< Key, Value >& val )
 	{
 		unsigned int mapSize = static_cast<unsigned int>( val.size() );
 		*this << mapSize;
@@ -251,7 +251,7 @@ struct StreamWriter
 	}
 
 	template<>
-	StreamWriter& operator<<( const std::wstring& val )
+	StreamWriter& operator<<( const ::std::wstring& val )
 	{
 		unsigned int strSize = static_cast<unsigned int>( val.size() );
 		*this << strSize;
@@ -266,7 +266,7 @@ struct StreamWriter
 	}
 
 	template<>
-	StreamWriter& operator<<( const std::string& val )
+	StreamWriter& operator<<( const ::std::string& val )
 	{
 		unsigned int strSize = static_cast<unsigned int>( val.size() );
 		*this << strSize;

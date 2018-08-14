@@ -22,7 +22,7 @@ public:
 	template< typename PacketType >
 	void Send( PacketType& pck )
 	{
-		static_assert( std::is_base_of<Packet,PacketType>::value, "Invalid Packet" );
+		static_assert( ::std::is_base_of<Packet,PacketType>::value, "Invalid Packet" );
 
 		if( m_sendOverlapped.object.Get() == nullptr )
 			return;
@@ -85,7 +85,7 @@ private:
 
 
 	Overlapped m_sendOverlapped;
-	using WsaBuffContainer = std::vector<WSABUF>;
+	using WsaBuffContainer = ::std::vector<WSABUF>;
 	WsaBuffContainer* m_consumeBuff;
 	WsaBuffContainer* m_sendingBuff;
 	bool m_nowSending;

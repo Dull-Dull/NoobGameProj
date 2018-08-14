@@ -12,7 +12,7 @@ struct PacketHeader
 struct Packet : public RefCnt
 {
 	unsigned int index;
-	virtual std::wstring GetName() = 0;
+	virtual ::std::wstring GetName() = 0;
 };
 using PacketPtr = Ptr< Packet >;
 

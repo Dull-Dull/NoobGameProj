@@ -8,7 +8,7 @@ namespace Noob
 class PacketRegister
 {
 public:
-	PacketRegister( unsigned int index, std::function<Packet*(StreamBuf*)> func );
+	PacketRegister( unsigned int index, ::std::function<Packet*(StreamBuf*)> func );
 	~PacketRegister(){}
 };
 

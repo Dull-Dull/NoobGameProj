@@ -22,7 +22,7 @@ struct TestPck1 : public ::Noob::Packet
 		list = _list;
 	}
 
-	std::wstring GetName(){ return L"TestPck1"; }
+	::std::wstring GetName(){ return L"TestPck1"; }
 	static unsigned int GetIndex(){ return 10000; }
 };
 
@@ -51,7 +51,7 @@ struct TestPck2 : public ::Noob::Packet
 		val1 = _val1;
 	}
 
-	std::wstring GetName(){ return L"TestPck2"; }
+	::std::wstring GetName(){ return L"TestPck2"; }
 	static unsigned int GetIndex(){ return 10001; }
 };
 
@@ -70,7 +70,7 @@ struct TestData3
 	int val1;
 	::std::wstring val2;
 
-	static std::wstring GetName(){ return L"TestData3"; }
+	static ::std::wstring GetName(){ return L"TestData3"; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, TestData3& val )

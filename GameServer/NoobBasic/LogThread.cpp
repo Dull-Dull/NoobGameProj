@@ -19,16 +19,16 @@ public:
 	DWORD threadID;
 
 public:
-	Imple( std::wstring&& fileName );
+	Imple( ::std::wstring&& fileName );
 	static DWORD WINAPI ThreadFunc( void* arg );
 };
 
-LogThread::Imple::Imple( std::wstring&& fileName ) : fileHandle( NULL ), threadHandle( NULL ), threadID( 0 )
+LogThread::Imple::Imple( ::std::wstring&& fileName ) : fileHandle( NULL ), threadHandle( NULL ), threadID( 0 )
 {
 	wchar currentPath[MAX_PATH] = {0,};
 	GetCurrentDirectoryW( MAX_PATH, currentPath );
 
-	std::wstring path;
+	::std::wstring path;
 	path += currentPath;
 	path += L"\\Log";
 	_wmkdir( path.c_str() );
@@ -40,9 +40,9 @@ LogThread::Imple::Imple( std::wstring&& fileName ) : fileHandle( NULL ), threadH
 	if( fileHandle == INVALID_HANDLE_VALUE )
 	{
 		DWORD lastError = ::GetLastError();
-		std::wstring msg = fileName;
+		::std::wstring msg = fileName;
 		msg += L" 파일을 열 수 없습니다.\nErrorCode : ";
-		msg += std::to_wstring( lastError );
+		msg += ::std::to_wstring( lastError );
 		MessageBoxW( NULL, msg.c_str(), 0, 0 );
 		exit( -1 );
 	}
@@ -57,17 +57,17 @@ LogThread::Imple::Imple( std::wstring&& fileName ) : fileHandle( NULL ), threadH
 	if( threadHandle==INVALID_HANDLE_VALUE )
 	{
 		DWORD lastError = ::GetLastError();
-		std::wstring msg = fileName;
+		::std::wstring msg = fileName;
 		msg += L" 쓰래드 생성 실패.\nErrorCode : ";
-		msg += std::to_wstring( lastError );
+		msg += ::std::to_wstring( lastError );
 		MessageBoxW( NULL, msg.c_str(), 0, 0 );
 		exit( -1 );
 	}
 }
 
-LogThread::LogThread( std::wstring&& fileName )
+LogThread::LogThread( ::std::wstring&& fileName )
 {
-	pImple = new Imple( std::move( fileName ) );
+	pImple = new Imple( ::std::move( fileName ) );
 }
 
 LogThread::~LogThread()
@@ -100,7 +100,7 @@ DWORD WINAPI LogThread::Imple::ThreadFunc( void* arg )
 
 		WriteFile( pImple->fileHandle,
 			stream->GetBuf().c_str(),
-			(DWORD)( stream->GetBuf().length() ) * sizeof( std::wstring::value_type ),
+			(DWORD)( stream->GetBuf().length() ) * sizeof( ::std::wstring::value_type ),
 			&numOfWriteByte,
 			NULL );
 

@@ -41,7 +41,7 @@ namespace CodeGenerator.Generator.Language
 			}
 
 			//	GetName 생성
-			m_result += "\n\tstatic std::wstring GetName(){ return L\"" + name + "\"; }\n";
+			m_result += "\n\tstatic ::std::wstring GetName(){ return L\"" + name + "\"; }\n";
 
 			m_result += "};\n\n";
 			//struct 생성 끝
@@ -123,7 +123,7 @@ namespace CodeGenerator.Generator.Language
 			}
 
 			//	GetName 생성
-			m_result += "\n\tstd::wstring GetName(){ return L\"" + name + "\"; }\n";
+			m_result += "\n\t::std::wstring GetName(){ return L\"" + name + "\"; }\n";
 			//	GetCode 생성
 			m_result += "\tstatic unsigned int GetIndex(){ return " + index + "; }\n";
 
