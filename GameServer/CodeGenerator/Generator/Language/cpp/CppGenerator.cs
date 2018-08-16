@@ -176,7 +176,7 @@ namespace CodeGenerator.Generator.Language
 				m_result += "\t" + value.name + ",\n";
 			}
 
-			m_result += "\t__MAX__\n}\n\n";
+			m_result += "\t__MAX__\n};\n\n";
 
 			m_result += "inline StreamReader& operator>>( StreamReader& stream, " + name + "& val )\n";
 			m_result += "{\n\treturn stream >> (unsigned int)val;\n}\n";
