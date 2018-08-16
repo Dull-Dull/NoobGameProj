@@ -11,6 +11,9 @@ public:
 
 	void Insert( const PlayerPtr& player );
 	void Delete( const PlayerPtr& player );
+
+	::std::unordered_set< PlayerPtr >::iterator begin();
+	::std::unordered_set< PlayerPtr >::iterator end();
 private:
 	::std::unordered_set< PlayerPtr > container;
 };

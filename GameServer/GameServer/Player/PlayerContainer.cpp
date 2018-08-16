@@ -17,3 +17,13 @@ void PlayerContainer::Delete( const PlayerPtr& player )
 {
 	container.erase( player );
 }
+
+::std::unordered_set< PlayerPtr >::iterator PlayerContainer::begin()
+{
+	return container.begin();
+}
+
+::std::unordered_set< PlayerPtr >::iterator PlayerContainer::end()
+{
+	return container.end();
+}
