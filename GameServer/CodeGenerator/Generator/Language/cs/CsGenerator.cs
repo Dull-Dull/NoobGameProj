@@ -61,6 +61,21 @@ namespace CodeGenerator.Generator.Language
 			m_result += "\t}\n";
 		}
 
+		public void WriteEnum( string name, List<Value> valueList )
+		{
+			m_result += "\n";
+			m_result += "\t[NoobSerializAble]\n";
+			m_result += "\tpublic enum " + name + " : uint\n";
+			m_result += "\t{\n";
+
+			foreach( var value in valueList )
+			{
+				m_result += "\t\t" + value.name + ",\n";
+			}
+
+			m_result += "\t\t__MAX__\n\t}\n";
+		}
+
 		public void WriteEnd()
 		{
 			m_result += "\n}";

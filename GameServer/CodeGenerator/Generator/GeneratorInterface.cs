@@ -13,6 +13,7 @@ namespace CodeGenerator.Generator
 		void WriteInclude( string fileName );
 		void WriteData( string name, string extends, List<Value> valueList );
 		void WritePacket( string name, string extends, int index, List<Value> valueList );
+		void WriteEnum( string name, List<Value> valueList );
 		void WriteEnd();
 
 		void GenerateFile( string path );

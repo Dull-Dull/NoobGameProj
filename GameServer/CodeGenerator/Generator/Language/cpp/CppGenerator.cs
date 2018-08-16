@@ -165,6 +165,25 @@ namespace CodeGenerator.Generator.Language
 			m_registeredPcks += "REGIST_PACKET( " + name + " );\n";
 		}
 
+		public void WriteEnum( string name, List<Value> valueList )
+		{
+			m_result += "\n";
+			m_result += "enum class " + name + " : unsigned int\n";
+			m_result += "{\n";
+
+			foreach( var value in valueList )
+			{
+				m_result += "\t" + value.name + ",\n";
+			}
+
+			m_result += "\t__MAX__\n}\n\n";
+
+			m_result += "inline StreamReader& operator>>( StreamReader& stream, " + name + "& val )\n";
+			m_result += "{\n\treturn stream >> (unsigned int)val;\n}\n";
+			m_result += "inline StreamWriter& operator<<( StreamWriter& stream, " + name + "& val )\n";
+			m_result += "{\n\treturn stream << (unsigned int)val;\n}\n";
+		}
+
 		public void WriteEnd()
 		{
 

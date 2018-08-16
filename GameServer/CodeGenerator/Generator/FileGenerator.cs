@@ -54,6 +54,12 @@ namespace CodeGenerator.Generator
 				generator.WritePacket( name, extends, index, valueList );
 		}
 
+		public void WriteEnum( string name, List<Value> valueList )
+		{
+			foreach( var generator in generatorCon )
+				generator.WriteEnum( name, valueList );
+		}
+
 		public void WriteEnd()
 		{
 			foreach( var generator in generatorCon )

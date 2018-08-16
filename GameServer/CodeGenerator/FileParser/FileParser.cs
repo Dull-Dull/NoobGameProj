@@ -59,6 +59,9 @@ namespace CodeGenerator.FileParser
 					case "PckCodeRange":
 						ParsePckCodeRange( node );
 						break;
+					case "Enum":
+						ParseEnum( node );
+						break;
 					default:
 						throw new Exception.UnKnownKeywordException( node.Name );
 				}
