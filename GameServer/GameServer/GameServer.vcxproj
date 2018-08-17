@@ -96,9 +96,11 @@
   <ItemGroup>
     <ClCompile Include="Alarm\AlarmManager.cpp" />
     <ClCompile Include="Alarm\AlarmTask.cpp" />
-    <ClCompile Include="Dispatcher\GameDispatcher.cpp" />
+    <ClCompile Include="GameDispatcher\GameDispatcher.cpp" />
     <ClCompile Include="GameServerMain.cpp" />
-    <ClCompile Include="PacketProc\PacketProc.cpp" />
+    <ClCompile Include="PacketDispatcher\PacketDispatcher.cpp" />
+    <ClCompile Include="Player\PacketProc\PlayerGame.cpp" />
+    <ClCompile Include="Player\PacketProc\PlayerLogin.cpp" />
     <ClCompile Include="Player\Ping\PingManager.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerContainer.cpp" />
@@ -112,8 +114,8 @@
   <ItemGroup>
     <ClInclude Include="Alarm\AlarmManager.h" />
     <ClInclude Include="Alarm\AlarmTask.h" />
-    <ClInclude Include="Dispatcher\GameDispatcher.h" />
-    <ClInclude Include="PacketProc\PacketProc.h" />
+    <ClInclude Include="GameDispatcher\GameDispatcher.h" />
+    <ClInclude Include="PacketDispatcher\PacketDispatcher.h" />
     <ClInclude Include="Player\Ping\PingManager.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerContainer.h" />

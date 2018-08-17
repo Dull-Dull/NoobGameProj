@@ -1,7 +1,7 @@
 #include "PreCompiled.h"
 #include "AlarmManager.h"
 
-#include "../Dispatcher/GameDispatcher.h"
+#include "../GameDispatcher/GameDispatcher.h"
 
 const static ::Noob::Tick g_tickUnit = ::Noob::Second / 2;
 

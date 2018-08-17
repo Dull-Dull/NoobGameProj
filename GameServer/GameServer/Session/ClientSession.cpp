@@ -2,8 +2,7 @@
 #include "ClientSession.h"
 
 #include "ClientAcceptor.h"
-#include "../Dispatcher/GameDispatcher.h"
-#include <GamePacket\Packets\TestPcks.h>
+#include "../GameDispatcher/GameDispatcher.h"
 #include <concurrent_queue.h>
 
 struct ClientSession::imple

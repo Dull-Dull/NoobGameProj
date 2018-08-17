@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<reflection>
+
+	<Include>../Datas/Math</Include>
+
+	<Enum name ="PLAYER_STATE">
+		<Val name ="STOP"/>
+		<Val name ="RUN"/>
+	</Enum>
+
+	<Data name ="PlayerMove">
+		<Val type ="Vector2D" name ="position"/>
+		<Val type ="Vector2D" name ="velocity"/>
+	</Data>
+
+</reflection>

@@ -71,8 +71,6 @@ void GameDispatcher::imple::Accept( const Noob::RefCntPtr& obj )
 	auto session = ::Noob::PtrCast<ClientSession>( obj );
 	PlayerPtr player = new Player( session.Get() );
 	session->SetPlayer( player.Get() );
-
-	PlayerContainer::GetInstance()->Insert( player );
 	
 	player->OnAccept();
 }

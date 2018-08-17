@@ -76,14 +76,14 @@ inline StreamWriter& operator<<( StreamWriter& stream, CS_Login& val )
 struct SC_Login : public ::Noob::Packet
 {
 	unsigned int playerIndex;
-	int spawnPosition;
+	Vector2D spawnPosition;
 
 	SC_Login()
 	{
 		index = 4;
 	}
 
-	SC_Login( unsigned int _playerIndex, int _spawnPosition )
+	SC_Login( unsigned int _playerIndex, Vector2D _spawnPosition )
 	{
 		index = 4;
 		playerIndex = _playerIndex;
@@ -104,23 +104,56 @@ inline StreamWriter& operator<<( StreamWriter& stream, SC_Login& val )
 	return stream<<val.playerIndex<<val.spawnPosition;
 }
 
+struct SC_NewPlayer : public ::Noob::Packet
+{
+	unsigned int playerIndex;
+	::std::wstring nick;
+	Vector2D position;
+
+	SC_NewPlayer()
+	{
+		index = 5;
+	}
+
+	SC_NewPlayer( unsigned int _playerIndex, ::std::wstring _nick, Vector2D _position )
+	{
+		index = 5;
+		playerIndex = _playerIndex;
+		nick = _nick;
+		position = _position;
+	}
+
+	::std::wstring GetName(){ return L"SC_NewPlayer"; }
+	static unsigned int GetIndex(){ return 5; }
+};
+
+inline StreamReader& operator>>( StreamReader& stream, SC_NewPlayer& val )
+{
+	return stream>>val.playerIndex>>val.nick>>val.position;
+}
+
+inline StreamWriter& operator<<( StreamWriter& stream, SC_NewPlayer& val )
+{
+	return stream<<val.playerIndex<<val.nick<<val.position;
+}
+
 struct SC_Ping : public ::Noob::Packet
 {
 	int64_t tick;
 
 	SC_Ping()
 	{
-		index = 5;
+		index = 6;
 	}
 
 	SC_Ping( int64_t _tick )
 	{
-		index = 5;
+		index = 6;
 		tick = _tick;
 	}
 
 	::std::wstring GetName(){ return L"SC_Ping"; }
-	static unsigned int GetIndex(){ return 5; }
+	static unsigned int GetIndex(){ return 6; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, SC_Ping& val )
@@ -139,17 +172,17 @@ struct CS_Ping : public ::Noob::Packet
 
 	CS_Ping()
 	{
-		index = 6;
+		index = 7;
 	}
 
 	CS_Ping( int64_t _tick )
 	{
-		index = 6;
+		index = 7;
 		tick = _tick;
 	}
 
 	::std::wstring GetName(){ return L"CS_Ping"; }
-	static unsigned int GetIndex(){ return 6; }
+	static unsigned int GetIndex(){ return 7; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, CS_Ping& val )

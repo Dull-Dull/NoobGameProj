@@ -27,8 +27,10 @@ public:
 private:
 	ClientSession* m_session;
 	PingManager* m_ping;
-	bool m_saidHello;
+	bool m_handShakeComplete;
+	bool m_loginComplete;
 
+	unsigned int m_index;
 	::std::wstring m_nick;
 };
 

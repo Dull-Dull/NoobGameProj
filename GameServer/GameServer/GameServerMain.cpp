@@ -2,7 +2,7 @@
 
 #include "Session/ClientSession.h"
 #include "Session/ClientAcceptor.h"
-#include "Dispatcher\GameDispatcher.h"
+#include "GameDispatcher/GameDispatcher.h"
 #include <GamePacket/PcksRegistration.h>
 
 int main()

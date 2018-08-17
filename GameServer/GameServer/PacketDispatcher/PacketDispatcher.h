@@ -3,7 +3,7 @@
 DECL_CLASS( Player );
 class PacketProcRegisterer;
 
-class PacketProcManager
+class PacketDispatcher
 {
 public:
 	using Func = void (Player::*)( const ::Noob::PacketPtr& );
@@ -16,12 +16,12 @@ private:
 class PacketProcRegisterer
 {
 public:
-	PacketProcRegisterer( unsigned int pckIndex, PacketProcManager::Func callbackFunc );
+	PacketProcRegisterer( unsigned int pckIndex, PacketDispatcher::Func callbackFunc );
 };
 
 #define REGIST_PCK_PROC( PACKET_TYPE )\
 DECL_STRUCT( PACKET_TYPE );\
 template<> void Player::OnPacket< PACKET_TYPE >(const ::Noob::Ptr<PACKET_TYPE>&);\
 PacketProcRegisterer __##PACKET_TYPE##Registerer( PACKET_TYPE::GetIndex(),\
-reinterpret_cast<PacketProcManager::Func>( &Player::OnPacket<PACKET_TYPE> ) );\
+reinterpret_cast<PacketDispatcher::Func>( &Player::OnPacket<PACKET_TYPE> ) );\
 template<>

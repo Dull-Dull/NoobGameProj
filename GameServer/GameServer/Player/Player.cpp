@@ -2,18 +2,19 @@
 #include "Player.h"
 
 #include "Ping/PingManager.h"
+#include "PlayerContainer.h"
+#include "../PacketDispatcher/PacketDispatcher.h"
 #include "../Session/ClientSession.h"
-#include "../PacketProc/PacketProc.h"
 #include "../Alarm/AlarmManager.h"
 #include <GamePacket/Packets/Login.h>
 
-unsigned int g_playerIndexCnt = 0;
+
 
 Player::Player( ClientSession* session )
 {
 	m_session = session;
 	m_ping = nullptr;
-	m_saidHello = false;
+	m_handShakeComplete = false;
 }
 
 Player::~Player()
@@ -29,7 +30,7 @@ void Player::OnAccept()
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
 {
-	if( m_saidHello == false )
+	if( m_handShakeComplete == false )
 	{
 		if( pck->index != CS_Hello::GetIndex() )
 		{
@@ -38,7 +39,7 @@ void Player::OnRecv( ::Noob::PacketPtr pck )
 		}
 	}
 
-	PacketProcManager::Call( this, pck );
+	PacketDispatcher::Call( this, pck );
 }
 
 void Player::OnClose()
@@ -50,32 +51,4 @@ void Player::OnClose()
 void Player::Close()
 {
 	m_session->Close();
-}
-
-REGIST_PCK_PROC(CS_Hello)
-void Player::OnPacket( const CS_HelloPtr& pck )
-{
-	SC_Hello hello;
-	Send( hello );
-	m_saidHello = true;
-	
-	m_ping->SendPing();
-}
-
-REGIST_PCK_PROC( CS_Login )
-void Player::OnPacket( const CS_LoginPtr& loginReq )
-{
-	m_nick = loginReq->nick;
-
-	SC_Login loginAck;
-	loginAck.playerIndex = g_playerIndexCnt++;
-	loginAck.spawnPosition = ::Noob::Random::GetInteger(0, 8);
-
-	Send( loginAck );
-}
-
-REGIST_PCK_PROC( CS_Ping )
-void Player::OnPacket( const CS_PingPtr& pck )
-{
-	m_ping->RecvPing( pck->tick );
 }

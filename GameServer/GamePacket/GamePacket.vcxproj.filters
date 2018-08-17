@@ -10,9 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompiled.h" />
-    <ClInclude Include="Packets\TestPcks.h">
-      <Filter>Packets</Filter>
-    </ClInclude>
     <ClInclude Include="PcksRegistration.h" />
     <ClInclude Include="Packets\Login.h">
       <Filter>Packets</Filter>
@@ -20,18 +17,27 @@
     <ClInclude Include="Datas\Math.h">
       <Filter>Data</Filter>
     </ClInclude>
+    <ClInclude Include="Packets\Game.h">
+      <Filter>Packets</Filter>
+    </ClInclude>
+    <ClInclude Include="Datas\Reflection.h">
+      <Filter>Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiled.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Packets\TestPcks.xml">
-      <Filter>Packets</Filter>
-    </Xml>
     <Xml Include="Packets\Login.xml">
       <Filter>Packets</Filter>
     </Xml>
     <Xml Include="Datas\Math.xml">
+      <Filter>Data</Filter>
+    </Xml>
+    <Xml Include="Packets\Game.xml">
+      <Filter>Packets</Filter>
+    </Xml>
+    <Xml Include="Datas\Reflection.xml">
       <Filter>Data</Filter>
     </Xml>
   </ItemGroup>

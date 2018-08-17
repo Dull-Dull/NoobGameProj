@@ -13,7 +13,13 @@
 
 	<Packet name ="SC_Login">
 		<Val type ="uint32" name ="playerIndex"/>
-		<Val type ="int32" name ="spawnPosition"/>
+		<Val type ="Vector2D" name ="spawnPosition"/>
+	</Packet>
+
+	<Packet name ="SC_NewPlayer">
+		<Val type ="uint32" name ="playerIndex"/>
+		<Val type ="string" name ="nick"/>
+		<Val type ="Vector2D" name ="position"/>
 	</Packet>
 
 	<Packet name ="SC_Ping">
