@@ -316,6 +316,27 @@ namespace Noob
 			} );
 		}
 
+		public static void RegisterEnum( Type dataType )
+		{
+			writeFuncCon.Add( dataType, ( BinaryWriter writer, Object graph ) =>
+			{
+				WriteFunc func = null;
+				if( NoobSerializeFormatter.writeFuncCon.TryGetValue( typeof( uint ), out func ) )
+				{
+					func( writer, graph );
+				}
+			} );
+
+			readFuncCon.Add( dataType, ( BinaryReader reader, ref Object graph ) =>
+			{
+				ReadFunc func = null;
+				if( NoobSerializeFormatter.readFuncCon.TryGetValue( typeof(uint), out func ) )
+				{
+					func( reader, ref graph );
+				}
+			} );
+		}
+
 		public static Dictionary<Type, WriteFunc> writeFuncCon = new Dictionary<Type, WriteFunc>();
 		public static Dictionary<Type, ReadFunc> readFuncCon = new Dictionary<Type, ReadFunc>();
 	}

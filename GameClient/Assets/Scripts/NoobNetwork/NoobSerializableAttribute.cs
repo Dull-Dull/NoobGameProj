@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Noob
 {
-	[AttributeUsage( AttributeTargets.Class )]
+	[AttributeUsage( AttributeTargets.Class | AttributeTargets.Enum )]
 	public class NoobSerializAbleAttribute : Attribute
 	{
 		public static void Init()
@@ -20,8 +20,11 @@ namespace Noob
 					attrObj == null )
 					continue;
 
-				NoobSerializeFormatter.RegisterData( t );
-				
+				if( t.IsEnum )
+					NoobSerializeFormatter.RegisterData( t );
+				else
+					NoobSerializeFormatter.RegisterData( t );
+
 				if( t.BaseType == typeof( Noob.Packet ) )
 				{
 					uint index = (uint)t.GetField( "index" ).GetRawConstantValue();
