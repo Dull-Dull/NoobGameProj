@@ -15,6 +15,7 @@ Player::Player( ClientSession* session )
 	m_session = session;
 	m_ping = nullptr;
 	m_handShakeComplete = false;
+	m_loginComplete = false;
 }
 
 Player::~Player()

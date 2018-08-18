@@ -22,7 +22,7 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
-		if( player->m_loginComplete == false )
+		if( player->m_loginComplete == false && player.Get() != this )
 			continue;
 
 		SC_NewPlayer newPlayer;
@@ -41,6 +41,7 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 {
 	m_nick = loginReq->nick;
 	m_index = g_playerIndexCnt++;
+	m_loginComplete = true;
 
 	SC_Login loginAck;
 	loginAck.playerIndex = m_index;
@@ -53,14 +54,14 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	newPlayer.nick = m_nick;
 	newPlayer.transform.position = loginAck.spawnPosition;
 	newPlayer.transform.velocity = { 0.0f ,0.0f };
-	newPlayer.direction.direction = { 0.0f, -1.0f };
+	newPlayer.direction.direction = { 0.0f, 1.0f };
 	newPlayer.direction.angularVelocity = 0.0f;
 	newPlayer.animation.state = PLAYER_STATE::STOP;
 
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
-		if( player->m_handShakeComplete )
+		if( player->m_handShakeComplete && player.Get() != this )
 			player->Send( newPlayer );
 	}
 }
