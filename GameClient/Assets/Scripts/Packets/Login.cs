@@ -31,10 +31,23 @@ namespace Noob
 	public class SC_Login : Packet
 	{
 		public uint playerIndex = 0;
-		public int spawnPosition = 0;
+		public Vector2D spawnPosition = new Vector2D();
 
 		public override uint GetIndex(){ return index; }
 		public const uint index = 4;
+	}
+
+	[NoobSerializAble]
+	public class SC_NewPlayer : Packet
+	{
+		public uint playerIndex = 0;
+		public string nick = "";
+		public PlayerTransform transform = new PlayerTransform();
+		public PlayerDirection direction = new PlayerDirection();
+		public PlayerAnimation animation = new PlayerAnimation();
+
+		public override uint GetIndex(){ return index; }
+		public const uint index = 5;
 	}
 
 	[NoobSerializAble]
@@ -43,7 +56,7 @@ namespace Noob
 		public long tick = 0;
 
 		public override uint GetIndex(){ return index; }
-		public const uint index = 5;
+		public const uint index = 6;
 	}
 
 	[NoobSerializAble]
@@ -52,7 +65,7 @@ namespace Noob
 		public long tick = 0;
 
 		public override uint GetIndex(){ return index; }
-		public const uint index = 6;
+		public const uint index = 7;
 	}
 
 }
