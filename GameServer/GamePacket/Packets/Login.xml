@@ -2,6 +2,7 @@
 
 <login>
 	<Include>../Datas/Math</Include>
+	<Include>../Datas/Reflection</Include>
 	<PckCodeRange min="1" max="100"/>
 
 	<Packet name ="SC_Hello"/>
@@ -19,7 +20,9 @@
 	<Packet name ="SC_NewPlayer">
 		<Val type ="uint32" name ="playerIndex"/>
 		<Val type ="string" name ="nick"/>
-		<Val type ="Vector2D" name ="position"/>
+		<Val type ="PlayerTransform" name ="transform"/>
+		<Val type ="PlayerDirection" name ="direction"/>
+		<Val type ="PlayerAnimation" name ="animation"/>
 	</Packet>
 
 	<Packet name ="SC_Ping">

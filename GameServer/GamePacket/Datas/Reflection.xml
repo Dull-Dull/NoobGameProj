@@ -9,9 +9,18 @@
 		<Val name ="RUN"/>
 	</Enum>
 
-	<Data name ="PlayerMove">
+	<Data name ="PlayerTransform">
 		<Val type ="Vector2D" name ="position"/>
 		<Val type ="Vector2D" name ="velocity"/>
+	</Data>
+
+	<Data name ="PlayerDirection">
+		<Val type ="Vector2D" name ="direction"/>
+		<Val type ="float" name="angularVelocity"/>
+	</Data>
+
+	<Data name ="PlayerAnimation">
+		<Val type ="PLAYER_STATE" name ="state"/>
 	</Data>
 
 </reflection>

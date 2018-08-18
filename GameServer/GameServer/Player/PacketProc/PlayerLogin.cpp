@@ -28,6 +28,11 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 		SC_NewPlayer newPlayer;
 		newPlayer.playerIndex = player->m_index;
 		newPlayer.nick = player->m_nick;
+		newPlayer.transform = player->m_transform;
+		newPlayer.direction = player->m_direction;
+		newPlayer.animation = player->m_animation;
+
+		Send( newPlayer );
 	}
 }
 
@@ -46,7 +51,12 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	SC_NewPlayer newPlayer;
 	newPlayer.playerIndex = m_index;
 	newPlayer.nick = m_nick;
-	newPlayer.position = loginAck.spawnPosition;
+	newPlayer.transform.position = loginAck.spawnPosition;
+	newPlayer.transform.velocity = { 0.0f ,0.0f };
+	newPlayer.direction.direction = { 0.0f, -1.0f };
+	newPlayer.direction.angularVelocity = 0.0f;
+	newPlayer.animation.state = PLAYER_STATE::STOP;
+
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Session/ClientSession.h"
+#include <GamePacket\Datas\Reflection.h>
 
 class PingManager;
 
@@ -32,6 +33,9 @@ private:
 
 	unsigned int m_index;
 	::std::wstring m_nick;
+	PlayerTransform m_transform;
+	PlayerDirection m_direction;
+	PlayerAnimation m_animation;
 };
 
 using PlayerPtr = ::Noob::Ptr<Player>;

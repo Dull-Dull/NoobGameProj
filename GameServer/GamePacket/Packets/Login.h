@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Datas/Math.h"
+#include "../Datas/Reflection.h"
 
 struct SC_Hello : public ::Noob::Packet
 {
@@ -108,19 +109,23 @@ struct SC_NewPlayer : public ::Noob::Packet
 {
 	unsigned int playerIndex;
 	::std::wstring nick;
-	Vector2D position;
+	PlayerTransform transform;
+	PlayerDirection direction;
+	PlayerAnimation animation;
 
 	SC_NewPlayer()
 	{
 		index = 5;
 	}
 
-	SC_NewPlayer( unsigned int _playerIndex, ::std::wstring _nick, Vector2D _position )
+	SC_NewPlayer( unsigned int _playerIndex, ::std::wstring _nick, PlayerTransform _transform, PlayerDirection _direction, PlayerAnimation _animation )
 	{
 		index = 5;
 		playerIndex = _playerIndex;
 		nick = _nick;
-		position = _position;
+		transform = _transform;
+		direction = _direction;
+		animation = _animation;
 	}
 
 	::std::wstring GetName(){ return L"SC_NewPlayer"; }
@@ -129,12 +134,12 @@ struct SC_NewPlayer : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, SC_NewPlayer& val )
 {
-	return stream>>val.playerIndex>>val.nick>>val.position;
+	return stream>>val.playerIndex>>val.nick>>val.transform>>val.direction>>val.animation;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, SC_NewPlayer& val )
 {
-	return stream<<val.playerIndex<<val.nick<<val.position;
+	return stream<<val.playerIndex<<val.nick<<val.transform<<val.direction<<val.animation;
 }
 
 struct SC_Ping : public ::Noob::Packet
