@@ -65,16 +65,9 @@ public class ServerSession : MonoBehaviour {
 	[PacketProcRegistration( SC_Hello.index )]
 	public void SC_HelloProc( Packet pck )
 	{
-		//Debug.Log( "Call SC_Hello pck!!!" );
-
 		GameObject loginCanvasObj = GameObject.Find( "LoginCanvas" );
 		Canvas loginCanvas = loginCanvasObj.GetComponent<Canvas>();
 		loginCanvas.enabled = true;
-
-		//CS_Login login = new CS_Login();
-		//login.nick = "Unknown";
-
-		//session.Send( login );
 	}
 
 	[PacketProcRegistration( SC_Login.index )]
@@ -82,25 +75,12 @@ public class ServerSession : MonoBehaviour {
 	{
 		Debug.Log( "Call SC_Login pck!!!" );
 
-		var loginCanvasObj = GameObject.Find( "LoginCanvas" );
-		loginCanvasObj.GetComponent<Canvas>().enabled = false;
-
 		SC_Login login = pck as SC_Login;
 
-		Debug.Log( "Spawn Position : " + login.spawnPosition );
+		PlayerManager.CreateControlPlayer( login );
 
-		var rsc = Resources.Load( "Prefabs/Player" );
-		GameObject player = Instantiate( rsc ) as GameObject;
-		var playerHudComponent = player.GetComponent<PlayerHud>();
-		playerHudComponent.nick = GameObject.Find( "LoginCanvas/NickNameField/Text" ).GetComponent<UnityEngine.UI.Text>().text;
-		Transform pos = player.GetComponent<Transform>();
-		Vector2 spawnPos = GameObject.Find( "Manager" ).GetComponent<GameRule>().m_spawnSpot[login.spawnPosition];
-		pos.position = new Vector3( spawnPos.x, 0, spawnPos.y );
-
-		player.AddComponent<PlayerMovement>();
-		player.AddComponent<Rigidbody>();
-
-		GameObject.Find( "Main Camera" ).GetComponent<CameraFollow>().target = pos;
+		GameObject loginCanvasObj = GameObject.Find( "LoginCanvas" );
+		Destroy( loginCanvasObj );
 	}
 
 	[PacketProcRegistration( SC_Ping.index )]
@@ -110,5 +90,17 @@ public class ServerSession : MonoBehaviour {
 		CS_Ping ping = new CS_Ping();
 		ping.tick = ( pck as SC_Ping ).tick;
 		session.Send( ping );
+	}
+
+	[PacketProcRegistration( SC_EnterPlayer.index )]
+	public void SC_NewPlayerProc( Packet pck )
+	{
+		PlayerManager.CreateOtherPlayer( pck as SC_EnterPlayer );
+	}
+
+	[PacketProcRegistration( SC_ExitPlayer.index )]
+	public void SC_ExitPlayerProc( Packet pck )
+	{
+		PlayerManager.DestroyOtherPlayer( ( pck as SC_ExitPlayer ).playerIndex );
 	}
 }

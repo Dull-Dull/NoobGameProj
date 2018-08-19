@@ -22,17 +22,17 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
-		if( player->m_loginComplete == false && player.Get() != this )
+		if( player->m_loginComplete == false && player.Get() == this )
 			continue;
 
-		SC_NewPlayer newPlayer;
-		newPlayer.playerIndex = player->m_index;
-		newPlayer.nick = player->m_nick;
-		newPlayer.transform = player->m_transform;
-		newPlayer.direction = player->m_direction;
-		newPlayer.animation = player->m_animation;
+		SC_EnterPlayer enterPlayer;
+		enterPlayer.playerIndex = player->m_index;
+		enterPlayer.nick = player->m_nick;
+		enterPlayer.transform = player->m_transform;
+		enterPlayer.direction = player->m_direction;
+		enterPlayer.animation = player->m_animation;
 
-		Send( newPlayer );
+		Send( enterPlayer );
 	}
 }
 
@@ -42,27 +42,29 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	m_nick = loginReq->nick;
 	m_index = g_playerIndexCnt++;
 	m_loginComplete = true;
+	m_transform.position = g_spawnSpotList[ ::Noob::Random::GetInteger( 0, 8 ) ];
+	m_transform.velocity = { 0.0f ,0.0f };
+	m_direction.direction = { 0.0f, 1.0f };
+	m_direction.angularVelocity = 0.0f;
+	m_animation.state = PLAYER_STATE::STOP;
 
 	SC_Login loginAck;
 	loginAck.playerIndex = m_index;
-	loginAck.spawnPosition = g_spawnSpotList[ ::Noob::Random::GetInteger( 0, 8 ) ];
+	loginAck.spawnPosition = m_transform.position;
 
 	Send( loginAck );
 
-	SC_NewPlayer newPlayer;
-	newPlayer.playerIndex = m_index;
-	newPlayer.nick = m_nick;
-	newPlayer.transform.position = loginAck.spawnPosition;
-	newPlayer.transform.velocity = { 0.0f ,0.0f };
-	newPlayer.direction.direction = { 0.0f, 1.0f };
-	newPlayer.direction.angularVelocity = 0.0f;
-	newPlayer.animation.state = PLAYER_STATE::STOP;
-
+	SC_EnterPlayer enterPlayer;
+	enterPlayer.playerIndex = m_index;
+	enterPlayer.nick = m_nick;
+	enterPlayer.transform = m_transform;
+	enterPlayer.direction = m_direction;
+	enterPlayer.animation = m_animation;
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
 		if( player->m_handShakeComplete && player.Get() != this )
-			player->Send( newPlayer );
+			player->Send( enterPlayer );
 	}
 }
 

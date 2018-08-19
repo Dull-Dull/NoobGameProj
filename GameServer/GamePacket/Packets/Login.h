@@ -105,7 +105,7 @@ inline StreamWriter& operator<<( StreamWriter& stream, SC_Login& val )
 	return stream<<val.playerIndex<<val.spawnPosition;
 }
 
-struct SC_NewPlayer : public ::Noob::Packet
+struct SC_EnterPlayer : public ::Noob::Packet
 {
 	unsigned int playerIndex;
 	::std::wstring nick;
@@ -113,12 +113,12 @@ struct SC_NewPlayer : public ::Noob::Packet
 	PlayerDirection direction;
 	PlayerAnimation animation;
 
-	SC_NewPlayer()
+	SC_EnterPlayer()
 	{
 		index = 5;
 	}
 
-	SC_NewPlayer( unsigned int _playerIndex, ::std::wstring _nick, PlayerTransform _transform, PlayerDirection _direction, PlayerAnimation _animation )
+	SC_EnterPlayer( unsigned int _playerIndex, ::std::wstring _nick, PlayerTransform _transform, PlayerDirection _direction, PlayerAnimation _animation )
 	{
 		index = 5;
 		playerIndex = _playerIndex;
@@ -128,18 +128,47 @@ struct SC_NewPlayer : public ::Noob::Packet
 		animation = _animation;
 	}
 
-	::std::wstring GetName(){ return L"SC_NewPlayer"; }
+	::std::wstring GetName(){ return L"SC_EnterPlayer"; }
 	static unsigned int GetIndex(){ return 5; }
 };
 
-inline StreamReader& operator>>( StreamReader& stream, SC_NewPlayer& val )
+inline StreamReader& operator>>( StreamReader& stream, SC_EnterPlayer& val )
 {
 	return stream>>val.playerIndex>>val.nick>>val.transform>>val.direction>>val.animation;
 }
 
-inline StreamWriter& operator<<( StreamWriter& stream, SC_NewPlayer& val )
+inline StreamWriter& operator<<( StreamWriter& stream, SC_EnterPlayer& val )
 {
 	return stream<<val.playerIndex<<val.nick<<val.transform<<val.direction<<val.animation;
+}
+
+struct SC_ExitPlayer : public ::Noob::Packet
+{
+	unsigned int playerIndex;
+
+	SC_ExitPlayer()
+	{
+		index = 6;
+	}
+
+	SC_ExitPlayer( unsigned int _playerIndex )
+	{
+		index = 6;
+		playerIndex = _playerIndex;
+	}
+
+	::std::wstring GetName(){ return L"SC_ExitPlayer"; }
+	static unsigned int GetIndex(){ return 6; }
+};
+
+inline StreamReader& operator>>( StreamReader& stream, SC_ExitPlayer& val )
+{
+	return stream>>val.playerIndex;
+}
+
+inline StreamWriter& operator<<( StreamWriter& stream, SC_ExitPlayer& val )
+{
+	return stream<<val.playerIndex;
 }
 
 struct SC_Ping : public ::Noob::Packet
@@ -148,17 +177,17 @@ struct SC_Ping : public ::Noob::Packet
 
 	SC_Ping()
 	{
-		index = 6;
+		index = 7;
 	}
 
 	SC_Ping( int64_t _tick )
 	{
-		index = 6;
+		index = 7;
 		tick = _tick;
 	}
 
 	::std::wstring GetName(){ return L"SC_Ping"; }
-	static unsigned int GetIndex(){ return 6; }
+	static unsigned int GetIndex(){ return 7; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, SC_Ping& val )
@@ -177,17 +206,17 @@ struct CS_Ping : public ::Noob::Packet
 
 	CS_Ping()
 	{
-		index = 7;
+		index = 8;
 	}
 
 	CS_Ping( int64_t _tick )
 	{
-		index = 7;
+		index = 8;
 		tick = _tick;
 	}
 
 	::std::wstring GetName(){ return L"CS_Ping"; }
-	static unsigned int GetIndex(){ return 7; }
+	static unsigned int GetIndex(){ return 8; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, CS_Ping& val )

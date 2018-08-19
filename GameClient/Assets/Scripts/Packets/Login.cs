@@ -38,7 +38,7 @@ namespace Noob
 	}
 
 	[NoobSerializAble]
-	public class SC_NewPlayer : Packet
+	public class SC_EnterPlayer : Packet
 	{
 		public uint playerIndex = 0;
 		public string nick = "";
@@ -51,12 +51,21 @@ namespace Noob
 	}
 
 	[NoobSerializAble]
+	public class SC_ExitPlayer : Packet
+	{
+		public uint playerIndex = 0;
+
+		public override uint GetIndex(){ return index; }
+		public const uint index = 6;
+	}
+
+	[NoobSerializAble]
 	public class SC_Ping : Packet
 	{
 		public long tick = 0;
 
 		public override uint GetIndex(){ return index; }
-		public const uint index = 6;
+		public const uint index = 7;
 	}
 
 	[NoobSerializAble]
@@ -65,7 +74,7 @@ namespace Noob
 		public long tick = 0;
 
 		public override uint GetIndex(){ return index; }
-		public const uint index = 7;
+		public const uint index = 8;
 	}
 
 }
