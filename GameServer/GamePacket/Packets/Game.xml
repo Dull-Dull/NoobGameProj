@@ -7,6 +7,7 @@
 	<PckCodeRange min="101" max="200"/>
 
 	<Packet name ="N_Move">
+		<Val type ="uint32" name ="playerIndex"/>
 		<Val type ="PlayerTransform" name ="transform"/>
 		<Val type ="PlayerAnimation" name ="animation"/>
 	</Packet>

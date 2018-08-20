@@ -5,6 +5,7 @@
 
 struct N_Move : public ::Noob::Packet
 {
+	unsigned int playerIndex;
 	PlayerTransform transform;
 	PlayerAnimation animation;
 
@@ -13,9 +14,10 @@ struct N_Move : public ::Noob::Packet
 		index = 101;
 	}
 
-	N_Move( PlayerTransform _transform, PlayerAnimation _animation )
+	N_Move( unsigned int _playerIndex, PlayerTransform _transform, PlayerAnimation _animation )
 	{
 		index = 101;
+		playerIndex = _playerIndex;
 		transform = _transform;
 		animation = _animation;
 	}
@@ -26,10 +28,10 @@ struct N_Move : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, N_Move& val )
 {
-	return stream>>val.transform>>val.animation;
+	return stream>>val.playerIndex>>val.transform>>val.animation;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, N_Move& val )
 {
-	return stream<<val.transform<<val.animation;
+	return stream<<val.playerIndex<<val.transform<<val.animation;
 }

@@ -7,6 +7,7 @@ namespace Noob
 	[NoobSerializAble]
 	public class N_Move : Packet
 	{
+		public uint playerIndex = 0;
 		public PlayerTransform transform = new PlayerTransform();
 		public PlayerAnimation animation = new PlayerAnimation();
 
