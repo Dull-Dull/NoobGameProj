@@ -49,7 +49,7 @@ int64_t AlarmManager::RegisterAlarm( const ::Noob::Duration& duration, AlarmCall
 
 int64_t AlarmManager::RegisterAlarm( const ::Noob::TimePoint& timePoint, AlarmCallback callback )
 {
-	auto alarmTask = new AlarmTask( pImple->m_indexCount, timePoint, callback );
+	auto alarmTask = new AlarmTask( pImple->m_indexCount++, timePoint, callback );
 
 	auto iter = pImple->m_alarmList.insert( pImple->m_alarmList.end(), alarmTask );
 	pImple->m_alarmMap.emplace( alarmTask->GetIndex(), iter );
