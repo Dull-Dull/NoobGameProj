@@ -27,7 +27,6 @@ PingManager::~PingManager()
 
 void PingManager::SendPing()
 {
-#ifndef _DEBUG
 	SC_Ping ping;
 	ping.tick = ::Noob::GetTick();
 	m_player->Send( ping );
@@ -49,7 +48,6 @@ void PingManager::SendPing()
 		}
 		SendPing();
 	} );
-#endif
 }
 
 void PingManager::RecvPing( ::Noob::Tick tick )
