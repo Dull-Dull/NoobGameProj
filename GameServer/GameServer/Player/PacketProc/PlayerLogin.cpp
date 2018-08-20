@@ -4,6 +4,7 @@
 #include "../Ping/PingManager.h"
 #include "../../PacketDispatcher/PacketDispatcher.h"
 #include <GamePacket/Packets/Login.h>
+#include <GamePacket/Packets/Game.h>
 
 unsigned int g_playerIndexCnt = 0;
 
@@ -11,7 +12,7 @@ unsigned int g_playerIndexCnt = 0;
 { 16.0f, 11.0f }, { -25.0f, 0.0f }, { 23.0f, -5.0f },
 { 23.0f, -5.0f }, { 13.0f, -13.0f }, { 0.0f, -25.0f } };
 
-REGIST_PCK_PROC(CS_Hello)
+REGISTER_PCK_PROC( CS_Hello )
 void Player::OnPacket( const CS_HelloPtr& pck )
 {
 	SC_Hello hello;
@@ -36,7 +37,7 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 	}
 }
 
-REGIST_PCK_PROC( CS_Login )
+REGISTER_PCK_PROC( CS_Login )
 void Player::OnPacket( const CS_LoginPtr& loginReq )
 {
 	m_nick = loginReq->nick;
@@ -68,7 +69,7 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	}
 }
 
-REGIST_PCK_PROC( CS_Ping )
+REGISTER_PCK_PROC( CS_Ping )
 void Player::OnPacket( const CS_PingPtr& pck )
 {
 	m_ping->RecvPing( pck->tick );

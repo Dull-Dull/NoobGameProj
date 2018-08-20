@@ -19,7 +19,7 @@ public:
 	PacketProcRegisterer( unsigned int pckIndex, PacketDispatcher::Func callbackFunc );
 };
 
-#define REGIST_PCK_PROC( PACKET_TYPE )\
+#define REGISTER_PCK_PROC( PACKET_TYPE )\
 DECL_STRUCT( PACKET_TYPE );\
 template<> void Player::OnPacket< PACKET_TYPE >(const ::Noob::Ptr<PACKET_TYPE>&);\
 PacketProcRegisterer __##PACKET_TYPE##Registerer( PACKET_TYPE::GetIndex(),\
