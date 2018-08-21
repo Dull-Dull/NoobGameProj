@@ -6,6 +6,8 @@ using Noob;
 
 public class ServerSession : MonoBehaviour {
 
+	public string Ip = "";
+
 	void Awake()
 	{
 		NoobSerializAbleAttribute.Init();
@@ -27,7 +29,7 @@ public class ServerSession : MonoBehaviour {
 			Debug.Log( "Disconnected!!!" );
 		};
 
-		session.AsyncConnect( "127.0.0.1", 15000 );
+		session.AsyncConnect( Ip, 15000 );
 
 		pckProcMng = new PacketProcManager( this );
 	}
@@ -73,7 +75,7 @@ public class ServerSession : MonoBehaviour {
 	[PacketProcRegistration( SC_Login.index )]
 	public void SC_LoginProc( Packet pck )
 	{
-		Debug.Log( "Call SC_Login pck!!!" );
+		//Debug.Log( "Call SC_Login pck!!!" );
 
 		SC_Login login = pck as SC_Login;
 
@@ -86,7 +88,7 @@ public class ServerSession : MonoBehaviour {
 	[PacketProcRegistration( SC_Ping.index )]
 	public void SC_PingProc( Packet pck )
 	{
-		Debug.Log( "Recv SC_Ping pck!!!" );
+		//Debug.Log( "Recv SC_Ping pck!!!" );
 		CS_Ping ping = new CS_Ping();
 		ping.tick = ( pck as SC_Ping ).tick;
 		session.Send( ping );
@@ -102,5 +104,17 @@ public class ServerSession : MonoBehaviour {
 	public void SC_ExitPlayerProc( Packet pck )
 	{
 		PlayerManager.DestroyOtherPlayer( ( pck as SC_ExitPlayer ).playerIndex );
+	}
+
+	[PacketProcRegistration( N_Move.index )]
+	public void N_MoveProc( Packet pck )
+	{
+		N_Move movePck = pck as N_Move;
+		GameObject player = PlayerManager.FindPlayer( movePck.playerIndex );
+		if( player == null )
+			return;
+
+		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
+		movement.SetTransform( movePck.transform );
 	}
 }

@@ -21,7 +21,7 @@ namespace Noob
 					continue;
 
 				if( t.IsEnum )
-					NoobSerializeFormatter.RegisterData( t );
+					NoobSerializeFormatter.RegisterEnum( t );
 				else
 					NoobSerializeFormatter.RegisterData( t );
 

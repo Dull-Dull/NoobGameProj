@@ -115,7 +115,7 @@ namespace Noob
 			m_sendArgs.SetBuffer( m_sendArgs.Offset, (int)m_sendMem.Length );
 			Array.Copy( m_sendMem.GetBuffer(), 0, m_sendArgs.Buffer, m_sendArgs.Offset, m_sendMem.Length );
 
-			return m_sock.SendAsync( m_sendArgs );			
+			return m_sock.SendAsync( m_sendArgs );
 		}
 
 		private void onSendComplete( Object sender, SocketAsyncEventArgs e )

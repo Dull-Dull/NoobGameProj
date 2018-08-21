@@ -41,4 +41,9 @@ inline TimePoint GetNow()
 	return ::std::chrono::time_point_cast<Duration>( ::std::chrono::system_clock::now() );
 }
 
+inline float TickToFloat( Tick tick )
+{
+	return ::std::chrono::duration_cast< ::std::chrono::duration< float > >( Duration( tick ) ).count();
+}
+
 }

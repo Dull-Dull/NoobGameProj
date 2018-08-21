@@ -42,7 +42,7 @@ public static class PlayerManager
 		trans.position = new Vector3( pck.transform.position.x, 0, pck.transform.position.y );
 
 		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
-		movement.velocity = new Vector3( pck.transform.velocity.x, 0, pck.transform.velocity.y );
+		movement.SetTransform( pck.transform );
 
 		//AddPlayerList
 		m_playerList.Add( pck.playerIndex, player );
@@ -88,6 +88,15 @@ public static class PlayerManager
 		GameObject.Find( "Main Camera" ).GetComponent<CameraFollow>().target = pos;
 
 		m_playerList.Add( playerHud.index, player );
+	}
+
+	public static GameObject FindPlayer( uint index )
+	{
+		GameObject player = null;
+		if( m_playerList.TryGetValue( index, out player ) )
+			return player;
+		else
+			return null;
 	}
 
 	private static Object m_playerResource = null;

@@ -5,20 +5,33 @@ using UnityEngine;
 public class OtherPlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+		trans = GetComponent<Transform>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void FixedUpdate () {
+		Vector3 pos = trans.position;
+		if( m_velocity.x >= 0.1f )
+		{
+			Debug.Log( trans.position.ToString( "F5" ) );
+			Debug.Log( ( m_velocity * Time.deltaTime ).ToString( "F5" ) );
+		}
+		trans.position = pos + ( m_velocity * Time.deltaTime );
+		if( m_velocity.x >= 0.1f )
+		{
+			Debug.Log( trans.position.ToString("F5") );
+		}
+			
 	}
 
-	public Vector3 velocity
+	public void SetTransform( Noob.PlayerTransform playerTransform )
 	{
-		get { return m_velocity; }
-		set { m_velocity = value; }
+		trans.position = new Vector3( playerTransform.position.x, 0.0f, playerTransform.position.y );
+		m_velocity.x = playerTransform.velocity.x;
+		m_velocity.z = playerTransform.velocity.y;
 	}
 
+	Transform trans = null;
 	private Vector3 m_velocity = new Vector3();
 }
