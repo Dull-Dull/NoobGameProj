@@ -93,5 +93,5 @@ public class PlayerMovement : MonoBehaviour
 	bool stateChanged = false;
 
 	private float sendMoveTimeGap = 0.0f;
-	private readonly float sendDelay = 0.2f;
+	private readonly float sendDelay = 0.1f;
 }
