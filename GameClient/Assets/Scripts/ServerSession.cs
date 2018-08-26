@@ -75,8 +75,6 @@ public class ServerSession : MonoBehaviour {
 	[PacketProcRegistration( SC_Login.index )]
 	public void SC_LoginProc( Packet pck )
 	{
-		//Debug.Log( "Call SC_Login pck!!!" );
-
 		SC_Login login = pck as SC_Login;
 
 		PlayerManager.CreateControlPlayer( login );
@@ -88,7 +86,6 @@ public class ServerSession : MonoBehaviour {
 	[PacketProcRegistration( SC_Ping.index )]
 	public void SC_PingProc( Packet pck )
 	{
-		//Debug.Log( "Recv SC_Ping pck!!!" );
 		CS_Ping ping = new CS_Ping();
 		ping.tick = ( pck as SC_Ping ).tick;
 		session.Send( ping );

@@ -82,8 +82,6 @@ public class PlayerMovement : MonoBehaviour
 
 			movePck.animation.state = state;
 
-			Debug.Log( "Send\t" + movePck.playerIndex + "\t" + movePck.animation.state );
-
 			session.Send( movePck );
 
 			return;
