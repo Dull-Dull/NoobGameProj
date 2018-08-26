@@ -10,7 +10,7 @@ void Player::OnPacket( const N_MovePtr& pck )
 {
 	pck->playerIndex;
 
-	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
+  	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{

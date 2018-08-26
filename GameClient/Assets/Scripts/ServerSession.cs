@@ -114,6 +114,9 @@ public class ServerSession : MonoBehaviour {
 		if( player == null )
 			return;
 
+		Animator anim = player.GetComponent<Animator>();
+		anim.SetInteger( "State", (int)movePck.animation.state );
+
 		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
 		movement.SetTransform( movePck.transform );
 	}

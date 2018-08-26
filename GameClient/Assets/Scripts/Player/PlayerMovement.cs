@@ -50,16 +50,19 @@ public class PlayerMovement : MonoBehaviour
 	private void Animating( float h, float v )
 	{
 		stateChanged = false;
-		bool preState = walking;
-		walking = h != 0f || v != 0f;
-		anim.SetBool( "IsWalking", walking );
-		if( preState != walking )
+		Noob.PLAYER_STATE preState = state;
+		if( h != 0f || v != 0f )
+			state = Noob.PLAYER_STATE.RUN;
+		else
+			state = Noob.PLAYER_STATE.STOP;
+		anim.SetInteger( "State", (int)state );
+		if( preState != state )
 			stateChanged = true;
 	}
 
 	private void Reflection()
 	{
-		if( walking )
+		if( state == Noob.PLAYER_STATE.RUN )
 			sendMoveTimeGap += Time.deltaTime;
 
 		if( ( sendMoveTimeGap >= sendDelay )
@@ -77,10 +80,14 @@ public class PlayerMovement : MonoBehaviour
 			movePck.transform.velocity.x = movement.x;
 			movePck.transform.velocity.y = movement.z;
 
+			movePck.animation.state = state;
+
+			Debug.Log( "Send\t" + movePck.playerIndex + "\t" + movePck.animation.state );
+
 			session.Send( movePck );
 
 			return;
-		}
+		}			
 	}
 
 	private ServerSession session;
@@ -89,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 	private Rigidbody playerRigidbody;
 	private int floorMask;
 	private float camRayLength = 100f;
-	bool walking = false;
+	private Noob.PLAYER_STATE state = Noob.PLAYER_STATE.RUN;
 	bool stateChanged = false;
 
 	private float sendMoveTimeGap = 0.0f;

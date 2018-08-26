@@ -6,16 +6,17 @@ enum class PLAYER_STATE : unsigned int
 {
 	STOP,
 	RUN,
+	DEAD,
 	__MAX__
 };
 
 inline StreamReader& operator>>( StreamReader& stream, PLAYER_STATE& val )
 {
-	return stream >> (unsigned int)val;
+	return stream >> *reinterpret_cast<unsigned int*>(&val);
 }
 inline StreamWriter& operator<<( StreamWriter& stream, PLAYER_STATE& val )
 {
-	return stream << (unsigned int)val;
+	return stream << static_cast<unsigned int>(val);
 }
 
 struct PlayerTransform

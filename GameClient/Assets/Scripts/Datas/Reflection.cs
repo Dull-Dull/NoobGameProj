@@ -9,6 +9,7 @@ namespace Noob
 	{
 		STOP,
 		RUN,
+		DEAD,
 		__MAX__
 	}
 
