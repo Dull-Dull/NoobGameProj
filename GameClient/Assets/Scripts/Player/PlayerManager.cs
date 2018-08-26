@@ -31,18 +31,18 @@ public static class PlayerManager
 		GameObject player = m_playerPool.Dequeue();
 		player.SetActive( true );
 
-		//SetHud
-		PlayerHud hud = player.GetComponent<PlayerHud>();
-		hud.nick = pck.nick;
-		hud.index = pck.playerIndex;
-		hud.SetActiveHud( true );
-
 		//SetPosition
 		Transform trans = player.GetComponent<Transform>();
 		trans.position = new Vector3( pck.transform.position.x, 0, pck.transform.position.y );
 
 		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
 		movement.SetTransform( pck.transform );
+
+		//SetHud
+		PlayerHud hud = player.GetComponent<PlayerHud>();
+		hud.nick = pck.nick;
+		hud.index = pck.playerIndex;
+		hud.SetActiveHud( true );
 
 		//AddPlayerList
 		m_playerList.Add( pck.playerIndex, player );

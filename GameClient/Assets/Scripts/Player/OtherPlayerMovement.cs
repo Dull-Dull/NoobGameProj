@@ -12,7 +12,6 @@ public class OtherPlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
 		Noob.PLAYER_STATE state = (Noob.PLAYER_STATE)anim.GetInteger( "State" );
 
 		if( state == Noob.PLAYER_STATE.RUN )
@@ -25,7 +24,7 @@ public class OtherPlayerMovement : MonoBehaviour {
 		{
 			stopTime += Time.deltaTime;
 			trans.position = Vector3.Lerp( m_stopOldPos, m_estimationPos, stopSmoothing * stopTime );
-		}		
+		}
 	}
 
 	public void SetTransform( Noob.PlayerTransform playerTransform )
@@ -38,7 +37,7 @@ public class OtherPlayerMovement : MonoBehaviour {
 		{
 			m_stopOldPos = trans.position;
 			stopTime = 0.0f;
-		}			
+		}
 	}
 
 	Animator anim = null;

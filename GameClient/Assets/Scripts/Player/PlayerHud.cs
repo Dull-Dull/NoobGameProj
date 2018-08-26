@@ -20,6 +20,7 @@ public class PlayerHud : MonoBehaviour {
 	public void SetActiveHud( bool active )
 	{
 		m_hud.SetActive( active );
+		Update();
 	}
 
 	public string nick
