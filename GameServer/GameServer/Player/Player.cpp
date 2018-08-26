@@ -45,13 +45,16 @@ void Player::OnRecv( ::Noob::PacketPtr pck )
 
 void Player::OnClose()
 {
-	SC_ExitPlayer exit;
-	exit.playerIndex = m_index;
-	for( auto player : *PlayerContainer::GetInstance() )
+	if( m_loginComplete )
 	{
-		if( player->m_handShakeComplete && player.Get() != this )
-			player->Send( exit );
-	}
+		SC_ExitPlayer exit;
+		exit.playerIndex = m_index;
+		for( auto player : *PlayerContainer::GetInstance() )
+		{
+			if( player->m_handShakeComplete && player.Get() != this )
+				player->Send( exit );
+		}
+	}	
 
 	m_session = nullptr;
 	SAFE_DELETE( m_ping );
