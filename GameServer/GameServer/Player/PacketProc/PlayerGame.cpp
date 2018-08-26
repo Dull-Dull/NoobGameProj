@@ -8,7 +8,8 @@
 REGISTER_PCK_PROC(N_Move)
 void Player::OnPacket( const N_MovePtr& pck )
 {
-	pck->playerIndex;
+	m_transform = pck->transform;
+	m_animation = pck->animation;
 
   	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
 
