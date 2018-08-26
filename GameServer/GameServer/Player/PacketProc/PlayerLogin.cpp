@@ -23,7 +23,7 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
-		if( player->m_loginComplete == false && player.Get() == this )
+		if( player->m_loginComplete == false || player.Get() == this )
 			continue;
 
 		SC_EnterPlayer enterPlayer;
