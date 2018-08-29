@@ -20,9 +20,6 @@ public static class PlayerManager
 				tempPlayer.SetActive( false );
 				tempPlayer.GetComponent<PlayerHud>().SetActiveHud( false );
 
-				var collider = tempPlayer.GetComponent<CapsuleCollider>();
-				collider.enabled = false;
-
 				m_playerPool.Enqueue( tempPlayer );
 			}
 		}

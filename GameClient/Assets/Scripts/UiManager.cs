@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameRule : MonoBehaviour {
+public class UiManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,14 +10,18 @@ public class GameRule : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void  FixedUpdate() {
+		GameObject button = GameObject.Find( "NickNameField" );
+		if( button != null &&
+			button.GetComponent<UnityEngine.UI.InputField>().isFocused &&
+			Input.GetKeyDown( KeyCode.Return ) )
+		{
+			OnLoginButtonClick();
+		}
 	}
 
 	public void OnLoginButtonClick()
 	{
-		Debug.Log( "Button Clicked!!" );
-
 		GameObject nick = GameObject.Find( "NickNameField/Text" );
 		var nickField = nick.GetComponent<UnityEngine.UI.Text>();
 		if( nickField.text == "" )
@@ -34,6 +38,4 @@ public class GameRule : MonoBehaviour {
 
 		session.Send( login );
 	}
-
-	public List<Vector2> m_spawnSpot = new List<Vector2>();
 }
