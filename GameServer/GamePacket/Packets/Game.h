@@ -35,3 +35,34 @@ inline StreamWriter& operator<<( StreamWriter& stream, N_Move& val )
 {
 	return stream<<val.playerIndex<<val.transform<<val.animation;
 }
+
+struct N_Chat : public ::Noob::Packet
+{
+	unsigned int playerIndex;
+	::std::wstring message;
+
+	N_Chat()
+	{
+		index = 102;
+	}
+
+	N_Chat( unsigned int _playerIndex, ::std::wstring _message )
+	{
+		index = 102;
+		playerIndex = _playerIndex;
+		message = _message;
+	}
+
+	::std::wstring GetName(){ return L"N_Chat"; }
+	static unsigned int GetIndex(){ return 102; }
+};
+
+inline StreamReader& operator>>( StreamReader& stream, N_Chat& val )
+{
+	return stream>>val.playerIndex>>val.message;
+}
+
+inline StreamWriter& operator<<( StreamWriter& stream, N_Chat& val )
+{
+	return stream<<val.playerIndex<<val.message;
+}

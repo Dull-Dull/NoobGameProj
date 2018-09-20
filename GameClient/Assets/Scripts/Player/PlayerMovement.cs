@@ -11,12 +11,19 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody>();
 
 		session = GameObject.Find( "Manager" ).GetComponent<ServerSession>();
+		chatCanvas = GameObject.Find( "ChatInputCanvas" ).GetComponent<Canvas>();
 	}
 
 	private void FixedUpdate()
 	{
-		float h = Input.GetAxisRaw( "Horizontal" );
-		float v = Input.GetAxisRaw( "Vertical" );
+		float h = 0.0f;
+		float v = 0.0f;
+
+		if( chatCanvas.enabled == false )
+		{
+			h = Input.GetAxisRaw( "Horizontal" );
+			v = Input.GetAxisRaw( "Vertical" );
+		}
 
 		Move( h, v );
 		Turning();
@@ -99,4 +106,6 @@ public class PlayerMovement : MonoBehaviour
 
 	private float sendMoveTimeGap = 0.0f;
 	private readonly float sendDelay = 0.1f;
+
+	private Canvas chatCanvas = null;
 }

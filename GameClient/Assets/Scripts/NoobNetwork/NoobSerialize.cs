@@ -145,7 +145,7 @@ namespace Noob
 				( BinaryReader reader, ref Object graph ) =>
 				{
 					int count = reader.ReadInt32();
-					byte[] bytes = reader.ReadBytes( ( count + 1 ) * sizeof( char ) );
+					byte[] bytes = reader.ReadBytes( ( count ) * sizeof( char ) );
 					graph = Encoding.Unicode.GetString( bytes );
 				} );
 			readFuncCon.Add( typeof( List<> ),

@@ -35,3 +35,15 @@ void Player::OnPacket( const N_MovePtr& pck )
 		player->Send( movePlayerPck );
 	}
 }
+
+REGISTER_PCK_PROC(N_Chat)
+void Player::OnPacket( const N_ChatPtr& pck )
+{
+	for( auto& player : *PlayerContainer::GetInstance() )
+	{
+		if( player->m_handShakeComplete == false )
+			continue;
+
+		player->Send( *pck );
+	}
+}

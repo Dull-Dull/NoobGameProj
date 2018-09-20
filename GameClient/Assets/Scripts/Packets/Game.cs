@@ -15,4 +15,14 @@ namespace Noob
 		public const uint index = 101;
 	}
 
+	[NoobSerializAble]
+	public class N_Chat : Packet
+	{
+		public uint playerIndex = 0;
+		public string message = "";
+
+		public override uint GetIndex(){ return index; }
+		public const uint index = 102;
+	}
+
 }

@@ -12,4 +12,9 @@
 		<Val type ="PlayerAnimation" name ="animation"/>
 	</Packet>
 
+	<Packet name ="N_Chat">
+		<Val type ="uint32" name ="playerIndex"/>
+		<Val type ="string" name ="message"/>
+	</Packet>
+
 </game>

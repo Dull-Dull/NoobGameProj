@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UiManager : MonoBehaviour {
+public class LoginProc : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

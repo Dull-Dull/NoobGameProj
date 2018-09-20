@@ -16,17 +16,18 @@ public class ServerSession : MonoBehaviour {
 		{
 			if( err == SocketError.Success )
 			{
-				Debug.Log( "Connect Success!!!" );
 				CS_Hello hello = new CS_Hello();
 				session.Send( hello );
 			}
 			else
-				Debug.Log( "Connect Fail!!!" );
+			{
+				//UnityEngine.SceneManagement.SceneManager.LoadScene( "DisconnectScene" );
+			}
 		};
 
 		session.m_OnDisConnect += () =>
 		{
-			Debug.Log( "Disconnected!!!" );
+			//UnityEngine.SceneManagement.SceneManager.LoadScene( "DisconnectScene" );
 		};
 
 		session.AsyncConnect( Ip, 15000 );
@@ -70,6 +71,10 @@ public class ServerSession : MonoBehaviour {
 		GameObject loginCanvasObj = GameObject.Find( "LoginCanvas" );
 		Canvas loginCanvas = loginCanvasObj.GetComponent<Canvas>();
 		loginCanvas.enabled = true;
+
+		GameObject nickFieldObj = GameObject.Find( "LoginCanvas/NickNameField" );
+		UnityEngine.UI.InputField nickField = nickFieldObj.GetComponent<UnityEngine.UI.InputField>();
+		nickField.Select();
 	}
 
 	[PacketProcRegistration( SC_Login.index )]
@@ -81,6 +86,9 @@ public class ServerSession : MonoBehaviour {
 
 		GameObject loginCanvasObj = GameObject.Find( "LoginCanvas" );
 		Destroy( loginCanvasObj );
+
+		ChatInputHud chatInputHud = GameObject.Find( "ChatInputCanvas/ChatInputField" ).GetComponent<ChatInputHud>();
+		chatInputHud.PlayerIndex = login.playerIndex;
 	}
 
 	[PacketProcRegistration( SC_Ping.index )]
@@ -116,5 +124,18 @@ public class ServerSession : MonoBehaviour {
 
 		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
 		movement.SetTransform( movePck.transform );
+	}
+
+	[PacketProcRegistration( N_Chat.index )]
+	public void N_ChatProc( Packet pck )
+	{
+		N_Chat chatPck = pck as N_Chat;
+		GameObject player = PlayerManager.FindPlayer( chatPck.playerIndex );
+
+		if( player == null )
+			return;
+
+		PlayerHud hud = player.GetComponent<PlayerHud>();
+		hud.InsertChatMessage( chatPck.message );
 	}
 }
