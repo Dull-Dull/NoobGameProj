@@ -10,6 +10,7 @@ public class ServerSession : MonoBehaviour {
 
 	void Awake()
 	{
+		
 		NoobSerializAbleAttribute.Init();
 
 		session.m_OnConnect += ( SocketError err ) =>
@@ -21,13 +22,13 @@ public class ServerSession : MonoBehaviour {
 			}
 			else
 			{
-				//UnityEngine.SceneManagement.SceneManager.LoadScene( "DisconnectScene" );
+				connectionError = true;
 			}
 		};
 
 		session.m_OnDisConnect += () =>
 		{
-			//UnityEngine.SceneManagement.SceneManager.LoadScene( "DisconnectScene" );
+			connectionError = true;
 		};
 
 		session.AsyncConnect( Ip, 15000 );
@@ -49,6 +50,12 @@ public class ServerSession : MonoBehaviour {
 				pckProcMng.runPckProc( pck );
 			}
 		}
+
+		if( connectionError )
+		{
+			Canvas connecErrorCanvas = GameObject.Find( "ConnectErrorCanvas" ).GetComponent<Canvas>();
+			connecErrorCanvas.enabled = true;
+		}
 	}
 
 	private void OnDestroy()
@@ -60,10 +67,11 @@ public class ServerSession : MonoBehaviour {
 	public void Send( Packet pck )
 	{
 		session.Send( pck );
-	}
+	}	
 
 	private TcpSession session = new TcpSession();
 	private PacketProcManager pckProcMng = null;
+	private bool connectionError = false;
 
 	[PacketProcRegistration( SC_Hello.index )]
 	public void SC_HelloProc( Packet pck )
