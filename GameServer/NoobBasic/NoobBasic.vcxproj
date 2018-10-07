@@ -82,6 +82,7 @@
     <ClInclude Include="LogAble.h" />
     <ClInclude Include="LogStream.h" />
     <ClInclude Include="LogThread.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="MiniDump.h" />
     <ClInclude Include="PreCompiled.h" />
     <ClInclude Include="Ptr.hpp" />
@@ -91,12 +92,14 @@
     <ClInclude Include="Singletone.hpp" />
     <ClInclude Include="TaskQueue.hpp" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FastSmtp.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="LogStream.cpp" />
     <ClCompile Include="LogThread.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MiniDump.cpp" />
     <ClCompile Include="PreCompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -104,6 +107,7 @@
     </ClCompile>
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RefCnt.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -38,6 +38,12 @@
     <ClInclude Include="Random.h">
       <Filter>Random</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiled.cpp" />
@@ -62,6 +68,12 @@
     <ClCompile Include="Random.cpp">
       <Filter>Random</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FastSmtp">
@@ -78,6 +90,9 @@
     </Filter>
     <Filter Include="Random">
       <UniqueIdentifier>{9e6b7cf8-8022-4a6b-ac3e-090c81b4ab08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{741798e8-f8e4-417c-8c9b-f31c36d55539}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
