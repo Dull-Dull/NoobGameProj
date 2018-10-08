@@ -23,6 +23,7 @@ namespace CodeGenerator.Generator
 			m_typeChangeFuncCon.Add( "uint64", typeInterface.GetUInt64 );
 			m_typeChangeFuncCon.Add( "float32", typeInterface.GetFloat32 );
 			m_typeChangeFuncCon.Add( "float64", typeInterface.GetFloat64 );
+			m_typeChangeFuncCon.Add( "Vector2D", typeInterface.GetVector2D );
 			m_typeChangeFuncCon.Add( "bool", typeInterface.GetBool );
 			m_typeChangeFuncCon.Add( "string", typeInterface.GetString );
 			m_typeChangeFuncCon.Add( "list", typeInterface.GetList );
@@ -95,6 +96,7 @@ namespace CodeGenerator.Generator
 
 		string GetFloat32();
 		string GetFloat64();
+		string GetVector2D();
 
 		string GetBool();
 

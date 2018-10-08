@@ -63,6 +63,11 @@ namespace CodeGenerator.Generator.Language
 			return "double";
 		}
 
+		public string GetVector2D()
+		{
+			return "UnityEngine.Vector2";
+		}
+
 		public string GetString()
 		{
 			return "string";

@@ -57,6 +57,11 @@ namespace CodeGenerator.Generator.Language
 		{
 			return "double";
 		}
+		
+		public string GetVector2D()
+		{
+			return "::Noob::Vector2D";
+		}
 
 		public string GetBool()
 		{

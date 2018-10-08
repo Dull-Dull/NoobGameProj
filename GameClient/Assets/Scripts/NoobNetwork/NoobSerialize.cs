@@ -63,6 +63,13 @@ namespace Noob
 					double val = (double)graph;
 					writer.Write( val );
 				} );
+			writeFuncCon.Add( typeof( UnityEngine.Vector2 ),
+				( BinaryWriter writer, Object graph ) =>
+				{
+					UnityEngine.Vector2 val = (UnityEngine.Vector2)graph;
+					writer.Write( val.x );
+					writer.Write( val.y );
+				} );
 			writeFuncCon.Add( typeof( bool ),
 				( BinaryWriter writer, Object graph ) =>
 				{
@@ -135,6 +142,11 @@ namespace Noob
 				( BinaryReader reader, ref Object graph ) =>
 				{
 					graph = reader.ReadDouble();
+				} );
+			readFuncCon.Add( typeof( UnityEngine.Vector2 ),
+				( BinaryReader reader, ref Object graph ) =>
+				{
+					graph = new UnityEngine.Vector2( reader.ReadSingle(), reader.ReadSingle() );
 				} );
 			readFuncCon.Add( typeof( bool ),
 				( BinaryReader reader, ref Object graph ) =>

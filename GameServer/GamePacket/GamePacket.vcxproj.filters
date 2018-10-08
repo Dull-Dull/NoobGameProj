@@ -14,9 +14,6 @@
     <ClInclude Include="Packets\Login.h">
       <Filter>Packets</Filter>
     </ClInclude>
-    <ClInclude Include="Datas\Math.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="Packets\Game.h">
       <Filter>Packets</Filter>
     </ClInclude>
@@ -30,9 +27,6 @@
   <ItemGroup>
     <Xml Include="Packets\Login.xml">
       <Filter>Packets</Filter>
-    </Xml>
-    <Xml Include="Datas\Math.xml">
-      <Filter>Data</Filter>
     </Xml>
     <Xml Include="Packets\Game.xml">
       <Filter>Packets</Filter>

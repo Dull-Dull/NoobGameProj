@@ -96,7 +96,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Datas\Math.h" />
     <ClInclude Include="Datas\Reflection.h" />
     <ClInclude Include="Packets\Game.h" />
     <ClInclude Include="Packets\Login.h" />
@@ -110,7 +109,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Datas\Math.xml" />
     <Xml Include="Datas\Reflection.xml" />
     <Xml Include="Packets\Game.xml" />
     <Xml Include="Packets\Login.xml" />
