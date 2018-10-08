@@ -13,3 +13,5 @@
 #include "Lock.h"
 #include "Singletone.hpp"
 #include "Random.h"
+#include "Vector.h"
+#include "Matrix.h"
