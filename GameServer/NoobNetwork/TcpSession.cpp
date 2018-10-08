@@ -141,9 +141,9 @@ void ITcpSession::OnRecvForIocp( bool success, unsigned int transferedLen )
 			Packet* pck = PacketFactory::CreatePacket( header, m_recvBuff.buf + sizeof( PacketHeader ) );
 			OnRecv( pck );
 		}
-		catch( StreamException& exception )
+		catch( CreatePckException& exception )
 		{
-			Log( LOG_TYPE::ERROR, L"StreamReadFail", exception.what() );
+			Log( LOG_TYPE::ERROR, L"CreatePacket Fail", exception.what() );
 
 			Close();
 			m_recvOverlapped.object = nullptr;

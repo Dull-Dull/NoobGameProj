@@ -14,7 +14,7 @@ Packet * PacketFactory::CreatePacket( PacketHeader * header, char * buff )
 	if( iter == pckFuncCon->end() )
 	{
 		Log( LOG_TYPE::ERROR, L"CreatePacketFail", header->index );
-		return nullptr;
+		throw CreatePckException(L"CreatePacketFail\t" + ::std::to_wstring( header->index ));
 	}
 
 	StreamBuf streamBuff(reinterpret_cast<byte*>( buff ), header->length - sizeof( PacketHeader ) );	

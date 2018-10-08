@@ -33,10 +33,10 @@ struct StreamBuf
 	size_t	m_bufSize;
 };
 
-class StreamException
+class CreatePckException
 {
 public:
-	StreamException( const ::std::wstring& msg ) : m_msg( msg ){}
+	CreatePckException( const ::std::wstring& msg ) : m_msg( msg ){}
 
 	const::std::wstring& what(){ return m_msg; }
 private:
@@ -57,7 +57,7 @@ struct StreamReader
 		static_assert( ::std::is_arithmetic<BasicType>::value, "Invalid Type" );
 
 		if( m_offSet + sizeof( BasicType ) > m_buffer.m_bufSize )
-			throw StreamException( ::std::wstring(L"operator>> BasicType") +
+			throw CreatePckException( ::std::wstring(L"operator>> BasicType") +
 				::std::wstring(L"\toffset = ") + ::std::to_wstring( m_offSet ) +
 				::std::wstring(L"\tdata size = ") + ::std::to_wstring( sizeof( BasicType ) ) +
 				::std::wstring(L"\tbuf size = ") + ::std::to_wstring( m_buffer.m_bufSize ) );
@@ -74,7 +74,7 @@ struct StreamReader
 		static_assert( ::std::is_arithmetic<BasicType>::value, "Invalid Type" );
 
 		if( m_offSet + sizeof( BasicType ) > m_buffer.m_bufSize )
-			throw StreamException( ::std::wstring(L"operator>> BasicType") +
+			throw CreatePckException( ::std::wstring(L"operator>> BasicType") +
 				::std::wstring(L"\toffset = ") + ::std::to_wstring( m_offSet ) +
 				::std::wstring(L"\tdata size = ") + ::std::to_wstring( sizeof( BasicType ) ) +
 				::std::wstring(L"\tbuf size = ") + ::std::to_wstring( m_buffer.m_bufSize ) );
@@ -156,7 +156,7 @@ struct StreamReader
 		*this >> strSize;
 
 		if( m_offSet + ( strSize + 1 ) * sizeof( wchar ) > m_buffer.m_bufSize )
-			throw StreamException( ::std::wstring(L"operator>> wstring") +
+			throw CreatePckException( ::std::wstring(L"operator>> wstring") +
 				::std::wstring(L"\toffset = ") + ::std::to_wstring( m_offSet ) +
 				::std::wstring(L"\tdata size = ") + ::std::to_wstring( ( strSize + 1 ) * sizeof( wchar ) ) +
 				::std::wstring(L"\tbuf size = ") + ::std::to_wstring( m_buffer.m_bufSize ) );
