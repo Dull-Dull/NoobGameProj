@@ -33,7 +33,7 @@ void __Log( LogStream& stream, const Type& val )
 template< typename Type, typename ... Args >
 void __Log( LogStream& stream, const Type& val, const Args&... args )
 {
-	stream << val;
+	stream << val << L"\t";
 	__Log( stream, args... );
 }
 

@@ -10,7 +10,7 @@ void LogStream::SetNowTime()
 	GetSystemTime( &sysTime );
 
 	wchar nowTime[32] = { 0, };
-	wsprintfW( nowTime, L"[%4d-%02d-%02d %02d:%02d:%02d.%03d]",
+	wsprintfW( nowTime, L"[%4d-%02d-%02d %02d:%02d:%02d.%03d]\t",
 		sysTime.wYear, sysTime.wMonth, sysTime.wDay,
 		sysTime.wHour, sysTime.wMinute, sysTime.wSecond, sysTime.wMilliseconds );
 
