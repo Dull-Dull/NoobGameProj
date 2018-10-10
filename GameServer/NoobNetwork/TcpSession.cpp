@@ -53,6 +53,7 @@ void ITcpSession::PostSend()
 		if( err != WSA_IO_PENDING )
 		{
 			Log( LOG_TYPE::ERROR, L"WSASendError", err );
+			Close();
 		}
 	}
 
@@ -146,13 +147,13 @@ void ITcpSession::OnRecvForIocp( bool success, unsigned int transferedLen )
 			Log( LOG_TYPE::ERROR, L"CreatePacket Fail", exception.what() );
 
 			Close();
-			m_recvOverlapped.object = nullptr;
 			{
 				LockGuard lock( m_sendLock );
 				if( false == m_nowSending )
 					m_sendOverlapped.object = nullptr;
 			}
 			OnClose();
+			m_recvOverlapped.object = nullptr;
 			return;
 		}
 		
