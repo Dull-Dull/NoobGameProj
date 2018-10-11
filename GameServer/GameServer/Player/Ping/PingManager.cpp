@@ -31,7 +31,7 @@ void PingManager::SendPing()
 	ping.tick = ::Noob::GetTick();
 	m_player->Send( ping );
 
-	m_pingAlarmIndex = AlarmManager::GetInstance()->RegisterAlarm( ::Noob::Duration(::Noob::Second * 7), [ this ](){
+	m_pingAlarmIndex = AlarmManager::GetInstance()->RegisterAlarm( ::Noob::Duration(::Noob::Second * 1), [ this ](){
 		if( m_bRecvedPing )
 		{
 			m_tryCnt = 0;
@@ -39,7 +39,7 @@ void PingManager::SendPing()
 		}
 		else
 		{
-			m_tryCnt += 1;
+			m_tryCnt += 5;
 			if( m_tryCnt >= g_maxTryCnt )
 			{
 				m_player->Close();
