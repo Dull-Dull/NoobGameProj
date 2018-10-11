@@ -173,6 +173,14 @@ void ITcpSession::PostRecv()
 		if( error != WSA_IO_PENDING )
 		{
 			Log( LOG_TYPE::ERROR, L"WSARecvError", error );
+			Close();
+			{
+				LockGuard lock( m_sendLock );
+				if( false == m_nowSending )
+					m_sendOverlapped.object = nullptr;
+			}
+			OnClose();
+			m_recvOverlapped.object = nullptr;
 		}
 	}
 }
