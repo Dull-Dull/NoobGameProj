@@ -92,17 +92,20 @@ namespace Noob
 				m_sendPckQueue.Enqueue( pck );
 
 				if( m_sendPckQueue.Count == 1 )
-				{
 					pending = postSend();
-				}
+				else
+					return;
 			}
 
 			if( pending == false )
-				onSendComplete( null, null );
+				onSendComplete( null, m_sendArgs );
 		}
 
 		private bool postSend()
 		{
+			if( m_sock == null )
+				return true;
+
 			Packet pck = m_sendPckQueue.Peek();
 			
 			m_sendMem.SetLength( HEADER_SIZE );
@@ -123,19 +126,27 @@ namespace Noob
 			if( e.BytesTransferred <= 0 || e.SocketError != SocketError.Success )
 				return;
 
-			lock( m_sendLock )
+			while( true )
 			{
-				try
+				bool pending = false;
+				lock( m_sendLock )
 				{
-					m_sendPckQueue.Dequeue();
-
-					if( m_sendPckQueue.Count != 0 )
+					try
 					{
-						postSend();
+						m_sendPckQueue.Dequeue();
+
+						if( m_sendPckQueue.Count != 0 )
+							pending = postSend();
+						else
+							return;
 					}
+					catch( InvalidOperationException ) { return; }
 				}
-				catch( InvalidOperationException ) { }
+
+				if( pending )
+					return;
 			}
+
 		}
 
 		public Packet TryPopPacket()
