@@ -27,7 +27,7 @@ public class ChatInputHud : MonoBehaviour {
 			{
 				if( m_chatInputField.text.Length != 0 )
 				{
-					Noob.N_Chat chat = new Noob.N_Chat();
+					N_Chat chat = new N_Chat();
 					chat.playerIndex = m_playerIndex;
 					chat.message = m_chatInputField.text;
 					m_chatInputField.text = "";

@@ -18,9 +18,7 @@ namespace CodeGenerator.Generator.Language
 		public void WriteBegin()
 		{
 			m_result = "using System;\n" +
-						"using System.Collections.Generic;\n\n" +
-						"namespace Noob\n" +
-						"{\n";
+						"using System.Collections.Generic;\n\n";
 		}
 
 		public void WriteInclude( string fileName )
@@ -30,55 +28,54 @@ namespace CodeGenerator.Generator.Language
 		public void WriteData( string name, string extends, List<Value> valueList )
 		{
 			m_result += "\n";
-			m_result += "\t[NoobSerializAble]\n";
-			m_result += "\tpublic class " + name + ( extends != null ? " : " + extends : "" ) + "\n\t{\n";
+			m_result += "[Noob.NoobSerializAble]\n";
+			m_result += "public class " + name + ( extends != null ? " : " + extends : "" ) + "\n{\n";
 			
 			foreach( var value in valueList )
 			{
-				m_result += "\t\tpublic " + m_typeParser.ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
+				m_result += "\tpublic " + m_typeParser.ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
-			m_result += "\t}\n";
+			m_result += "}\n";
 		}
 
 		public void WritePacket( string name, string extends, int index, List<Value> valueList )
 		{
 			m_result += "\n";
-			m_result += "\t[NoobSerializAble]\n";
-			m_result += "\tpublic class " + name + ( extends != null ? " : " + extends : " : " + "Packet" ) + "\n\t{\n";
+			m_result += "[Noob.NoobSerializAble]\n";
+			m_result += "public class " + name + ( extends != null ? " : " + extends : " : " + "Noob.Packet" ) + "\n{\n";
 
 			foreach( var value in valueList )
 			{
-				m_result += "\t\tpublic " + m_typeParser.ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
+				m_result += "\tpublic " + m_typeParser.ChangeType( value.type ) + " " + value.name + " = " + GetDefaultVal( value.type ) + ";\n";
 			}
 
 			if( valueList.Count != 0 )
 				m_result += "\n";
 
-			m_result += "\t\tpublic override uint GetIndex(){ return index; }\n";
-			m_result += $"\t\tpublic const uint index = {index};\n";
+			m_result += "\tpublic override uint GetIndex(){ return index; }\n";
+			m_result += $"\tpublic const uint index = {index};\n";
 
-			m_result += "\t}\n";
+			m_result += "}\n";
 		}
 
 		public void WriteEnum( string name, List<Value> valueList )
 		{
 			m_result += "\n";
-			m_result += "\t[NoobSerializAble]\n";
-			m_result += "\tpublic enum " + name + " : uint\n";
-			m_result += "\t{\n";
+			m_result += "[Noob.NoobSerializAble]\n";
+			m_result += "public enum " + name + " : uint\n";
+			m_result += "{\n";
 
 			foreach( var value in valueList )
 			{
-				m_result += "\t\t" + value.name + ",\n";
+				m_result += "\t" + value.name + ",\n";
 			}
 
-			m_result += "\t\t__MAX__\n\t}\n";
+			m_result += "\t__MAX__\n}\n";
 		}
 
 		public void WriteEnd()
 		{
-			m_result += "\n}";
 		}
 
 		public void GenerateFile( string path )

@@ -33,7 +33,7 @@ public class LoginProc : MonoBehaviour {
 		GameObject manager = GameObject.Find( "Manager" );
 		var session = manager.GetComponent<ServerSession>();
 
-		Noob.CS_Login login = new Noob.CS_Login();
+		CS_Login login = new CS_Login();
 		login.nick = nickField.text;
 
 		session.Send( login );

@@ -57,11 +57,11 @@ public class PlayerMovement : MonoBehaviour
 	private void Animating( float h, float v )
 	{
 		stateChanged = false;
-		Noob.PLAYER_STATE preState = state;
+		PLAYER_STATE preState = state;
 		if( h != 0f || v != 0f )
-			state = Noob.PLAYER_STATE.RUN;
+			state = PLAYER_STATE.RUN;
 		else
-			state = Noob.PLAYER_STATE.STOP;
+			state = PLAYER_STATE.STOP;
 		anim.SetInteger( "State", (int)state );
 		if( preState != state )
 			stateChanged = true;
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Reflection()
 	{
-		if( state == Noob.PLAYER_STATE.RUN )
+		if( state == PLAYER_STATE.RUN )
 			sendMoveTimeGap += Time.deltaTime;
 
 		PlayerHud hud = GetComponent<PlayerHud>();
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			sendMoveTimeGap = 0.0f;
 
-			Noob.N_Move movePck = new Noob.N_Move();
+			N_Move movePck = new N_Move();
 			movePck.playerIndex = hud.index;
 			movePck.transform.position.x = transform.position.x;
 			movePck.transform.position.y = transform.position.z;
@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 		if( ( rolling != preRolling ) ||
 			( rolling && ( sendRollTimeGap >= sendDelay ) ) )
 		{
-			Noob.N_Roll rollPck = new Noob.N_Roll();
+			N_Roll rollPck = new N_Roll();
 			rollPck.playerIndex = hud.index;
 			rollPck.degree = transform.rotation.eulerAngles.y;						
 			session.Send( rollPck );
@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
 	private Rigidbody playerRigidbody;
 	private int floorMask;
 	private float camRayLength = 100f;
-	private Noob.PLAYER_STATE state = Noob.PLAYER_STATE.RUN;
+	private PLAYER_STATE state = PLAYER_STATE.RUN;
 	private bool stateChanged = false;
 
 	private float preDegree = 0.0f;
