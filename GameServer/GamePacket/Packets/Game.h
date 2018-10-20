@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Datas/Math.h"
 #include "../Datas/Reflection.h"
 
 struct N_Move : public ::Noob::Packet
@@ -36,6 +35,37 @@ inline StreamWriter& operator<<( StreamWriter& stream, N_Move& val )
 	return stream<<val.playerIndex<<val.transform<<val.animation;
 }
 
+struct N_Roll : public ::Noob::Packet
+{
+	unsigned int playerIndex;
+	float degree;
+
+	N_Roll()
+	{
+		index = 102;
+	}
+
+	N_Roll( unsigned int _playerIndex, float _degree )
+	{
+		index = 102;
+		playerIndex = _playerIndex;
+		degree = _degree;
+	}
+
+	::std::wstring GetName(){ return L"N_Roll"; }
+	static unsigned int GetIndex(){ return 102; }
+};
+
+inline StreamReader& operator>>( StreamReader& stream, N_Roll& val )
+{
+	return stream>>val.playerIndex>>val.degree;
+}
+
+inline StreamWriter& operator<<( StreamWriter& stream, N_Roll& val )
+{
+	return stream<<val.playerIndex<<val.degree;
+}
+
 struct N_Chat : public ::Noob::Packet
 {
 	unsigned int playerIndex;
@@ -43,18 +73,18 @@ struct N_Chat : public ::Noob::Packet
 
 	N_Chat()
 	{
-		index = 102;
+		index = 103;
 	}
 
 	N_Chat( unsigned int _playerIndex, ::std::wstring _message )
 	{
-		index = 102;
+		index = 103;
 		playerIndex = _playerIndex;
 		message = _message;
 	}
 
 	::std::wstring GetName(){ return L"N_Chat"; }
-	static unsigned int GetIndex(){ return 102; }
+	static unsigned int GetIndex(){ return 103; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, N_Chat& val )

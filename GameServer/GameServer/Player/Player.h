@@ -34,7 +34,7 @@ private:
 	unsigned int m_index;
 	::std::wstring m_nick;
 	PlayerTransform m_transform;
-	PlayerDirection m_direction;
+	float m_degree;
 	PlayerAnimation m_animation;
 };
 

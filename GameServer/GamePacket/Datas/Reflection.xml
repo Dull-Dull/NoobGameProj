@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <reflection>
-
-	<Include>../Datas/Math</Include>
-
+	
 	<Enum name ="PLAYER_STATE">
 		<Val name ="STOP"/>
 		<Val name ="RUN"/>
@@ -13,11 +11,6 @@
 	<Data name ="PlayerTransform">
 		<Val type ="Vector2D" name ="position"/>
 		<Val type ="Vector2D" name ="velocity"/>
-	</Data>
-
-	<Data name ="PlayerDirection">
-		<Val type ="Vector2D" name ="direction"/>
-		<Val type ="float" name="angularVelocity"/>
 	</Data>
 
 	<Data name ="PlayerAnimation">

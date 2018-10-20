@@ -134,6 +134,18 @@ public class ServerSession : MonoBehaviour {
 		movement.SetTransform( movePck.transform );
 	}
 
+	[PacketProcRegistration( N_Roll.index )]
+	public void N_RollProc( Packet pck )
+	{
+		N_Roll rollPck = pck as N_Roll;
+		GameObject player = PlayerManager.FindPlayer( rollPck.playerIndex );
+		if( player == null )
+			return;
+
+		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
+		movement.SetDirection( rollPck.degree );
+	}
+
 	[PacketProcRegistration( N_Chat.index )]
 	public void N_ChatProc( Packet pck )
 	{

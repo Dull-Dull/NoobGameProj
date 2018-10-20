@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Datas/Math.h"
 
 enum class PLAYER_STATE : unsigned int
 {
@@ -21,8 +20,8 @@ inline StreamWriter& operator<<( StreamWriter& stream, PLAYER_STATE& val )
 
 struct PlayerTransform
 {
-	Vector2D position;
-	Vector2D velocity;
+	::Noob::Vector2D position;
+	::Noob::Vector2D velocity;
 
 	static ::std::wstring GetName(){ return L"PlayerTransform"; }
 };
@@ -35,24 +34,6 @@ inline StreamReader& operator>>( StreamReader& stream, PlayerTransform& val )
 inline StreamWriter& operator<<( StreamWriter& stream, PlayerTransform& val )
 {
 	return stream<<val.position<<val.velocity;
-}
-
-struct PlayerDirection
-{
-	Vector2D direction;
-	float angularVelocity;
-
-	static ::std::wstring GetName(){ return L"PlayerDirection"; }
-};
-
-inline StreamReader& operator>>( StreamReader& stream, PlayerDirection& val )
-{
-	return stream>>val.direction>>val.angularVelocity;
-}
-
-inline StreamWriter& operator<<( StreamWriter& stream, PlayerDirection& val )
-{
-	return stream<<val.direction<<val.angularVelocity;
 }
 
 struct PlayerAnimation

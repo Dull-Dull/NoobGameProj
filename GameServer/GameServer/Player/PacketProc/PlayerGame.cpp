@@ -23,16 +23,25 @@ void Player::OnPacket( const N_MovePtr& pck )
 
 		N_Move movePlayerPck;
 		movePlayerPck.playerIndex = pck->playerIndex;
-		movePlayerPck.transform.position.x = 
-			pck->transform.position.x + ( pck->transform.velocity.x * interpolationTime );
-
-		movePlayerPck.transform.position.y = 
-			pck->transform.position.y + ( pck->transform.velocity.y * interpolationTime );
-
+		movePlayerPck.transform.position = pck->transform.position + ( pck->transform.velocity * interpolationTime );
 		movePlayerPck.transform.velocity = pck->transform.velocity;
 		movePlayerPck.animation = pck->animation;
 
 		player->Send( movePlayerPck );
+	}
+}
+
+REGISTER_PCK_PROC(N_Roll)
+void Player::OnPacket( const N_RollPtr& pck )
+{
+	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
+
+	for( auto& player : *PlayerContainer::GetInstance() )
+	{
+		if( player->m_handShakeComplete == false || player.Get() == this )
+			continue;
+
+		player->Send( *pck );
 	}
 }
 

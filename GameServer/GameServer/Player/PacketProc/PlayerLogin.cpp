@@ -8,7 +8,7 @@
 
 unsigned int g_playerIndexCnt = 0;
 
-::std::vector<Vector2D> g_spawnSpotList = {	{ 0.0f, 0.0f }, { -3.5f, 19.0f }, { -15.0f, 6.5f },
+::std::vector<::Noob::Vector2D> g_spawnSpotList = {	{ 0.0f, 0.0f }, { -3.5f, 19.0f }, { -15.0f, 6.5f },
 { 16.0f, 11.0f }, { -25.0f, 0.0f }, { 23.0f, -5.0f },
 { 23.0f, -5.0f }, { 13.0f, -13.0f }, { 0.0f, -25.0f } };
 
@@ -30,8 +30,8 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 		enterPlayer.playerIndex = player->m_index;
 		enterPlayer.nick = player->m_nick;
 		enterPlayer.transform = player->m_transform;
-		enterPlayer.direction = player->m_direction;
 		enterPlayer.animation = player->m_animation;
+		enterPlayer.degree = player->m_degree;
 
 		Send( enterPlayer );
 	}
@@ -45,9 +45,8 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	m_loginComplete = true;
 	m_transform.position = g_spawnSpotList[ ::Noob::Random::GetInteger( 0, 8 ) ];
 	m_transform.velocity = { 0.0f ,0.0f };
-	m_direction.direction = { 0.0f, 1.0f };
-	m_direction.angularVelocity = 0.0f;
 	m_animation.state = PLAYER_STATE::STOP;
+	m_degree = 0.0f;
 
 	SC_Login loginAck;
 	loginAck.playerIndex = m_index;
@@ -59,8 +58,8 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 	enterPlayer.playerIndex = m_index;
 	enterPlayer.nick = m_nick;
 	enterPlayer.transform = m_transform;
-	enterPlayer.direction = m_direction;
 	enterPlayer.animation = m_animation;
+	enterPlayer.degree = m_degree;
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{

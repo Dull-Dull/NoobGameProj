@@ -72,27 +72,41 @@ public class PlayerMovement : MonoBehaviour
 		if( state == Noob.PLAYER_STATE.RUN )
 			sendMoveTimeGap += Time.deltaTime;
 
+		PlayerHud hud = GetComponent<PlayerHud>();
+
 		if( ( sendMoveTimeGap >= sendDelay )
 			|| stateChanged )
 		{
 			sendMoveTimeGap = 0.0f;
 
-			PlayerHud hud = GetComponent<PlayerHud>();
-			Transform trans = GetComponent<Transform>();
-
 			Noob.N_Move movePck = new Noob.N_Move();
 			movePck.playerIndex = hud.index;
-			movePck.transform.position.x = trans.position.x;
-			movePck.transform.position.y = trans.position.z;
+			movePck.transform.position.x = transform.position.x;
+			movePck.transform.position.y = transform.position.z;
 			movePck.transform.velocity.x = movement.x;
 			movePck.transform.velocity.y = movement.z;
 
 			movePck.animation.state = state;
 
 			session.Send( movePck );
+		}
 
-			return;
-		}			
+		bool rolling = Mathf.Abs( transform.rotation.eulerAngles.y - preDegree ) > 3.0f;
+		sendRollTimeGap += Time.deltaTime;
+
+		if( ( rolling != preRolling ) ||
+			( rolling && ( sendRollTimeGap >= sendDelay ) ) )
+		{
+			Noob.N_Roll rollPck = new Noob.N_Roll();
+			rollPck.playerIndex = hud.index;
+			rollPck.degree = transform.rotation.eulerAngles.y;						
+			session.Send( rollPck );
+			
+			preDegree = transform.rotation.eulerAngles.y;
+			sendRollTimeGap = 0.0f;
+		}
+
+		preRolling = rolling;
 	}
 
 	private ServerSession session;
@@ -102,9 +116,13 @@ public class PlayerMovement : MonoBehaviour
 	private int floorMask;
 	private float camRayLength = 100f;
 	private Noob.PLAYER_STATE state = Noob.PLAYER_STATE.RUN;
-	bool stateChanged = false;
+	private bool stateChanged = false;
 
-	private float sendMoveTimeGap = 0.0f;
+	private float preDegree = 0.0f;
+	private bool preRolling = false;
+
+	private float sendMoveTimeGap = 0.1f;
+	private float sendRollTimeGap = 0.1f;
 	private readonly float sendDelay = 0.1f;
 
 	private Canvas chatCanvas = null;

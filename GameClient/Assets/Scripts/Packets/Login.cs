@@ -31,7 +31,7 @@ namespace Noob
 	public class SC_Login : Packet
 	{
 		public uint playerIndex = 0;
-		public Vector2D spawnPosition = new Vector2D();
+		public UnityEngine.Vector2 spawnPosition = new UnityEngine.Vector2();
 
 		public override uint GetIndex(){ return index; }
 		public const uint index = 4;
@@ -43,8 +43,8 @@ namespace Noob
 		public uint playerIndex = 0;
 		public string nick = "";
 		public PlayerTransform transform = new PlayerTransform();
-		public PlayerDirection direction = new PlayerDirection();
 		public PlayerAnimation animation = new PlayerAnimation();
+		public float degree = 0.0f;
 
 		public override uint GetIndex(){ return index; }
 		public const uint index = 5;

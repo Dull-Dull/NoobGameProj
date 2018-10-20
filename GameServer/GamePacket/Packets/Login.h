@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Datas/Math.h"
 #include "../Datas/Reflection.h"
 
 struct SC_Hello : public ::Noob::Packet
@@ -77,14 +76,14 @@ inline StreamWriter& operator<<( StreamWriter& stream, CS_Login& val )
 struct SC_Login : public ::Noob::Packet
 {
 	unsigned int playerIndex;
-	Vector2D spawnPosition;
+	::Noob::Vector2D spawnPosition;
 
 	SC_Login()
 	{
 		index = 4;
 	}
 
-	SC_Login( unsigned int _playerIndex, Vector2D _spawnPosition )
+	SC_Login( unsigned int _playerIndex, ::Noob::Vector2D _spawnPosition )
 	{
 		index = 4;
 		playerIndex = _playerIndex;
@@ -110,22 +109,22 @@ struct SC_EnterPlayer : public ::Noob::Packet
 	unsigned int playerIndex;
 	::std::wstring nick;
 	PlayerTransform transform;
-	PlayerDirection direction;
 	PlayerAnimation animation;
+	float degree;
 
 	SC_EnterPlayer()
 	{
 		index = 5;
 	}
 
-	SC_EnterPlayer( unsigned int _playerIndex, ::std::wstring _nick, PlayerTransform _transform, PlayerDirection _direction, PlayerAnimation _animation )
+	SC_EnterPlayer( unsigned int _playerIndex, ::std::wstring _nick, PlayerTransform _transform, PlayerAnimation _animation, float _degree )
 	{
 		index = 5;
 		playerIndex = _playerIndex;
 		nick = _nick;
 		transform = _transform;
-		direction = _direction;
 		animation = _animation;
+		degree = _degree;
 	}
 
 	::std::wstring GetName(){ return L"SC_EnterPlayer"; }
@@ -134,12 +133,12 @@ struct SC_EnterPlayer : public ::Noob::Packet
 
 inline StreamReader& operator>>( StreamReader& stream, SC_EnterPlayer& val )
 {
-	return stream>>val.playerIndex>>val.nick>>val.transform>>val.direction>>val.animation;
+	return stream>>val.playerIndex>>val.nick>>val.transform>>val.animation>>val.degree;
 }
 
 inline StreamWriter& operator<<( StreamWriter& stream, SC_EnterPlayer& val )
 {
-	return stream<<val.playerIndex<<val.nick<<val.transform<<val.direction<<val.animation;
+	return stream<<val.playerIndex<<val.nick<<val.transform<<val.animation<<val.degree;
 }
 
 struct SC_ExitPlayer : public ::Noob::Packet

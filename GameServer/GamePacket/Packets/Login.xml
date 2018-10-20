@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <login>
-	<Include>../Datas/Math</Include>
 	<Include>../Datas/Reflection</Include>
 	<PckCodeRange min="1" max="100"/>
 
@@ -21,8 +20,8 @@
 		<Val type ="uint32" name ="playerIndex"/>
 		<Val type ="string" name ="nick"/>
 		<Val type ="PlayerTransform" name ="transform"/>
-		<Val type ="PlayerDirection" name ="direction"/>
 		<Val type ="PlayerAnimation" name ="animation"/>
+		<Val type ="float32" name ="degree"/>
 	</Packet>
 
 	<Packet name ="SC_ExitPlayer">
