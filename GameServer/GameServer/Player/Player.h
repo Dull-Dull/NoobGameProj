@@ -25,6 +25,8 @@ public:
 	template< class PacketType >
 	void OnPacket( const ::Noob::Ptr<PacketType>& pck ){ static_assert( false, "Invalid Pck" ); }
 
+	unsigned int GetIndex(){ return m_index; }
+
 private:
 	ClientSession* m_session;
 	PingManager* m_ping;

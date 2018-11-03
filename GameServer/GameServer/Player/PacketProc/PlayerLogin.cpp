@@ -6,8 +6,6 @@
 #include <GamePacket/Packets/Login.h>
 #include <GamePacket/Packets/Game.h>
 
-unsigned int g_playerIndexCnt = 0;
-
 ::std::vector<::Noob::Vector2D> g_spawnSpotList = {	{ 0.0f, 0.0f }, { -3.5f, 19.0f }, { -15.0f, 6.5f },
 { 16.0f, 11.0f }, { -25.0f, 0.0f }, { 23.0f, -5.0f },
 { 23.0f, -5.0f }, { 13.0f, -13.0f }, { 0.0f, -25.0f } };
@@ -41,7 +39,6 @@ REGISTER_PCK_PROC( CS_Login )
 void Player::OnPacket( const CS_LoginPtr& loginReq )
 {
 	m_nick = loginReq->nick;
-	m_index = g_playerIndexCnt++;
 	m_loginComplete = true;
 	m_transform.position = g_spawnSpotList[ ::Noob::Random::GetInteger( 0, 8 ) ];
 	m_transform.velocity = { 0.0f ,0.0f };

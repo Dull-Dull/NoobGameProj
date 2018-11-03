@@ -8,7 +8,7 @@
 #include "../Alarm/AlarmManager.h"
 #include <GamePacket/Packets/Login.h>
 
-
+unsigned int g_playerIndexCnt = 0;
 
 Player::Player( ClientSession* session )
 {
@@ -16,6 +16,7 @@ Player::Player( ClientSession* session )
 	m_ping = nullptr;
 	m_handShakeComplete = false;
 	m_loginComplete = false;
+	m_index = g_playerIndexCnt++;
 }
 
 Player::~Player()
