@@ -39,12 +39,14 @@ void PingManager::SendPing()
 		}
 		else
 		{
-			m_tryCnt += 5;
+			m_tryCnt += 1;
+#ifndef _DEBUG
 			if( m_tryCnt >= g_maxTryCnt )
 			{
 				m_player->Close();
 				return;
 			}
+#endif
 		}
 		SendPing();
 	} );
