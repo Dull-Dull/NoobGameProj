@@ -34,6 +34,7 @@ public static class PlayerManager
 
 		OtherPlayerMovement movement = player.GetComponent<OtherPlayerMovement>();
 		movement.SetTransform( pck.transform );
+		movement.SetDirection( pck.degree );
 
 		//SetHud
 		PlayerHud hud = player.GetComponent<PlayerHud>();

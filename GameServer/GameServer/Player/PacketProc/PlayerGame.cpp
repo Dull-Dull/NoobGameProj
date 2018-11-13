@@ -35,6 +35,7 @@ REGISTER_PCK_PROC(N_Roll)
 void Player::OnPacket( const N_RollPtr& pck )
 {
 	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
+	m_degree = pck->degree;
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
