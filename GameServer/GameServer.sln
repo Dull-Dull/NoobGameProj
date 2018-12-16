@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator", "CodeGenera
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GamePacket", "GamePacket\GamePacket.vcxproj", "{7B5B9A2F-BD2C-43B5-B5B1-74E5044EF314}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bot", "Bot\Bot.vcxproj", "{5F96967C-C1A1-4633-A1A2-B0C515F82B48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -45,6 +47,10 @@ Global
 		{7B5B9A2F-BD2C-43B5-B5B1-74E5044EF314}.Debug|x64.Build.0 = Debug|x64
 		{7B5B9A2F-BD2C-43B5-B5B1-74E5044EF314}.Release|x64.ActiveCfg = Release|x64
 		{7B5B9A2F-BD2C-43B5-B5B1-74E5044EF314}.Release|x64.Build.0 = Release|x64
+		{5F96967C-C1A1-4633-A1A2-B0C515F82B48}.Debug|x64.ActiveCfg = Debug|x64
+		{5F96967C-C1A1-4633-A1A2-B0C515F82B48}.Debug|x64.Build.0 = Debug|x64
+		{5F96967C-C1A1-4633-A1A2-B0C515F82B48}.Release|x64.ActiveCfg = Release|x64
+		{5F96967C-C1A1-4633-A1A2-B0C515F82B48}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
