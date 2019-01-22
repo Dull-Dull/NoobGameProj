@@ -24,10 +24,10 @@ struct EndPoint
 		m_ip = ntohl( addr.s_addr );
 	}
 
-	::std::wstring GetIpStr()
+	::std::wstring GetIpStr() const
 	{
 		in_addr addr;
-		addr.s_addr = htonl( m_ip );
+		addr.s_addr = m_ip;
 
 		const size_t buffSize = 17;
 		wchar buff[buffSize] = {};
