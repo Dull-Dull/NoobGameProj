@@ -20,7 +20,7 @@ Packet * PacketFactory::CreatePacket( PacketHeader * header, char * buff )
 	return (*iter).second( &streamBuff);
 }
 
-void PacketFactory::RegistPacket( unsigned int index, ::std::function<Packet*(StreamBuf*)> func )
+void PacketFactory::RegisterPacket( unsigned int index, ::std::function<Packet*(StreamBuf*)> func )
 {
 	if( pckFuncCon == nullptr )
 		pckFuncCon = new PacketFuncContainer;

@@ -11,7 +11,7 @@ class PacketFactory
 {
 public:
 	static Packet* CreatePacket( PacketHeader* header, char* buff );
-	static void RegistPacket( unsigned int index, ::std::function<Packet*(StreamBuf*)> func );
+	static void RegisterPacket( unsigned int index, ::std::function<Packet*(StreamBuf*)> func );
 
 private:
 	static PacketFuncContainer* pckFuncCon;

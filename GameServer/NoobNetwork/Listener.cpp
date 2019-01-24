@@ -33,7 +33,7 @@ Listener::Listener( Iocp* iocp, const EndPoint& endPoint ) : m_endPoint( endPoin
 		exit( 1 );
 	}
 
-	iocp->Regist( m_sock );
+	iocp->Register( m_sock );
 }
 
 Listener::~Listener()

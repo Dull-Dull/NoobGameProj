@@ -8,7 +8,7 @@ namespace Noob
 
 PacketRegister::PacketRegister( unsigned int index, ::std::function<Packet*( StreamBuf* )> func )
 {
-	PacketFactory::RegistPacket( index, func );
+	PacketFactory::RegisterPacket( index, func );
 }
 
 }

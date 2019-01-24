@@ -83,13 +83,13 @@ void Iocp::Wait()
 								&threadHandleContainer[0], true, INFINITE );
 }
 
-void Iocp::Regist( SOCKET sock )
+void Iocp::Register( SOCKET sock )
 {
 	if( iocpHandle != NULL )
 	{
 		if( CreateIoCompletionPort( (HANDLE)sock, iocpHandle, NULL, 0 ) == NULL )
 		{
-			Log( LOG_TYPE::ERROR, L"CreateIoCompletionPort(Regist) Error", GetLastError() );
+			Log( LOG_TYPE::ERROR, L"CreateIoCompletionPort(Register) Error", GetLastError() );
 		}
 	}
 }

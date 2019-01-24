@@ -37,7 +37,7 @@ void ITcpSession::Init( Iocp* iocp, SOCKET sock, const EndPoint& local, const En
 	m_sock = sock;
 	m_localEndPoint = local;
 	m_remoteEndPoint = remote;
-	m_iocp->Regist( m_sock );
+	m_iocp->Register( m_sock );
 }
 
 void ITcpSession::PostSend()

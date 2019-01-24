@@ -12,7 +12,7 @@ public:
 	~PacketRegister(){}
 };
 
-#define REGIST_PACKET( PacketType )\
+#define REGISTER_PACKET( PacketType )\
 ::Noob::PacketRegister __##PacketType##Register__( PacketType::GetIndex(), \
 []( StreamBuf* buff )-> ::Noob::Packet* { PacketType* pck = new PacketType;\
 							StreamReader stream( *buff );\

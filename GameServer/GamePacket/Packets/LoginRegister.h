@@ -3,11 +3,11 @@
 #include<NoobNetwork\PacketRegister.h>
 #include"Login.h"
 
-REGIST_PACKET( SC_Hello );
-REGIST_PACKET( CS_Hello );
-REGIST_PACKET( CS_Login );
-REGIST_PACKET( SC_Login );
-REGIST_PACKET( SC_EnterPlayer );
-REGIST_PACKET( SC_ExitPlayer );
-REGIST_PACKET( SC_Ping );
-REGIST_PACKET( CS_Ping );
+REGISTER_PACKET( SC_Hello );
+REGISTER_PACKET( CS_Hello );
+REGISTER_PACKET( CS_Login );
+REGISTER_PACKET( SC_Login );
+REGISTER_PACKET( SC_EnterPlayer );
+REGISTER_PACKET( SC_ExitPlayer );
+REGISTER_PACKET( SC_Ping );
+REGISTER_PACKET( CS_Ping );

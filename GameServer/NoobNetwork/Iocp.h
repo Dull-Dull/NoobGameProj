@@ -13,7 +13,7 @@ public:
 	void		Stop();
 	void		Wait();
 
-	void		Regist( SOCKET sock );
+	void		Register( SOCKET sock );
 
 private:
 	static DWORD WINAPI ThreadFunc( void* arg );
