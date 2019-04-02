@@ -162,7 +162,7 @@ namespace CodeGenerator.Generator.Language
 			m_result += ";\n}\n";
 			//operator << 생성 끝
 
-			m_registeredPcks += "REGIST_PACKET( " + name + " );\n";
+			m_registeredPcks += "REGISTER_PACKET( " + name + " );\n";
 		}
 
 		public void WriteEnum( string name, List<Value> valueList )
