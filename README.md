@@ -6,12 +6,12 @@
 
 ## GameClient
 게임 클라이언 소스 입니다.<br>
-[자세히](GameClient\GameClient.md)
+[자세히](.\GameClient\GameClient.md)
 
 
 ## GameServer
 게임 서버 소스 입니다.<br>
-[자세히](GameServe\GameServer.md)
+[자세히](.\GameServe\GameServer.md)
 
 ## ClientBinary.zip
 게임 클라이언트 입니다.<br>
