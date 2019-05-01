@@ -9,3 +9,13 @@
 - 중간 언어로 xml을 사용합니다.
 - 기본 자료형, 구조체, enum 각종 컨테이너를 패킷에 담을 수 있습니다.
 - C# 과 C++ 을 지원합니다.
+
+## AWS
+- 현재 Noob Game Server 는 aws에서 동작하고 있습니다.
+- 읽기 권한만 가지고 있는 iam 계정으로 구성 환경을 직접 확인하실 수 있습니다.
+    - url : https://293419094569.signin.aws.amazon.com/console
+    - Id : GuestForInterview
+    - Pass : kW=vx2sOiJqE
+    - 권한(읽기) : vpc, ec2, s3
+
+![aws_architecture](aws_arc.png)
