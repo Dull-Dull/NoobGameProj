@@ -28,6 +28,8 @@ public:
 	template< class PacketType >
 	void OnPacket( const ::Noob::Ptr<PacketType>& pck ){ static_assert( false, "Invalid Pck" ); }
 
+	Dispatcher* GetDispatcher(){ return m_dispatcher; }
+
 private:
 	void __onAccept();
 	void __onClose();

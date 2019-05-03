@@ -5,19 +5,19 @@
 namespace Noob
 {
 
-class IPlayer;
+DECL_CLASS( IUser );
 
 class TcpSession : public ::Noob::ITcpSession
 {
 public:
-	TcpSession();
+	TcpSession( const IUserPtr& user );
 	virtual ~TcpSession();
 
-	void OnAccept( ::Noob::IAcceptor* acceptor ) override;
+	void OnAccept() override;
 	void OnRecv( ::Noob::PacketPtr pck ) override;
-	void OnClose();
+	void OnClose() override;
 
-	void SetPlayer( IPlayer* player );
+	::Noob::PacketPtr PopPck();
 
 private:
 	struct imple;
