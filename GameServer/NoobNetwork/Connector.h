@@ -13,7 +13,7 @@ class IConnector : public RefCnt
 {
 public:
 	IConnector()
-		: m_sock( NULL ), m_addr{}, m_overlapped( Overlapped::IO_TYPE::CONNECT, this )
+		: m_sock( NULL ), m_addr{}, m_overlapped( Overlapped::IO_TYPE::CONNECT, nullptr )
 	{}
 	virtual ~IConnector(){}
 
