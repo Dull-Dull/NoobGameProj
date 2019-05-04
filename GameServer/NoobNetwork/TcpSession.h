@@ -58,7 +58,7 @@ public:
 	const EndPoint& GetRemote(){ return m_remoteEndPoint; }
 
 protected:
-	virtual void OnAccept( IAcceptor* acceptor ){}
+	virtual void OnAccept(){}
 	virtual void OnConnect(){}
 	virtual void OnRecv( PacketPtr pck ) = 0;
 	virtual void OnSend(){}

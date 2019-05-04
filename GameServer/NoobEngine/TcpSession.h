@@ -10,10 +10,10 @@ DECL_CLASS( IUser );
 class TcpSession : public ::Noob::ITcpSession
 {
 public:
-	TcpSession( const IUserPtr& user );
+	TcpSession();
 	virtual ~TcpSession();
 
-	void OnAccept() override;
+	void OnAccept( const IUserPtr& user );
 	void OnRecv( ::Noob::PacketPtr pck ) override;
 	void OnClose() override;
 

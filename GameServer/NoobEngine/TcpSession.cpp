@@ -14,17 +14,17 @@ struct TcpSession::imple
 	::concurrency::concurrent_queue<::Noob::PacketPtr> m_pckQueue;
 };
 
-TcpSession::TcpSession( const IUserPtr& user ) : pImple( new imple )
+TcpSession::TcpSession() : pImple( new imple )
 {
-	pImple->m_user = user;
 }
 
 TcpSession::~TcpSession()
 {
 }
 
-void TcpSession::OnAccept()
+void TcpSession::OnAccept( const IUserPtr& user )
 {
+	pImple->m_user = user;
 	pImple->m_user->GetDispatcher()->Push( ::Noob::E_TASK_TYPE::ACCEPT, pImple->m_user.Get() );
 }
 

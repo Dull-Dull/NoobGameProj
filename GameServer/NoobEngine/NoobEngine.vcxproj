@@ -30,6 +30,8 @@
     <ClInclude Include="PreCompiled.h" />
     <ClInclude Include="TcpSession.h" />
     <ClInclude Include="Dispatcher.h" />
+    <ClInclude Include="TcpSessionAcceptor.h" />
+    <ClInclude Include="TcpSessionConnector.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NoobBasic\NoobBasic.vcxproj">

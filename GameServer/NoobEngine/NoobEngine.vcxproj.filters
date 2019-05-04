@@ -41,6 +41,12 @@
     <ClInclude Include="PingManager.h">
       <Filter>Ping</Filter>
     </ClInclude>
+    <ClInclude Include="TcpSessionAcceptor.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSessionConnector.h">
+      <Filter>Session</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Alarm">
