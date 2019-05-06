@@ -1,8 +1,6 @@
 # GameClient
 ![snap](../snap.png)
 - 개발 환경 : Unity Engine(2017.1.1f1)
-<br>
-<br>
 - Unity Engine 튜토리얼의 Survival Shooter 프로젝트를 온라인으로 일부 구현했습니다.
 - C#으로 네트워크 모듈을 직접 만들었습니다.
 - 패킷 송수신은 별도의 스레드에서 진행 되고<br>
