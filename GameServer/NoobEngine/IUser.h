@@ -3,6 +3,8 @@
 namespace Noob
 {
 
+DECL_CLASS( TcpSession );
+DECL_STRUCT( Packet );
 class PingManager;
 class TcpSession;
 class Dispatcher;
@@ -10,7 +12,7 @@ class Dispatcher;
 class IUser : public ::Noob::RefCnt
 {
 public:
-	IUser( ::Noob::TcpSession* session, Dispatcher* dispatcher );
+	IUser( ::Noob::TcpSessionPtr session, Dispatcher* dispatcher );
 	virtual ~IUser();
 
 	virtual void OnAccept() = 0;
@@ -20,7 +22,8 @@ public:
 	template< typename PacketType >
 	void Send( PacketType& pck )
 	{
-		m_session->Send( pck );
+		if( m_session != nullptr )
+			m_session->Send( pck );
 	}
 
 	void Close();
@@ -29,16 +32,19 @@ public:
 	void OnPacket( const ::Noob::Ptr<PacketType>& pck ){ static_assert( false, "Invalid Pck" ); }
 
 	Dispatcher* GetDispatcher(){ return m_dispatcher; }
+	TcpSession* GetSession(){ return m_session.Get(); }
 
 private:
 	void __onAccept();
 	void __onClose();
 
-	TcpSession* m_session;
+	TcpSessionPtr m_session;
 	PingManager* m_ping;
 	Dispatcher* m_dispatcher;
 
 	friend Dispatcher;
 };
+
+using IUserPtr = ::Noob::Ptr<IUser>;
 
 }

@@ -7,7 +7,7 @@ namespace Noob
 
 class Dispatcher;
 
-#pragma todo 디스패쳐가 싱글스레드일 경우에만 정상 작동가능, 수정해야함.
+// 디스패쳐가 싱글스레드일 경우에만 정상 작동가능, 수정해야함.
 class AlarmManager
 {
 public:

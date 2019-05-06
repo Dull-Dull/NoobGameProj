@@ -1,9 +1,9 @@
 #pragma once
 
+#include "AlarmManager.h"
+
 namespace Noob
 {
-
-class AlarmManager;
 
 enum class E_TASK_TYPE
 {
@@ -21,11 +21,13 @@ public:
 	~Dispatcher();
 	
 	void Push( E_TASK_TYPE workType, const ::Noob::RefCntPtr& obj );
-	AlarmManager& GetAlarmManager();
+	AlarmManager& GetAlarmManager(){ return m_alarmManager; }
 
 private:
 	struct imple;
 	::std::unique_ptr<imple> pImple;
+
+	AlarmManager m_alarmManager;
 };
 
 }

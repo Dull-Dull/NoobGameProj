@@ -1,7 +1,8 @@
 #include "PreCompiled.h"
 
 #include "Dispatcher.h"
-#include "AlarmManager.h"
+#include "IUser.h"
+#include "TcpSession.h"
 #include <NoobBasic/TaskQueue.hpp>
 
 namespace Noob
@@ -20,10 +21,41 @@ struct Dispatcher::imple
 	::std::vector<HANDLE> m_threadHandleCon;
 	::std::vector<DWORD> m_threadIdCon;
 
-	AlarmManager manager;
-
 	static DWORD WINAPI threadFunc( void* arg );
+
+	void accept( IUserPtr& user );
+	void connect( IUserPtr& user );
+	void recv( IUserPtr& user );
+	void close( IUserPtr& user );
+	void tick();
 };
+
+void Dispatcher::imple::accept( IUserPtr& user )
+{
+	user->__onAccept();
+	user->OnAccept();
+}
+
+void Dispatcher::imple::connect( IUserPtr& user )
+{
+}
+
+void Dispatcher::imple::recv( IUserPtr& user )
+{
+	auto pck = user->GetSession()->PopPck();
+	user->OnRecv( pck );
+}
+
+void Dispatcher::imple::close( IUserPtr& user )
+{
+	user->__onClose();
+	user->OnClose();
+}
+
+void Dispatcher::imple::tick()
+{
+
+}
 
 DWORD WINAPI Dispatcher::imple::threadFunc( void* arg )
 {
@@ -41,19 +73,19 @@ DWORD WINAPI Dispatcher::imple::threadFunc( void* arg )
 		switch( task->m_type )
 		{
 		case E_TASK_TYPE::ACCEPT:
-
+			pImple->accept( ::Noob::PtrCast< IUser >( task->m_obj ) );
 			break;
 		case E_TASK_TYPE::CONNECT:
-
+			pImple->connect( ::Noob::PtrCast< IUser >( task->m_obj ) );
 			break;
 		case E_TASK_TYPE::RECV:
-
+			pImple->recv( ::Noob::PtrCast< IUser >( task->m_obj ) );
 			break;
 		case E_TASK_TYPE::CLOSE:
-
+			pImple->close( ::Noob::PtrCast< IUser >( task->m_obj ) );
 			break;
 		case E_TASK_TYPE::TICK:
-
+			pImple->tick();
 			break;
 		}
 	}
@@ -61,7 +93,7 @@ DWORD WINAPI Dispatcher::imple::threadFunc( void* arg )
 	return 0;
 }
 
-Dispatcher::Dispatcher( unsigned int threadCnt ) : pImple( ::std::make_unique<imple>() )
+Dispatcher::Dispatcher( unsigned int threadCnt ) : pImple( new Dispatcher::imple() ), m_alarmManager( this )
 {
 	for( unsigned int i = 0; i < threadCnt; ++i )
 	{
@@ -92,11 +124,6 @@ void Dispatcher::Push( E_TASK_TYPE workType, const ::Noob::RefCntPtr& obj )
 	task->m_obj = obj;
 
 	pImple->m_taskQueue.Push( task );
-}
-
-AlarmManager& Dispatcher::GetAlarmManager()
-{
-	return pImple->manager;
 }
 
 }

@@ -8,12 +8,13 @@
 namespace Noob
 {
 
-IUser::IUser( ::Noob::TcpSession* session, Dispatcher* dispatcher )
+IUser::IUser( ::Noob::TcpSessionPtr session, Dispatcher* dispatcher )
 	: m_session( session ), m_dispatcher( dispatcher ), m_ping( nullptr ){}
 
 IUser::~IUser()
 {
-
+	m_session->Close();
+	m_session = nullptr;
 }
 
 void IUser::Close()

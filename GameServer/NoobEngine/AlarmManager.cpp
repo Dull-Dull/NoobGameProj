@@ -6,7 +6,6 @@
 namespace Noob
 {
 
-
 const static ::Noob::Tick g_tickUnit = ::Noob::Second / 2;
 
 class TickGenerator : public Singletone< TickGenerator >
@@ -33,7 +32,7 @@ TickGenerator::TickGenerator()
 
 	if( m_tickThreadHandle == NULL )
 	{
-		::Noob::Log( ::Noob::LOG_TYPE::ERROR, "genTickThread Error", ::GetLastError() );
+		::Noob::Log( ::Noob::LOG_TYPE::ERROR, L"genTickThread Error", ::GetLastError() );
 		assert( false );
 	}
 }

@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="AlarmManager.h" />
     <ClInclude Include="AlarmTask.h" />
+    <ClInclude Include="DispatcherSelector.h" />
     <ClInclude Include="IUser.h" />
     <ClInclude Include="PingManager.h" />
     <ClInclude Include="PreCompiled.h" />

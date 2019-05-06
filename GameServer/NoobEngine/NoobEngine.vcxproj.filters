@@ -47,6 +47,9 @@
     <ClInclude Include="TcpSessionConnector.h">
       <Filter>Session</Filter>
     </ClInclude>
+    <ClInclude Include="DispatcherSelector.h">
+      <Filter>Dispatcher</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Alarm">
