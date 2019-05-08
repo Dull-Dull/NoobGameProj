@@ -1,12 +1,13 @@
 #pragma once
 
+#include "TcpSession.h"
+
 namespace Noob
 {
 
 DECL_CLASS( TcpSession );
 DECL_STRUCT( Packet );
 class PingManager;
-class TcpSession;
 class Dispatcher;
 
 class IUser : public ::Noob::RefCnt
@@ -22,7 +23,7 @@ public:
 	template< typename PacketType >
 	void Send( PacketType& pck )
 	{
-		if( m_session != nullptr )
+		if( m_session.Get() != nullptr )
 			m_session->Send( pck );
 	}
 

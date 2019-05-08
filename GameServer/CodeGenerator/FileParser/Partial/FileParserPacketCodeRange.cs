@@ -19,7 +19,14 @@ namespace CodeGenerator.FileParser
 
 			m_usingPck = true;
 			m_minPckIndex = int.Parse( GetAttrValue( node, "min" ) );
+			if( m_minPckIndex < 2 )
+				m_minPckIndex = 2;
+
 			m_maxPckIndex = int.Parse( GetAttrValue( node, "max" ) );
+
+			if( m_maxPckIndex < m_minPckIndex )
+				throw new Exception.InvalidPckCodeRangeException( m_minPckIndex, m_maxPckIndex );
+
 			m_nowPckIndex = m_minPckIndex;
 		}
 	}

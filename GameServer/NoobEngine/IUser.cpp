@@ -22,4 +22,14 @@ void IUser::Close()
 	m_session->Close();
 }
 
+void IUser::__onAccept()
+{
+	m_ping = new PingManager( this );
+}
+
+void IUser::__onClose()
+{
+	SAFE_DELETE( m_ping );
+}
+
 }

@@ -26,7 +26,6 @@ private:
 TickGenerator::TickGenerator()
 {
 	m_dispatcherCnt = 0;
-	m_tickThreadHandle = NULL;
 	m_tickThreadId = 0;
 	m_tickThreadHandle = CreateThread( NULL, 0, genTickThread, this, 0, & m_tickThreadId );
 
