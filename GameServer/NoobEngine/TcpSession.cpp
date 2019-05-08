@@ -22,10 +22,16 @@ TcpSession::~TcpSession()
 {
 }
 
-void TcpSession::OnAccept( const IUserPtr& user )
+void TcpSession::OnAccept( IUser* user )
 {
 	pImple->m_user = user;
 	pImple->m_user->GetDispatcher()->Push( ::Noob::E_TASK_TYPE::ACCEPT, pImple->m_user.Get() );
+}
+
+void TcpSession::OnConnect( IUser* user )
+{
+	pImple->m_user = user;
+	pImple->m_user->GetDispatcher()->Push( ::Noob::E_TASK_TYPE::CONNECT, pImple->m_user.Get() );
 }
 
 void TcpSession::OnRecv( ::Noob::PacketPtr pck )

@@ -13,7 +13,8 @@ public:
 	TcpSession();
 	virtual ~TcpSession();
 
-	void OnAccept( const IUserPtr& user );
+	void OnAccept( IUser* user );
+	void OnConnect( IUser* user );
 	void OnRecv( ::Noob::PacketPtr pck ) override;
 	void OnClose() override;
 
