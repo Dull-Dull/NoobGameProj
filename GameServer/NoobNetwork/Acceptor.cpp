@@ -63,7 +63,7 @@ void IAcceptor::getAddrInfo( EndPoint& local, EndPoint& remote )
 
 void IAcceptor::onAcceptSession( ITcpSession* session )
 {
-	session->OnAccept( this );
+	session->OnAccept();
 	session->PostRecv();
 }
 
