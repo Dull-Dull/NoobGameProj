@@ -20,6 +20,9 @@
     <ClCompile Include="PingManager.cpp">
       <Filter>Ping</Filter>
     </ClCompile>
+    <ClCompile Include="DispatcherSelector.cpp">
+      <Filter>Dispatcher</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompiled.h" />

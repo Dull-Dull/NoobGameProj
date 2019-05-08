@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="AlarmManager.cpp" />
     <ClCompile Include="AlarmTask.cpp" />
+    <ClCompile Include="DispatcherSelector.cpp" />
     <ClCompile Include="IUser.cpp" />
     <ClCompile Include="PingManager.cpp" />
     <ClCompile Include="PreCompiled.cpp">
