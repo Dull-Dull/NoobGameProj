@@ -53,6 +53,12 @@
     <ClInclude Include="DispatcherSelector.h">
       <Filter>Dispatcher</Filter>
     </ClInclude>
+    <ClInclude Include="PacketDispatcher.h">
+      <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPacket.h">
+      <Filter>Ping</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Alarm">

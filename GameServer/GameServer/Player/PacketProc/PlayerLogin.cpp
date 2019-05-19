@@ -1,23 +1,23 @@
 #include "PreCompiled.h"
 #include "../Player.h"
+
 #include "../PlayerContainer.h"
-#include "../Ping/PingManager.h"
-#include "../../PacketDispatcher/PacketDispatcher.h"
+#include <NoobEngine/PacketDispatcher.h>
 #include <GamePacket/Packets/Login.h>
 #include <GamePacket/Packets/Game.h>
+
+#define PLAYER_PCK_PROC( PACKET ) REGISTER_PCK_PROC( Player, PACKET )
 
 ::std::vector<::Noob::Vector2D> g_spawnSpotList = {	{ 0.0f, 0.0f }, { -3.5f, 19.0f }, { -15.0f, 6.5f },
 { 16.0f, 11.0f }, { -25.0f, 0.0f }, { 23.0f, -5.0f },
 { 23.0f, -5.0f }, { 13.0f, -13.0f }, { 0.0f, -25.0f } };
 
-REGISTER_PCK_PROC( CS_Hello )
+PLAYER_PCK_PROC( CS_Hello )
 void Player::OnPacket( const CS_HelloPtr& pck )
 {
 	SC_Hello hello;
 	Send( hello );
 	m_handShakeComplete = true;
-
-	m_ping->SendPing();
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
@@ -35,7 +35,7 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 	}
 }
 
-REGISTER_PCK_PROC( CS_Login )
+PLAYER_PCK_PROC( CS_Login )
 void Player::OnPacket( const CS_LoginPtr& loginReq )
 {
 	m_nick = loginReq->nick;
@@ -63,10 +63,4 @@ void Player::OnPacket( const CS_LoginPtr& loginReq )
 		if( player->m_handShakeComplete && player.Get() != this )
 			player->Send( enterPlayer );
 	}
-}
-
-REGISTER_PCK_PROC( CS_Ping )
-void Player::OnPacket( const CS_PingPtr& pck )
-{
-	m_ping->RecvPing( pck->tick );
 }

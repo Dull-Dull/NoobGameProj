@@ -94,34 +94,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Alarm\AlarmManager.cpp" />
-    <ClCompile Include="Alarm\AlarmTask.cpp" />
-    <ClCompile Include="GameDispatcher\GameDispatcher.cpp" />
     <ClCompile Include="GameServerMain.cpp" />
-    <ClCompile Include="PacketDispatcher\PacketDispatcher.cpp" />
     <ClCompile Include="Player\PacketProc\PlayerGame.cpp" />
     <ClCompile Include="Player\PacketProc\PlayerLogin.cpp" />
-    <ClCompile Include="Player\Ping\PingManager.cpp" />
     <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Player\PlayerAcceptManager.cpp" />
     <ClCompile Include="Player\PlayerContainer.cpp" />
     <ClCompile Include="PreCompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Session\ClientAcceptor.cpp" />
-    <ClCompile Include="Session\ClientSession.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Alarm\AlarmManager.h" />
-    <ClInclude Include="Alarm\AlarmTask.h" />
-    <ClInclude Include="GameDispatcher\GameDispatcher.h" />
-    <ClInclude Include="PacketDispatcher\PacketDispatcher.h" />
-    <ClInclude Include="Player\Ping\PingManager.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Player\PlayerAcceptManager.h" />
     <ClInclude Include="Player\PlayerContainer.h" />
     <ClInclude Include="PreCompiled.h" />
-    <ClInclude Include="Session\ClientAcceptor.h" />
-    <ClInclude Include="Session\ClientSession.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,21 +2,25 @@
 
 #include "TcpSession.h"
 
+
+DECL_STRUCT( Packet );
+DECL_STRUCT( CS_Ping );
+
 namespace Noob
 {
 
 DECL_CLASS( TcpSession );
-DECL_STRUCT( Packet );
 class PingManager;
 class Dispatcher;
 
 class IUser : public ::Noob::RefCnt
 {
 public:
-	IUser( ::Noob::TcpSessionPtr session, Dispatcher* dispatcher );
+	IUser( ::Noob::TcpSessionPtr session, ::Noob::Dispatcher* dispatcher );
 	virtual ~IUser();
 
-	virtual void OnAccept() = 0;
+	virtual void OnAccept() {};
+	virtual void OnConnect() {};
 	virtual void OnRecv( ::Noob::PacketPtr pck ) = 0;
 	virtual void OnClose() = 0;
 
@@ -32,13 +36,14 @@ public:
 	template< class PacketType >
 	void OnPacket( const ::Noob::Ptr<PacketType>& pck ){ static_assert( false, "Invalid Pck" ); }
 
+	template<>
+	void IUser::OnPacket( const CS_PingPtr& pck );
+
 	Dispatcher* GetDispatcher(){ return m_dispatcher; }
 	TcpSession* GetSession(){ return m_session.Get(); }
+	::Noob::Tick GetPing();
 
 private:
-	void __onAccept();
-	void __onClose();
-
 	TcpSessionPtr m_session;
 	PingManager* m_ping;
 	Dispatcher* m_dispatcher;

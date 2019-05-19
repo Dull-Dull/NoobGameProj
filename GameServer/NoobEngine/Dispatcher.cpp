@@ -3,6 +3,7 @@
 #include "Dispatcher.h"
 #include "IUser.h"
 #include "TcpSession.h"
+#include "PingManager.h"
 #include <NoobBasic/TaskQueue.hpp>
 
 namespace Noob
@@ -32,12 +33,13 @@ struct Dispatcher::imple
 
 void Dispatcher::imple::accept( IUserPtr& user )
 {
-	user->__onAccept();
+	user->m_ping = new PingManager( user.Get() );
 	user->OnAccept();
 }
 
 void Dispatcher::imple::connect( IUserPtr& user )
 {
+	user->OnConnect();
 }
 
 void Dispatcher::imple::recv( IUserPtr& user )
@@ -48,7 +50,7 @@ void Dispatcher::imple::recv( IUserPtr& user )
 
 void Dispatcher::imple::close( IUserPtr& user )
 {
-	user->__onClose();
+	SAFE_DELETE(user->m_ping);
 	user->OnClose();
 }
 
@@ -95,6 +97,8 @@ DWORD WINAPI Dispatcher::imple::threadFunc( void* arg )
 
 Dispatcher::Dispatcher( unsigned int threadCnt ) : pImple( new Dispatcher::imple() ), m_alarmManager( this )
 {
+	assert(threadCnt != 0);
+
 	for( unsigned int i = 0; i < threadCnt; ++i )
 	{
 		HANDLE threadHandle = NULL;
@@ -124,6 +128,11 @@ void Dispatcher::Push( E_TASK_TYPE workType, const ::Noob::RefCntPtr& obj )
 	task->m_obj = obj;
 
 	pImple->m_taskQueue.Push( task );
+}
+
+unsigned int Dispatcher::GetThreadCnt()
+{
+	return static_cast<unsigned int>( pImple->m_threadHandleCon.size() );
 }
 
 }

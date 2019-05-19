@@ -11,7 +11,7 @@ class SingleThreadDispatcher : public Singletone< SingleThreadDispatcher >
 public:
 	SingleThreadDispatcher();
 	~SingleThreadDispatcher();
-	Dispatcher* Get(){ m_dispatcher; }
+	Dispatcher* Get(){ return m_dispatcher; }
 private:
 	Dispatcher* m_dispatcher;
 };

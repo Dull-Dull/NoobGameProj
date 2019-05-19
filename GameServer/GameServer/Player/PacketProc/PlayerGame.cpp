@@ -1,24 +1,26 @@
 #include "PreCompiled.h"
 #include "../Player.h"
 #include "../PlayerContainer.h"
-#include "../Ping/PingManager.h"
-#include "../../PacketDispatcher/PacketDispatcher.h"
+#include <NoobEngine/PacketDispatcher.h>
+
 #include <GamePacket/Packets/Game.h>
 
-REGISTER_PCK_PROC(N_Move)
+#define PLAYER_PCK_PROC( PACKET ) REGISTER_PCK_PROC( Player, PACKET )
+
+PLAYER_PCK_PROC( N_Move )
 void Player::OnPacket( const N_MovePtr& pck )
 {
 	m_transform = pck->transform;
 	m_animation = pck->animation;
 
-  	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
+  	float senderPing = ::Noob::TickToFloat( GetPing() );
 
 	for( auto& player : *PlayerContainer::GetInstance() )
 	{
 		if( player->m_handShakeComplete == false || player.Get() == this )
 			continue;
 
-		float recverPing = ::Noob::TickToFloat( player->m_ping->GetPing() );
+		float recverPing = ::Noob::TickToFloat( player->GetPing() );
 		float interpolationTime = senderPing + recverPing;
 
 		N_Move movePlayerPck;
@@ -31,10 +33,10 @@ void Player::OnPacket( const N_MovePtr& pck )
 	}
 }
 
-REGISTER_PCK_PROC(N_Roll)
+PLAYER_PCK_PROC(N_Roll)
 void Player::OnPacket( const N_RollPtr& pck )
 {
-	float senderPing = ::Noob::TickToFloat( m_ping->GetPing() );
+	float senderPing = ::Noob::TickToFloat( GetPing() );
 	m_degree = pck->degree;
 
 	for( auto& player : *PlayerContainer::GetInstance() )
@@ -46,7 +48,7 @@ void Player::OnPacket( const N_RollPtr& pck )
 	}
 }
 
-REGISTER_PCK_PROC(N_Chat)
+PLAYER_PCK_PROC(N_Chat)
 void Player::OnPacket( const N_ChatPtr& pck )
 {
 	for( auto& player : *PlayerContainer::GetInstance() )

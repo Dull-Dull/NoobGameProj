@@ -4,6 +4,7 @@
 #include "IUser.h"
 #include "Dispatcher.h"
 #include "AlarmManager.h"
+#include "PingPacket.h"
 
 namespace Noob
 {

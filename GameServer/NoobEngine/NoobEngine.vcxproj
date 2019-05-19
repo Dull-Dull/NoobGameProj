@@ -28,7 +28,9 @@
     <ClInclude Include="AlarmTask.h" />
     <ClInclude Include="DispatcherSelector.h" />
     <ClInclude Include="IUser.h" />
+    <ClInclude Include="PacketDispatcher.h" />
     <ClInclude Include="PingManager.h" />
+    <ClInclude Include="PingPacket.h" />
     <ClInclude Include="PreCompiled.h" />
     <ClInclude Include="TcpSession.h" />
     <ClInclude Include="Dispatcher.h" />

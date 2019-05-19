@@ -1,8 +1,6 @@
 #include "PreCompiled.h"
 
-#include "Session/ClientSession.h"
-#include "Session/ClientAcceptor.h"
-#include "GameDispatcher/GameDispatcher.h"
+#include "Player/PlayerAcceptManager.h"
 #include <GamePacket/PcksRegistration.h>
 
 int main()
@@ -14,7 +12,7 @@ int main()
 	
 	iocp->Start();
 
-	ClientAcceptorManager acceptorManager( iocp.Get(), 15000 );
+	PlayerAcceptManager acceptorManager( iocp.Get(), 15000 );
 	
 	iocp->Wait();
 
