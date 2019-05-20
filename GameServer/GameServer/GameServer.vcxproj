@@ -89,6 +89,9 @@
     <ProjectReference Include="..\NoobBasic\NoobBasic.vcxproj">
       <Project>{20517bfd-6a78-41fe-b3ad-cdd574d6ef46}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\NoobEngine\NoobEngine.vcxproj">
+      <Project>{90a22a37-7297-4767-bf24-5e0de0fd24f5}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\NoobNetwork\NoobNetwork.vcxproj">
       <Project>{c512aeb2-80ca-4ee3-898a-409ff7a935cb}</Project>
     </ProjectReference>

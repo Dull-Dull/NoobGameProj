@@ -18,8 +18,7 @@ IUser::~IUser()
 	m_session = nullptr;
 }
 
-template<>
-void IUser::OnPacket( const CS_PingPtr& pck )
+void IUser::OnPingPacket( const CS_PingPtr& pck )
 {
 	m_ping->RecvPing( pck->tick );
 }

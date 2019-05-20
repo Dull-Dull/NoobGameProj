@@ -59,3 +59,6 @@ inline StreamWriter& operator<<( StreamWriter& stream, CS_Ping& val )
 {
 	return stream << val.tick;
 }
+
+DECL_STRUCT( SC_Ping );
+DECL_STRUCT( CS_Ping );

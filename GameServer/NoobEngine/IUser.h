@@ -1,10 +1,7 @@
 #pragma once
 
 #include "TcpSession.h"
-
-
-DECL_STRUCT( Packet );
-DECL_STRUCT( CS_Ping );
+#include "PingPacket.h"
 
 namespace Noob
 {
@@ -24,6 +21,8 @@ public:
 	virtual void OnRecv( ::Noob::PacketPtr pck ) = 0;
 	virtual void OnClose() = 0;
 
+	void OnPingPacket( const CS_PingPtr& pck );
+
 	template< typename PacketType >
 	void Send( PacketType& pck )
 	{
@@ -32,12 +31,6 @@ public:
 	}
 
 	void Close();
-
-	template< class PacketType >
-	void OnPacket( const ::Noob::Ptr<PacketType>& pck ){ static_assert( false, "Invalid Pck" ); }
-
-	template<>
-	void IUser::OnPacket( const CS_PingPtr& pck );
 
 	Dispatcher* GetDispatcher(){ return m_dispatcher; }
 	TcpSession* GetSession(){ return m_session.Get(); }

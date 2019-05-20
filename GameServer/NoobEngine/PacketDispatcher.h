@@ -42,7 +42,7 @@ public:
 		{
 			PacketDispatcher< UserType >::m_pckProcCon = new PacketDispatcher< UserType >::Container();
 			PacketDispatcher< UserType >::m_pckProcCon->emplace( CS_Ping::GetIndex(),
-				reinterpret_cast< typename PacketDispatcher< UserType >::Func >( &::Noob::IUser::OnPacket<CS_Ping> ) );
+				reinterpret_cast< typename PacketDispatcher< UserType >::Func >( &::Noob::IUser::OnPingPacket ) );
 		}			
 
 		if( PacketDispatcher< UserType >::m_pckProcCon->find( pckIndex ) != PacketDispatcher< UserType >::m_pckProcCon->end() )
