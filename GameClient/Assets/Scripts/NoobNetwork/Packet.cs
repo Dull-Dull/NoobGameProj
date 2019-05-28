@@ -86,4 +86,22 @@ namespace Noob
 
 		private Dictionary<uint, Action<Noob.Packet>> m_pckProcCon = new Dictionary<uint, Action<Noob.Packet>>();
 	}
+
+	[Noob.NoobSerializAble]
+	public class SC_Ping : Noob.Packet
+	{
+		public long tick = 0;
+
+		public override uint GetIndex() { return index; }
+		public const uint index = 0;
+	}
+
+	[Noob.NoobSerializAble]
+	public class CS_Ping : Noob.Packet
+	{
+		public long tick = 0;
+
+		public override uint GetIndex() { return index; }
+		public const uint index = 1;
+	}
 }

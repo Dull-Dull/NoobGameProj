@@ -14,8 +14,11 @@ IUser::IUser( ::Noob::TcpSessionPtr session, ::Noob::Dispatcher* dispatcher )
 
 IUser::~IUser()
 {
-	m_session->Close();
-	m_session = nullptr;
+	if( m_session.Get() != nullptr )
+	{
+		m_session->Close();
+		m_session = nullptr;
+	}	
 }
 
 void IUser::OnPingPacket( const CS_PingPtr& pck )
@@ -25,7 +28,10 @@ void IUser::OnPingPacket( const CS_PingPtr& pck )
 
 void IUser::Close()
 {
-	m_session->Close();
+	if( m_session.Get() != nullptr )
+	{
+		m_session->Close();
+	}
 }
 
 ::Noob::Tick IUser::GetPing()

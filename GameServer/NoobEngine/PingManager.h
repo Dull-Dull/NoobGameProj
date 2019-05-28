@@ -11,9 +11,9 @@ public:
 	PingManager( IUser* user );
 	~PingManager();
 
-	void SendPing();
 	void RecvPing( ::Noob::Tick tick );
 	::Noob::Tick GetPing() const{ return m_ping; }
+
 private:
 	IUser* m_user;
 	int64_t m_pingAlarmIndex;
@@ -21,6 +21,8 @@ private:
 	bool m_bRecvedPing;
 
 	::Noob::Tick m_ping;
+
+	void sendPing();
 };
 
 }

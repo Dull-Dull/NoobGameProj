@@ -6,6 +6,8 @@
 #include "AlarmManager.h"
 #include "PingPacket.h"
 
+#include <NoobNetwork/PacketRegister.h>
+
 namespace Noob
 {
 
@@ -18,6 +20,8 @@ PingManager::PingManager( IUser* user )
 	m_tryCnt = 0;
 	m_bRecvedPing = false;
 	m_ping = 0;
+
+	sendPing();
 }
 
 PingManager::~PingManager()
@@ -26,7 +30,7 @@ PingManager::~PingManager()
 		m_user->GetDispatcher()->GetAlarmManager().UnRegisterAlarm( m_pingAlarmIndex );
 }
 
-void PingManager::SendPing()
+void PingManager::sendPing()
 {
 	SC_Ping ping;
 	ping.tick = ::Noob::GetTick();
@@ -49,7 +53,7 @@ void PingManager::SendPing()
 			}
 #endif
 		}
-		SendPing();
+		sendPing();
 	} );
 }
 
@@ -60,3 +64,6 @@ void PingManager::RecvPing( ::Noob::Tick tick )
 }
 
 }
+
+REGISTER_PACKET( SC_Ping );
+REGISTER_PACKET( CS_Ping );

@@ -17,6 +17,7 @@ struct Dispatcher::imple
 		::Noob::RefCntPtr m_obj;
 	};
 
+	AlarmManager* m_alarmManager;
 	::Noob::TaskQueue<Task> m_taskQueue;
 
 	::std::vector<HANDLE> m_threadHandleCon;
@@ -39,6 +40,7 @@ void Dispatcher::imple::accept( IUserPtr& user )
 
 void Dispatcher::imple::connect( IUserPtr& user )
 {
+	user->m_ping = new PingManager( user.Get() );
 	user->OnConnect();
 }
 
@@ -52,11 +54,12 @@ void Dispatcher::imple::close( IUserPtr& user )
 {
 	SAFE_DELETE(user->m_ping);
 	user->OnClose();
+	user->m_session = nullptr;
 }
 
 void Dispatcher::imple::tick()
 {
-
+	m_alarmManager->onAlarm();
 }
 
 DWORD WINAPI Dispatcher::imple::threadFunc( void* arg )
@@ -90,14 +93,18 @@ DWORD WINAPI Dispatcher::imple::threadFunc( void* arg )
 			pImple->tick();
 			break;
 		}
+
+		SAFE_DELETE( task );
 	}
 
 	return 0;
 }
 
-Dispatcher::Dispatcher( unsigned int threadCnt ) : pImple( new Dispatcher::imple() ), m_alarmManager( this )
+Dispatcher::Dispatcher( unsigned int threadCnt ) : pImple( new Dispatcher::imple() )
 {
 	assert(threadCnt != 0);
+
+	pImple->m_alarmManager = new AlarmManager( this );
 
 	for( unsigned int i = 0; i < threadCnt; ++i )
 	{
@@ -133,6 +140,11 @@ void Dispatcher::Push( E_TASK_TYPE workType, const ::Noob::RefCntPtr& obj )
 unsigned int Dispatcher::GetThreadCnt()
 {
 	return static_cast<unsigned int>( pImple->m_threadHandleCon.size() );
+}
+
+AlarmManager& Dispatcher::GetAlarmManager()
+{
+	return *( pImple->m_alarmManager );
 }
 
 }

@@ -85,19 +85,12 @@ struct AlarmManager::imple
 
 	::std::list<AlarmTaskPtr> m_alarmList;
 	::std::unordered_map<int64_t, ::std::list<AlarmTaskPtr>::iterator> m_alarmMap;
-
-	AlarmLock* m_lock;
 };
 
 AlarmManager::AlarmManager( Dispatcher* dispatcher ) : pImple( new imple )
 {
 	pImple->m_indexCount = 0LL;
 	TickGenerator::GetInstance()->RegisterDispatcher( dispatcher );
-
-	//if (dispatcher->GetThreadCnt() > 1)
-	//	pImple->m_needLock = true;
-	//else
-	//	pImple->m_needLock = false;
 }
 
 AlarmManager::~AlarmManager()
@@ -115,15 +108,9 @@ int64_t AlarmManager::RegisterAlarm( const ::Noob::TimePoint& timePoint, AlarmCa
 	auto alarmTask = new AlarmTask( pImple->m_indexCount++, timePoint, callback );
 	int64_t alarmIndex = 0;
 
-	//if (pImple->m_needLock)
-	//	pImple->m_lock.Enter();
-
-	//auto iter = pImple->m_alarmList.insert(pImple->m_alarmList.end(), alarmTask);
-	//pImple->m_alarmMap.emplace(alarmTask->GetIndex(), iter);
-	//alarmIndex = alarmTask->GetIndex();
-
-	//if (pImple->m_needLock)
-	//	pImple->m_lock.Leave();
+	auto iter = pImple->m_alarmList.insert(pImple->m_alarmList.end(), alarmTask);
+	pImple->m_alarmMap.emplace(alarmTask->GetIndex(), iter);
+	alarmIndex = alarmTask->GetIndex();
 
 	return alarmIndex;
 }

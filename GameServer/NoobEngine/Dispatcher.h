@@ -21,14 +21,12 @@ public:
 	~Dispatcher();
 	
 	void Push( E_TASK_TYPE workType, const ::Noob::RefCntPtr& obj );
-	AlarmManager& GetAlarmManager(){ return m_alarmManager; }
+	AlarmManager& GetAlarmManager();
 
 	unsigned int GetThreadCnt();
 private:
 	struct imple;
 	::std::unique_ptr<imple> pImple;
-
-	AlarmManager m_alarmManager;
 };
 
 }

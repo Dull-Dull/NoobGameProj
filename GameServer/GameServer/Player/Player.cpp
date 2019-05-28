@@ -22,13 +22,15 @@ Player::~Player()
 
 void Player::OnAccept()
 {
+	PlayerContainer::GetInstance()->Insert( this );
 }
 
 void Player::OnRecv( ::Noob::PacketPtr pck )
 {
 	if( m_handShakeComplete == false )
 	{
-		if( pck->index != CS_Hello::GetIndex() )
+		if( pck->index != CS_Hello::GetIndex() &&
+			pck->index != CS_Ping::GetIndex() )
 		{
 			Close();
 			return;
@@ -40,6 +42,8 @@ void Player::OnRecv( ::Noob::PacketPtr pck )
 
 void Player::OnClose()
 {
+	PlayerContainer::GetInstance()->Delete( this );
+
 	if( m_loginComplete )
 	{
 		SC_ExitPlayer exit;
