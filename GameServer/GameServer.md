@@ -1,5 +1,5 @@
 # GameServer
-- 개발환경 : Visual Studio 2015
+- 개발환경 : Visual Studio 2019
 - 개발 언어
     - Game Server : Visual C++ (v142)
     - Packet Generator : C# (.Net 4.5.2)
