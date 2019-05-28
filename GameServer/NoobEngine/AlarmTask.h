@@ -1,5 +1,7 @@
 #pragma once
 
+namespace Noob
+{
 using AlarmCallback = ::std::function<void()>;
 
 class AlarmTask : public ::Noob::RefCnt
@@ -10,7 +12,7 @@ public:
 
 	int64_t GetIndex() { return m_index; }
 	const ::Noob::TimePoint& GetInvokeTime(){ return m_invokeTime; }
-	
+
 private:
 	int64_t m_index;
 	::Noob::TimePoint m_invokeTime;
@@ -18,3 +20,5 @@ private:
 };
 
 DECL_CLASS( AlarmTask );
+
+}

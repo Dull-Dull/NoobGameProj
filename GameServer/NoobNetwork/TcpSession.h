@@ -57,18 +57,18 @@ public:
 	const EndPoint& GetLocal(){ return m_localEndPoint; }
 	const EndPoint& GetRemote(){ return m_remoteEndPoint; }
 
+	void PostRecv();
+	void PostSend();
 protected:
-	virtual void OnAccept( IAcceptor* acceptor ){}
+	virtual void OnAccept(){}
 	virtual void OnConnect(){}
 	virtual void OnRecv( PacketPtr pck ) = 0;
 	virtual void OnSend(){}
 	virtual void OnClose() = 0;
+
 private:
 	void OnRecvForIocp( bool success, unsigned int transferedLen );
 	void OnSendForIocp( bool success, unsigned int transferedLen );
-
-	void PostRecv();
-	void PostSend();
 
 private:
 	Iocp* m_iocp;

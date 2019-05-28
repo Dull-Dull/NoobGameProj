@@ -1,26 +1,22 @@
 #pragma once
-#include "../Session/ClientSession.h"
+#include <NoobEngine/IUser.h>
 #include <GamePacket\Datas\Reflection.h>
 
-class PingManager;
+namespace Noob
+{
+DECL_CLASS( TcpSession );
+class Dispatcher;
+}
 
-class Player : public ::Noob::RefCnt
+class Player : public ::Noob::IUser
 {
 public:
-	Player( ClientSession* session );
+	Player( ::Noob::TcpSessionPtr session, ::Noob::Dispatcher* dispatcher );
 	~Player();
 	
-	void OnAccept();
-	void OnRecv( ::Noob::PacketPtr pck );
-	void OnClose();
-
-	template< typename PacketType >
-	void Send( PacketType& pck )
-	{
-		m_session->Send( pck );
-	}
-
-	void Close();
+	void OnAccept() override;
+	void OnRecv( ::Noob::PacketPtr pck ) override;
+	void OnClose() override;
 
 	template< class PacketType >
 	void OnPacket( const ::Noob::Ptr<PacketType>& pck ){ static_assert( false, "Invalid Pck" ); }
@@ -28,8 +24,6 @@ public:
 	unsigned int GetIndex(){ return m_index; }
 
 private:
-	ClientSession* m_session;
-	PingManager* m_ping;
 	bool m_handShakeComplete;
 	bool m_loginComplete;
 
@@ -40,4 +34,4 @@ private:
 	PlayerAnimation m_animation;
 };
 
-using PlayerPtr = ::Noob::Ptr<Player>;
+DECL_CLASS( Player );

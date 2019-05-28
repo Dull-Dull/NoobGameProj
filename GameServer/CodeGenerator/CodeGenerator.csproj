@@ -63,6 +63,7 @@
     <Compile Include="Exception\CanNotGenPck.cs" />
     <Compile Include="Exception\CanNotIncludeException.cs" />
     <Compile Include="Exception\CanNotPckCodeRangeException.cs" />
+    <Compile Include="Exception\InvalidPckCodeRangeException.cs" />
     <Compile Include="Exception\NoValueException.cs" />
     <Compile Include="Exception\UnKnownKeywordException.cs" />
     <Compile Include="FileInfoIterator.cs" />

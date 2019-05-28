@@ -2,14 +2,18 @@
 
 #include "AlarmTask.h"
 
-class GameDispatcher;
+namespace Noob
+{
 
-class AlarmManager : public ::Noob::Singletone<AlarmManager>
+class Dispatcher;
+
+// 디스패쳐가 싱글스레드일 경우에만 정상 작동가능, 수정해야함.
+class AlarmManager
 {
 public:
-	AlarmManager();
+	AlarmManager( Dispatcher* dispatcher );
 	~AlarmManager();
-	
+
 	int64_t RegisterAlarm( const ::Noob::Duration& duration,  AlarmCallback callback );
 	int64_t RegisterAlarm( const ::Noob::TimePoint& timePoint,  AlarmCallback callback );
 	void UnRegisterAlarm( int64_t alarmIndex );
@@ -19,5 +23,7 @@ private:
 	::std::unique_ptr<imple> pImple;
 
 	void onAlarm();
-	friend GameDispatcher;
+	friend Dispatcher;
 };
+
+}

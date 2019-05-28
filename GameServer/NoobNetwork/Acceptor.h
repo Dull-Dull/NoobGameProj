@@ -31,38 +31,4 @@ protected:
 	void onAcceptSession( ITcpSession* session );
 };
 
-template< class SessionType >
-class Acceptor : public IAcceptor
-{
-public:
-	Acceptor( Iocp* iocp, Listener* listener )
-		: IAcceptor( iocp, listener )
-	{
-	}
-
-	virtual ~Acceptor()
-	{
-
-	}
-
-	void OnAccept( bool success, unsigned int transferedLen )
-	{
-		if( success == false )
-		{
-			Log( LOG_TYPE::ERROR, L"Acceptor Closed ", WSAGetLastError() );
-			m_overlapped.object = nullptr;
-			return;
-		}
-
-		EndPoint local;
-		EndPoint remote;
-
-		getAddrInfo( local, remote );
-
-		SessionType* session = new SessionType();
-		session->Init( m_iocp, m_sock, local, remote );
-		onAcceptSession( session );
-	}
-};
-
 }

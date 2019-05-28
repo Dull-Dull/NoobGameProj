@@ -1,37 +1,42 @@
 #include "PreCompiled.h"
 #include "PingManager.h"
 
-#include "../Player.h"
-#include "../../Alarm/AlarmManager.h"
+#include "IUser.h"
+#include "Dispatcher.h"
+#include "AlarmManager.h"
+#include "PingPacket.h"
 
-#include <GamePacket/Packets/Login.h>
+#include <NoobNetwork/PacketRegister.h>
+
+namespace Noob
+{
 
 const static int g_maxTryCnt = 3;
 
-PingManager::PingManager( Player* player )
+PingManager::PingManager( IUser* user )
 {
-	m_player = player;
+	m_user = user;
 	m_pingAlarmIndex = -1;
 	m_tryCnt = 0;
 	m_bRecvedPing = false;
 	m_ping = 0;
+
+	sendPing();
 }
 
 PingManager::~PingManager()
 {
 	if( m_pingAlarmIndex != -1 )
-	{
-		AlarmManager::GetInstance()->UnRegisterAlarm( m_pingAlarmIndex );
-	}
+		m_user->GetDispatcher()->GetAlarmManager().UnRegisterAlarm( m_pingAlarmIndex );
 }
 
-void PingManager::SendPing()
+void PingManager::sendPing()
 {
 	SC_Ping ping;
 	ping.tick = ::Noob::GetTick();
-	m_player->Send( ping );
+	m_user->Send( ping );
 
-	m_pingAlarmIndex = AlarmManager::GetInstance()->RegisterAlarm( ::Noob::Duration(::Noob::Second * 1), [ this ](){
+	m_pingAlarmIndex = m_user->GetDispatcher()->GetAlarmManager().RegisterAlarm( ::Noob::Duration( ::Noob::Second * 1 ), [this](){
 		if( m_bRecvedPing )
 		{
 			m_tryCnt = 0;
@@ -48,7 +53,7 @@ void PingManager::SendPing()
 			}
 #endif
 		}
-		SendPing();
+		sendPing();
 	} );
 }
 
@@ -57,3 +62,8 @@ void PingManager::RecvPing( ::Noob::Tick tick )
 	m_ping = ::Noob::GetTick() - tick;
 	m_bRecvedPing = true;
 }
+
+}
+
+REGISTER_PACKET( SC_Ping );
+REGISTER_PACKET( CS_Ping );

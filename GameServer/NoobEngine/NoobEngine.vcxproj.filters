@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="PreCompiled.cpp" />
+    <ClCompile Include="AlarmManager.cpp">
+      <Filter>Alarm</Filter>
+    </ClCompile>
+    <ClCompile Include="AlarmTask.cpp">
+      <Filter>Alarm</Filter>
+    </ClCompile>
+    <ClCompile Include="Dispatcher.cpp">
+      <Filter>Dispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpSession.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="IUser.cpp">
+      <Filter>User</Filter>
+    </ClCompile>
+    <ClCompile Include="PingManager.cpp">
+      <Filter>Ping</Filter>
+    </ClCompile>
+    <ClCompile Include="DispatcherSelector.cpp">
+      <Filter>Dispatcher</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PreCompiled.h" />
+    <ClInclude Include="AlarmManager.h">
+      <Filter>Alarm</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmTask.h">
+      <Filter>Alarm</Filter>
+    </ClInclude>
+    <ClInclude Include="Dispatcher.h">
+      <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSession.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="IUser.h">
+      <Filter>User</Filter>
+    </ClInclude>
+    <ClInclude Include="PingManager.h">
+      <Filter>Ping</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSessionAcceptor.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSessionConnector.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="DispatcherSelector.h">
+      <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketDispatcher.h">
+      <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPacket.h">
+      <Filter>Ping</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Alarm">
+      <UniqueIdentifier>{7dfb0cdc-dcd2-44fb-8fc3-5f578e5cd4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session">
+      <UniqueIdentifier>{6347fce7-b9c5-419a-b968-037d7cc6562b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dispatcher">
+      <UniqueIdentifier>{56a30f08-56a7-4bc4-b3bd-d3d98720dc4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User">
+      <UniqueIdentifier>{1be280dc-afb9-4f8b-bcc2-763bd4670b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ping">
+      <UniqueIdentifier>{0e35b944-b315-4595-a0cc-ee97869dc42c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -13,7 +13,7 @@ class IConnector : public RefCnt
 {
 public:
 	IConnector()
-		: m_sock( NULL ), m_addr{}, m_overlapped( Overlapped::IO_TYPE::CONNECT, this )
+		: m_sock( NULL ), m_addr{}, m_overlapped( Overlapped::IO_TYPE::CONNECT, nullptr )
 	{}
 	virtual ~IConnector(){}
 
@@ -22,7 +22,6 @@ public:
 
 protected:
 	virtual void OnConnect( bool success, unsigned int transferedLen ) = 0;
-	void onConnectSession( ITcpSession* session );
 
 	SOCKET m_sock;
 	Iocp* m_iocp;
@@ -31,29 +30,6 @@ private:
 	SOCKADDR_IN m_addr;
 
 	friend Iocp;
-};
-
-template< class SessionType >
-class Connector : public IConnector
-{
-public:
-	Connector() : IConnector(){}
-	~Connector(){}
-
-protected:
-	void OnConnect( bool success, unsigned int transferedLen ) override
-	{
-		if( success == false )
-		{
-			Log( LOG_TYPE::ERROR, L"Async Connect Fail ", WSAGetLastError() );
-			m_overlapped.object = nullptr;
-			return;
-		}
-
-		SessionType* session = new SessionType();
-		session->Init( m_iocp, m_sock, EndPoint(), EndPoint() );
-		onConnectSession( session );
-	}
 };
 
 }

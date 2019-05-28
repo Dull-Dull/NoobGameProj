@@ -28,12 +28,4 @@
 		<Val type ="uint32" name ="playerIndex"/>
 	</Packet>
 
-	<Packet name ="SC_Ping">
-		<Val type ="int64" name ="tick"/>
-	</Packet>
-
-	<Packet name ="CS_Ping">
-		<Val type ="int64" name ="tick"/>
-	</Packet>
-
 </login>

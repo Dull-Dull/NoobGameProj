@@ -21,6 +21,7 @@ void IConnector::Connect( Iocp* iocp, EndPoint endPoint )
 	if( connect( m_sock, (SOCKADDR*)&m_addr, sizeof( m_addr ) ) == SOCKET_ERROR )
 	{
 		Log( LOG_TYPE::ERROR, L"connect Error ", WSAGetLastError() );
+		OnConnect( false, UINT_MAX );
 		return;
 	}
 
@@ -55,16 +56,13 @@ void IConnector::AsyncConnect( Iocp* iocp, EndPoint endPoint )
 	m_addr.sin_addr.s_addr = htonl( endPoint.m_ip );
 	m_addr.sin_port = htons( endPoint.m_port );
 
+	m_overlapped.object = this;
 	if( SOCKET_ERROR == connectEx( m_sock, (SOCKADDR*)&m_addr, sizeof( m_addr ), NULL, 0, NULL, &m_overlapped ) )
 	{
 		Log( LOG_TYPE::ERROR, L"connect Error ", WSAGetLastError() );
+		m_overlapped.object = nullptr;
 		//Todo 에러 처리
 	}
-}
-
-void IConnector::onConnectSession( ITcpSession* session )
-{
-	session->OnConnect();
 }
 
 }

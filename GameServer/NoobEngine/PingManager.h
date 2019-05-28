@@ -1,21 +1,28 @@
 #pragma once
 
-class Player;
+namespace Noob
+{
+
+class IUser;
 
 class PingManager
 {
 public:
-	PingManager( Player* player );
+	PingManager( IUser* user );
 	~PingManager();
 
-	void SendPing();
 	void RecvPing( ::Noob::Tick tick );
 	::Noob::Tick GetPing() const{ return m_ping; }
+
 private:
-	Player* m_player;
+	IUser* m_user;
 	int64_t m_pingAlarmIndex;
 	int m_tryCnt;
 	bool m_bRecvedPing;
 
 	::Noob::Tick m_ping;
+
+	void sendPing();
 };
+
+}
