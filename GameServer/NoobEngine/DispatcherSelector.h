@@ -1,6 +1,6 @@
 #pragma once
 
-#include <NoobBasic\Singletone.hpp>
+#include <NoobBasic/Singletone.hpp>
 #include "Dispatcher.h"
 
 namespace Noob

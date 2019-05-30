@@ -1,3 +1,3 @@
 #pragma once
 
-#include <NoobBasic\IncAll.h>
+#include <NoobBasic/IncAll.h>

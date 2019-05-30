@@ -1,6 +1,6 @@
 #pragma once
 
-#include<NoobNetwork\PacketRegister.h>
+#include<NoobNetwork/PacketRegister.h>
 #include"Game.h"
 
 REGISTER_PACKET( N_Move );

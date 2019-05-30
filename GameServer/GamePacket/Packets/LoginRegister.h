@@ -1,6 +1,6 @@
 #pragma once
 
-#include<NoobNetwork\PacketRegister.h>
+#include<NoobNetwork/PacketRegister.h>
 #include"Login.h"
 
 REGISTER_PACKET( SC_Hello );

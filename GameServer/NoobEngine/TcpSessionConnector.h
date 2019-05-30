@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TcpSession.h"
-#include <NoobNetwork\Connector.h>
+#include <NoobNetwork/Connector.h>
 
 namespace Noob
 {
