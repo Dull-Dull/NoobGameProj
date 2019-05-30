@@ -41,7 +41,7 @@ public:
 		if( PacketDispatcher< UserType >::m_pckProcCon == nullptr )
 		{
 			PacketDispatcher< UserType >::m_pckProcCon = new PacketDispatcher< UserType >::Container();
-			PacketDispatcher< UserType >::m_pckProcCon->emplace( CS_Ping::GetIndex(),
+			PacketDispatcher< UserType >::m_pckProcCon->emplace( Ping::GetIndex(),
 				reinterpret_cast< typename PacketDispatcher< UserType >::Func >( &::Noob::IUser::OnPingPacket ) );
 		}			
 

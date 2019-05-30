@@ -32,9 +32,9 @@ PingManager::~PingManager()
 
 void PingManager::sendPing()
 {
-	SC_Ping ping;
-	ping.tick = ::Noob::GetTick();
+	Ping ping;
 	m_user->Send( ping );
+	m_sendTime = GetNow();
 
 	m_pingAlarmIndex = m_user->GetDispatcher()->GetAlarmManager().RegisterAlarm( ::Noob::Duration( ::Noob::Second * 1 ), [this](){
 		if( m_bRecvedPing )
@@ -57,13 +57,18 @@ void PingManager::sendPing()
 	} );
 }
 
-void PingManager::RecvPing( ::Noob::Tick tick )
+void PingManager::RecvPing()
 {
-	m_ping = ::Noob::GetTick() - tick;
+	if( m_bRecvedPing )
+	{
+		Log( LOG_TYPE::WARNING, L"Invalid Ping Pck Recv" );
+		return;
+	}
+
+	m_ping = ( ::Noob::GetNow() - m_sendTime ).count();
 	m_bRecvedPing = true;
 }
 
 }
 
-REGISTER_PACKET( SC_Ping );
-REGISTER_PACKET( CS_Ping );
+REGISTER_PACKET( Ping );

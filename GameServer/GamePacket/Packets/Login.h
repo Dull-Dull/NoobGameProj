@@ -6,11 +6,11 @@ struct SC_Hello : public ::Noob::Packet
 {
 	SC_Hello()
 	{
-		index = 2;
+		index = 1;
 	}
 
 	::std::wstring GetName(){ return L"SC_Hello"; }
-	static unsigned int GetIndex(){ return 2; }
+	static unsigned int GetIndex(){ return 1; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, SC_Hello& val )
@@ -27,11 +27,11 @@ struct CS_Hello : public ::Noob::Packet
 {
 	CS_Hello()
 	{
-		index = 3;
+		index = 2;
 	}
 
 	::std::wstring GetName(){ return L"CS_Hello"; }
-	static unsigned int GetIndex(){ return 3; }
+	static unsigned int GetIndex(){ return 2; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, CS_Hello& val )
@@ -50,17 +50,17 @@ struct CS_Login : public ::Noob::Packet
 
 	CS_Login()
 	{
-		index = 4;
+		index = 3;
 	}
 
 	CS_Login( ::std::wstring _nick )
 	{
-		index = 4;
+		index = 3;
 		nick = _nick;
 	}
 
 	::std::wstring GetName(){ return L"CS_Login"; }
-	static unsigned int GetIndex(){ return 4; }
+	static unsigned int GetIndex(){ return 3; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, CS_Login& val )
@@ -80,18 +80,18 @@ struct SC_Login : public ::Noob::Packet
 
 	SC_Login()
 	{
-		index = 5;
+		index = 4;
 	}
 
 	SC_Login( unsigned int _playerIndex, ::Noob::Vector2D _spawnPosition )
 	{
-		index = 5;
+		index = 4;
 		playerIndex = _playerIndex;
 		spawnPosition = _spawnPosition;
 	}
 
 	::std::wstring GetName(){ return L"SC_Login"; }
-	static unsigned int GetIndex(){ return 5; }
+	static unsigned int GetIndex(){ return 4; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, SC_Login& val )
@@ -114,12 +114,12 @@ struct SC_EnterPlayer : public ::Noob::Packet
 
 	SC_EnterPlayer()
 	{
-		index = 6;
+		index = 5;
 	}
 
 	SC_EnterPlayer( unsigned int _playerIndex, ::std::wstring _nick, PlayerTransform _transform, PlayerAnimation _animation, float _degree )
 	{
-		index = 6;
+		index = 5;
 		playerIndex = _playerIndex;
 		nick = _nick;
 		transform = _transform;
@@ -128,7 +128,7 @@ struct SC_EnterPlayer : public ::Noob::Packet
 	}
 
 	::std::wstring GetName(){ return L"SC_EnterPlayer"; }
-	static unsigned int GetIndex(){ return 6; }
+	static unsigned int GetIndex(){ return 5; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, SC_EnterPlayer& val )
@@ -147,17 +147,17 @@ struct SC_ExitPlayer : public ::Noob::Packet
 
 	SC_ExitPlayer()
 	{
-		index = 7;
+		index = 6;
 	}
 
 	SC_ExitPlayer( unsigned int _playerIndex )
 	{
-		index = 7;
+		index = 6;
 		playerIndex = _playerIndex;
 	}
 
 	::std::wstring GetName(){ return L"SC_ExitPlayer"; }
-	static unsigned int GetIndex(){ return 7; }
+	static unsigned int GetIndex(){ return 6; }
 };
 
 inline StreamReader& operator>>( StreamReader& stream, SC_ExitPlayer& val )

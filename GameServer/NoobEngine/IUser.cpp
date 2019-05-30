@@ -21,9 +21,12 @@ IUser::~IUser()
 	}	
 }
 
-void IUser::OnPingPacket( const CS_PingPtr& pck )
+void IUser::OnPingPacket( const PingPtr& pck )
 {
-	m_ping->RecvPing( pck->tick );
+	if( m_ping != nullptr )
+		m_ping->RecvPing();
+	else
+		Send( pck );
 }
 
 void IUser::Close()

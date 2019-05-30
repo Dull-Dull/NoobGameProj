@@ -19,8 +19,8 @@ namespace CodeGenerator.FileParser
 
 			m_usingPck = true;
 			m_minPckIndex = int.Parse( GetAttrValue( node, "min" ) );
-			if( m_minPckIndex < 2 )
-				m_minPckIndex = 2;
+			if( m_minPckIndex < 1 )
+				m_minPckIndex = 1;
 
 			m_maxPckIndex = int.Parse( GetAttrValue( node, "max" ) );
 

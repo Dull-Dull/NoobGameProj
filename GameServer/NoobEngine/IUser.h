@@ -21,13 +21,20 @@ public:
 	virtual void OnRecv( ::Noob::PacketPtr pck ) = 0;
 	virtual void OnClose() = 0;
 
-	void OnPingPacket( const CS_PingPtr& pck );
+	void OnPingPacket( const PingPtr& pck );
 
 	template< typename PacketType >
 	void Send( PacketType& pck )
 	{
 		if( m_session.Get() != nullptr )
 			m_session->Send( pck );
+	}
+
+	template< typename PacketType >
+	void Send( const Ptr<PacketType>& pck )
+	{
+		if( m_session.Get() != nullptr )
+			m_session->Send( *( pck.Get() ) );
 	}
 
 	void Close();

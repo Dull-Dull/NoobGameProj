@@ -88,20 +88,9 @@ namespace Noob
 	}
 
 	[Noob.NoobSerializAble]
-	public class SC_Ping : Noob.Packet
+	public class Ping : Noob.Packet
 	{
-		public long tick = 0;
-
 		public override uint GetIndex() { return index; }
 		public const uint index = 0;
-	}
-
-	[Noob.NoobSerializAble]
-	public class CS_Ping : Noob.Packet
-	{
-		public long tick = 0;
-
-		public override uint GetIndex() { return index; }
-		public const uint index = 1;
 	}
 }

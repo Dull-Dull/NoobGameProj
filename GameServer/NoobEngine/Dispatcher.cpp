@@ -40,7 +40,6 @@ void Dispatcher::imple::accept( IUserPtr& user )
 
 void Dispatcher::imple::connect( IUserPtr& user )
 {
-	user->m_ping = new PingManager( user.Get() );
 	user->OnConnect();
 }
 

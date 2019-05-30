@@ -99,12 +99,10 @@ public class ServerSession : MonoBehaviour {
 		chatInputHud.PlayerIndex = login.playerIndex;
 	}
 
-	[PacketProcRegistration( SC_Ping.index )]
+	[PacketProcRegistration( Noob.Ping.index )]
 	public void SC_PingProc( Packet pck )
 	{
-		CS_Ping ping = new CS_Ping();
-		ping.tick = ( pck as SC_Ping ).tick;
-		session.Send( ping );
+		session.Send( pck );
 	}
 
 	[PacketProcRegistration( SC_EnterPlayer.index )]

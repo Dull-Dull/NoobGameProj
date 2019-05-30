@@ -30,7 +30,7 @@ void Player::OnRecv( ::Noob::PacketPtr pck )
 	if( m_handShakeComplete == false )
 	{
 		if( pck->index != CS_Hello::GetIndex() &&
-			pck->index != CS_Ping::GetIndex() )
+			pck->index != Ping::GetIndex() )
 		{
 			Close();
 			return;

@@ -11,7 +11,7 @@ public:
 	PingManager( IUser* user );
 	~PingManager();
 
-	void RecvPing( ::Noob::Tick tick );
+	void RecvPing();
 	::Noob::Tick GetPing() const{ return m_ping; }
 
 private:
@@ -20,7 +20,8 @@ private:
 	int m_tryCnt;
 	bool m_bRecvedPing;
 
-	::Noob::Tick m_ping;
+	::Noob::TimePoint m_sendTime;
+	::Noob::Tick m_ping;	
 
 	void sendPing();
 };
