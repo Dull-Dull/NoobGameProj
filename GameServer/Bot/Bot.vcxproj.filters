@@ -3,13 +3,40 @@
   <ItemGroup>
     <ClCompile Include="BotMain.cpp" />
     <ClCompile Include="PreCompiled.cpp" />
+    <ClCompile Include="BotConnectManager.cpp">
+      <Filter>Bot</Filter>
+    </ClCompile>
+    <ClCompile Include="Bot.cpp">
+      <Filter>Bot</Filter>
+    </ClCompile>
+    <ClCompile Include="BotContainer.cpp">
+      <Filter>Bot</Filter>
+    </ClCompile>
+    <ClCompile Include="BotLogin.cpp">
+      <Filter>Bot\PacketProc</Filter>
+    </ClCompile>
+    <ClCompile Include="BotGame.cpp">
+      <Filter>Bot\PacketProc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompiled.h" />
+    <ClInclude Include="BotConnectManager.h">
+      <Filter>Bot</Filter>
+    </ClInclude>
+    <ClInclude Include="Bot.h">
+      <Filter>Bot</Filter>
+    </ClInclude>
+    <ClInclude Include="BotContainer.h">
+      <Filter>Bot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bot">
       <UniqueIdentifier>{c166899c-9c12-4383-a641-eed5f048b6e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bot\PacketProc">
+      <UniqueIdentifier>{f21ef390-9d01-47b8-ae85-3237f67f8b1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

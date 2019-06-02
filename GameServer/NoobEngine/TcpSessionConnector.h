@@ -18,7 +18,7 @@ protected:
 	{
 		if( success == false )
 		{
-			Log( LOG_TYPE::ERROR, L"Async Connect Fail ", WSAGetLastError() );
+			Log( LOG_TYPE::ERROR, L"Connect Fail ", WSAGetLastError() );
 			m_overlapped.object = nullptr;
 			return;
 		}
@@ -26,6 +26,7 @@ protected:
 		TcpSession* session = new TcpSession;
 		session->Init( m_iocp, m_sock, EndPoint(), EndPoint() );
 		session->OnConnect( new UserType( session, DispatcherSelector::GetInstance()->Get() ) );
+		session->PostRecv();
 		m_overlapped.object = nullptr;
 	}
 };

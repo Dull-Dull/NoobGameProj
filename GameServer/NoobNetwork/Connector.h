@@ -12,9 +12,7 @@ class ITcpSession;
 class IConnector : public RefCnt
 {
 public:
-	IConnector()
-		: m_sock( NULL ), m_addr{}, m_overlapped( Overlapped::IO_TYPE::CONNECT, nullptr )
-	{}
+	IConnector();
 	virtual ~IConnector(){}
 
 	void Connect( Iocp* iocp, EndPoint endPoint );
@@ -28,6 +26,7 @@ protected:
 	Overlapped m_overlapped;
 private:
 	SOCKADDR_IN m_addr;
+	DWORD m_byteSent;
 
 	friend Iocp;
 };

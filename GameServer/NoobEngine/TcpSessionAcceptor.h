@@ -38,6 +38,7 @@ public:
 		session->Init( m_iocp, m_sock, local, remote );
 		session->OnAccept( new UserType( session, DispatcherSelector::GetInstance()->Get() ) );
 		session->PostRecv();
+		Post();
 	}
 };
 

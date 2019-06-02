@@ -65,6 +65,7 @@ void IAcceptor::onAcceptSession( ITcpSession* session )
 {
 	session->OnAccept();
 	session->PostRecv();
+	Post();
 }
 
 }

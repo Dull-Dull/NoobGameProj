@@ -6,6 +6,12 @@
 namespace Noob
 {
 
+IConnector::IConnector()
+	: m_sock( NULL ), m_addr{}, m_overlapped( Overlapped::IO_TYPE::CONNECT, this )
+{
+	m_byteSent = 0;
+}
+
 void IConnector::Connect( Iocp* iocp, EndPoint endPoint )
 {
 	m_iocp = iocp;
@@ -56,13 +62,15 @@ void IConnector::AsyncConnect( Iocp* iocp, EndPoint endPoint )
 	m_addr.sin_addr.s_addr = htonl( endPoint.m_ip );
 	m_addr.sin_port = htons( endPoint.m_port );
 
-	m_overlapped.object = this;
-	if( SOCKET_ERROR == connectEx( m_sock, (SOCKADDR*)&m_addr, sizeof( m_addr ), NULL, 0, NULL, &m_overlapped ) )
+	//m_iocp->Register(m_sock);
+
+	if( SOCKET_ERROR == connectEx( m_sock, (SOCKADDR*)&m_addr, sizeof( m_addr ), NULL, 0, &m_byteSent, &m_overlapped ) )
 	{
 		Log( LOG_TYPE::ERROR, L"connect Error ", WSAGetLastError() );
-		m_overlapped.object = nullptr;
 		//Todo 에러 처리
 	}
+
+	m_iocp->Register(m_sock);
 }
 
 }

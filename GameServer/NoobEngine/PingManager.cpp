@@ -48,7 +48,7 @@ void PingManager::sendPing()
 #ifndef _DEBUG
 			if( m_tryCnt >= g_maxTryCnt )
 			{
-				m_player->Close();
+				m_user->Close();
 				return;
 			}
 #endif
