@@ -3,20 +3,9 @@
 <Pck>
   <PckCodeRange min="1" max="100"/>
 	
-	<Packet name ="TestPck1" code ="1">
-		<Val type ="int" name ="val1"/>
-		<Val type ="int" name ="val2"/>
-		<Val type ="int" name ="val3"/>
-		<Val type ="list[int]" name ="list"/>
+	<Packet name ="TestPck">
+		<Val type ="int" name ="val"/>
+		<Val type ="list[string]" name ="list"/>
 	</Packet>
-
-	<Packet name ="TestPck2">
-		<Val type ="int" name ="val1"/>
-	</Packet>
-
-	<Data name="TestData3">
-		<Val type ="int" name ="val1"/>
-		<Val type ="string" name ="val2"/>
-	</Data>
 	
 </Pck>
