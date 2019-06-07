@@ -18,6 +18,7 @@ class Dispatcher
 {
 public:
 	Dispatcher( unsigned int threadCnt = 1 );
+	Dispatcher(const Dispatcher&) = delete;
 	~Dispatcher();
 	
 	void Push( E_TASK_TYPE workType, const ::Noob::RefCntPtr& obj );

@@ -15,6 +15,7 @@ class ITcpSession : public RefCnt
 {
 public:
 	ITcpSession();
+	ITcpSession(const ITcpSession&) = delete;
 	virtual ~ITcpSession();
 
 	void Init( Iocp* iocp, SOCKET sock, const EndPoint& local, const EndPoint& remote );

@@ -11,6 +11,7 @@ class Connector : public IConnector
 {
 public:
 	Connector() : IConnector(){}
+	Connector(const Connector&) = delete;
 	~Connector(){}
 
 protected:
