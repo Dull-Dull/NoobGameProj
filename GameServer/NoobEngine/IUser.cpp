@@ -18,7 +18,7 @@ IUser::~IUser()
 	{
 		m_session->Close();
 		m_session = nullptr;
-	}	
+	}
 }
 
 void IUser::OnPingPacket( const PingPtr& pck )

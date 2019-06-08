@@ -15,6 +15,8 @@ public:
 	{
 		WSACleanup();
 	}
+
+	WinSockInitor(const WinSockInitor&) = delete;
 };
 
 }

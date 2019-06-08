@@ -38,6 +38,9 @@ void Player::OnPacket( const CS_HelloPtr& pck )
 PLAYER_PCK_PROC( CS_Login )
 void Player::OnPacket( const CS_LoginPtr& loginReq )
 {
+#ifdef _DEBUG
+	::Noob::Log(::Noob::LOG_TYPE::CONSOLE, L"User Login : ", loginReq->nick);
+#endif
 	m_nick = loginReq->nick;
 	m_loginComplete = true;
 	m_transform.position = g_spawnSpotList[ ::Noob::Random::GetInteger( 0, 8 ) ];

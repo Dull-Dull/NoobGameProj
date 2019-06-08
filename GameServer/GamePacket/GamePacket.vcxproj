@@ -61,7 +61,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>$(ProjectDir)CodeGenerator $(ProjectDir) cpp,$(ProjectDir) cs,$(SolutionDir)..\GameClient\Assets\Scripts</Command>
+      <Command>$(SolutionDir)CodeGenerator $(ProjectDir) cpp,$(ProjectDir) cs,$(SolutionDir)..\GameClient\Assets\Scripts</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -81,7 +81,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PreBuildEvent>
-      <Command>$(ProjectDir)CodeGenerator $(ProjectDir) cpp,$(ProjectDir) cs,$(SolutionDir)..\GameClient\Assets\Scripts</Command>
+      <Command>$(SolutionDir)CodeGenerator $(ProjectDir) cpp,$(ProjectDir) cs,$(SolutionDir)..\GameClient\Assets\Scripts</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

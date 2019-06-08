@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="NetworkTest">
+      <UniqueIdentifier>{e8611eb9-91de-40ea-be07-c130a389e672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkTest\TestClient">
+      <UniqueIdentifier>{87a3d1c6-fd89-4aed-b7a4-0fa37dce0b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkTest\TestServer">
+      <UniqueIdentifier>{694839a9-50cf-44e1-9bc3-72c6657ce11e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkTest\TestPck">
+      <UniqueIdentifier>{5c654ed1-35ea-4eed-9778-fb613baac5b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="NoobNetwork.cpp">
+      <Filter>NetworkTest</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClient.cpp">
+      <Filter>NetworkTest\TestClient</Filter>
+    </ClCompile>
+    <ClCompile Include="TestServer.cpp">
+      <Filter>NetworkTest\TestServer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="TestPck\Pck.h">
+      <Filter>NetworkTest\TestPck</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClient.h">
+      <Filter>NetworkTest\TestClient</Filter>
+    </ClInclude>
+    <ClInclude Include="TestServer.h">
+      <Filter>NetworkTest\TestServer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="TestPck\Pck.xml">
+      <Filter>NetworkTest\TestPck</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

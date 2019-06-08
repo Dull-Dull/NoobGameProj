@@ -12,6 +12,7 @@ class AlarmManager
 {
 public:
 	AlarmManager( Dispatcher* dispatcher );
+	AlarmManager(const AlarmManager&) = delete;
 	~AlarmManager();
 
 	int64_t RegisterAlarm( const ::Noob::Duration& duration,  AlarmCallback callback );

@@ -14,6 +14,7 @@ class IUser : public ::Noob::RefCnt
 {
 public:
 	IUser( ::Noob::TcpSessionPtr session, ::Noob::Dispatcher* dispatcher );
+	IUser(const IUser&) = delete;
 	virtual ~IUser();
 
 	virtual void OnAccept() {};

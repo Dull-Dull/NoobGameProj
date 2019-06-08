@@ -9,6 +9,7 @@ class PingManager
 {
 public:
 	PingManager( IUser* user );
+	PingManager(const PingManager&) = delete;
 	~PingManager();
 
 	void RecvPing();

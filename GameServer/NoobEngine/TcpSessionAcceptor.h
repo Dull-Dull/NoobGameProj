@@ -15,6 +15,8 @@ public:
 	{
 	}
 
+	Acceptor(const Acceptor&) = delete;
+
 	virtual ~Acceptor()
 	{
 

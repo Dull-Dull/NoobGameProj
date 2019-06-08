@@ -7,7 +7,7 @@ using AlarmCallback = ::std::function<void()>;
 class AlarmTask : public ::Noob::RefCnt
 {
 public:
-	AlarmTask( int64_t index, const ::Noob::TimePoint& invokeTime, AlarmCallback callBack );	
+	AlarmTask( int64_t index, const ::Noob::TimePoint& invokeTime, AlarmCallback callBack );
 	void OnAlarm();
 
 	int64_t GetIndex() { return m_index; }
