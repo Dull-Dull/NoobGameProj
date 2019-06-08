@@ -9,10 +9,13 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 HANDLE g_TestCompleteEvent = CreateEvent(NULL, true, false, NULL);
 
+::std::unordered_set< TestClientPtr > TestClient::container;
 TestClient::TestClient(::Noob::TcpSessionPtr session, ::Noob::Dispatcher* dispatcher) : IUser( session, dispatcher ){}
 
 void TestClient::OnConnect()
 {
+	container.insert(this);
+
 	recvCnt = 0;
 
 	TestPck pck;
@@ -33,7 +36,7 @@ void TestClient::OnRecv(::Noob::PacketPtr pck)
 
 void TestClient::OnClose()
 {
-
+	container.erase(this);
 }
 
 REGISTER_PCK_PROC( TestClient, TestPck )
@@ -41,7 +44,7 @@ void TestClient::OnPacket(const ::Noob::Ptr<TestPck>& pck)
 {
 	++recvCnt;
 
-	if (recvCnt >= 1000)
+	if (recvCnt >= 10000)
 	{
 		::Noob::Duration elapse = ::Noob::GetNow() - startTime;
 		::std::wstring resultMsg = ::std::wstring(L"ElapseTime : ") + ::std::to_wstring( ::Noob::TickToFloat(elapse.count()) ) + L"Sec";

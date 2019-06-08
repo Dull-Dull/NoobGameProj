@@ -31,16 +31,18 @@ namespace NoobUnitTest
 			SAFE_DELETE(initor);
 		}
 
-		TEST_METHOD(Performance1)
+		TEST_METHOD(PingPongPerformance)
 		{
 			ResetEvent(g_TestCompleteEvent);
 
 			::Noob::Listener listener( iocp, ::Noob::EndPoint( INADDR_ANY, 12345 ));
-			::Noob::Acceptor< TestServer, ::Noob::SingleThreadDispatcher > acceptor( iocp, &listener );
-			acceptor.Post();
+			::Noob::Acceptor< TestServer, ::Noob::SingleThreadDispatcher >* acceptor =
+				new ::Noob::Acceptor< TestServer, ::Noob::SingleThreadDispatcher >( iocp, &listener );
+			acceptor->Post();
 
-			::Noob::Connector< TestClient, ::Noob::SingleThreadDispatcher > connector;
-			connector.Connect(iocp, ::Noob::EndPoint(L"127.0.0.1", 12345));
+			::Noob::Connector< TestClient, ::Noob::SingleThreadDispatcher >* connector = 
+				new ::Noob::Connector< TestClient, ::Noob::SingleThreadDispatcher >();
+			connector->Connect(iocp, ::Noob::EndPoint(L"127.0.0.1", 12345));
 
 			DWORD result = WaitForSingleObject(g_TestCompleteEvent, 10000);
 
@@ -48,11 +50,6 @@ namespace NoobUnitTest
 			{
 				Assert::Fail(L"TestTimeout");
 			}
-		}
-
-		TEST_METHOD(Performance2)
-		{
-			//TestTest!!@1#!#!
 		}
 
 		static ::Noob::MiniDump dump;

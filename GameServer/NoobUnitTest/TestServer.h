@@ -19,6 +19,10 @@ public:
 
 	template< class PacketType >
 	void OnPacket(const ::Noob::Ptr<PacketType>& pck) { static_assert(false, "Invalid Pck"); }
+
+	static ::std::unordered_set< ::Noob::Ptr<TestServer> >& GetContainer() { return container; }
+private:
+	static ::std::unordered_set< ::Noob::Ptr<TestServer> > container;
 };
 
 DECL_CLASS(TestServer);
